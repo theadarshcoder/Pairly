@@ -1,0 +1,10 @@
+{
+  "name": "pairly",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "pnpm --filter \"@pairly/*\" build",
+    "test": "pnpm --filter \"@pairly/*\" test"
+  },
+  "packageManager": "pnpm@10.33.3"
+}
