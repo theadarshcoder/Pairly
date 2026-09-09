@@ -3,8 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "pnpm --filter \"@pairly/*\" build",
-    "test": "pnpm --filter \"@pairly/*\" test"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.14"
   },
   "packageManager": "pnpm@10.33.3"
 }
