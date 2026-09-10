@@ -43,7 +43,7 @@ export function registerRoomHandlers(
       if (!roomBuffers.has(roomCode)) {
         const buffer = new AggregationBuffer();
         const currentSlide = room.slides[room.currentSlideIndex];
-        if (currentSlide) buffer.initSlide(currentSlide.id, currentSlide.type);
+        if (currentSlide) buffer.initSlide(currentSlide.id, currentSlide.type, currentSlide.conceptTags ?? []);
         roomBuffers.set(roomCode, buffer);
         flushScheduler.start(roomCode, buffer, io);
       }

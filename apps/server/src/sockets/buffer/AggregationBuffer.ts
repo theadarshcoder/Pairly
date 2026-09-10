@@ -5,6 +5,7 @@ type SlideType = 'spatial-hotspot' | 'network-matching' | 'sequential-sorting' |
 interface SlideBuffer {
   slideId: string;
   type: SlideType;
+  conceptTags: string[];
   // Each buffer holds the raw event arrays for its slide type
   hotspotTaps: HotspotTapPayload[];
   matchEvents: MatchConnectPayload[];
@@ -27,11 +28,12 @@ interface SlideBuffer {
 export class AggregationBuffer {
   private readonly slideBuffers = new Map<string, SlideBuffer>();
 
-  initSlide(slideId: string, type: SlideType): void {
+  initSlide(slideId: string, type: SlideType, conceptTags: string[] = []): void {
     if (!this.slideBuffers.has(slideId)) {
       this.slideBuffers.set(slideId, {
         slideId,
         type,
+        conceptTags,
         hotspotTaps: [],
         matchEvents: [],
         sortSubmissions: [],
@@ -103,6 +105,7 @@ export class AggregationBuffer {
     for (const [slideId, buf] of this.slideBuffers.entries()) {
       summary[slideId] = {
         type: buf.type,
+        conceptTags: buf.conceptTags,
         totalTaps: buf.hotspotTaps.length,
         totalMatches: buf.matchEvents.length,
         totalSorts: buf.sortSubmissions.length,

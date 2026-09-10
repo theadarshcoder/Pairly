@@ -45,7 +45,7 @@ export function registerSlideHandlers(
       // Initialize buffer for the new slide
       const buffer = roomBuffers.get(roomCode);
       if (buffer) {
-        buffer.initSlide(newSlide.id, newSlide.type);
+        buffer.initSlide(newSlide.id, newSlide.type, newSlide.conceptTags ?? []);
       }
 
       io.to(roomCode).emit('slide:change', {
