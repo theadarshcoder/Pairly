@@ -65,7 +65,7 @@ const socketGateway: FastifyPluginAsync = async (fastify) => {
 
     // Register all handler domains
     registerRoomHandlers(socket, io, roomManager);
-    registerSessionHandlers(socket, io, roomManager);
+    registerSessionHandlers(socket, io, roomManager, fastify.db);
     registerSlideHandlers(socket, io, roomManager);
     registerHotspotHandlers(socket, io);
     registerMatchingHandlers(socket, io);
@@ -83,4 +83,4 @@ const socketGateway: FastifyPluginAsync = async (fastify) => {
   fastify.log.info('Socket.IO gateway registered');
 };
 
-export default fp(socketGateway, { name: 'socket-gateway', dependencies: ['auth'] });
+export default fp(socketGateway, { name: 'socket-gateway', dependencies: ['auth', 'db'] });

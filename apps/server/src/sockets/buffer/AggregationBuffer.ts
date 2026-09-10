@@ -98,6 +98,21 @@ export class AggregationBuffer {
     return [...this.slideBuffers.keys()];
   }
 
+  getFinalSessionSummary(): Record<string, unknown> {
+    const summary: Record<string, unknown> = {};
+    for (const [slideId, buf] of this.slideBuffers.entries()) {
+      summary[slideId] = {
+        type: buf.type,
+        totalTaps: buf.hotspotTaps.length,
+        totalMatches: buf.matchEvents.length,
+        totalSorts: buf.sortSubmissions.length,
+        totalGrades: buf.reviewGrades.length,
+        questions: buf.questions,
+      };
+    }
+    return summary;
+  }
+
   clear(): void {
     this.slideBuffers.clear();
   }

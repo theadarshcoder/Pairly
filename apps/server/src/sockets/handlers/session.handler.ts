@@ -1,8 +1,11 @@
 import type { Socket, Server } from 'socket.io';
+import type { Db } from 'mongodb';
 import type { ClientToServerEvents, ServerToClientEvents, SocketData, SessionControlPayload } from '@pairly/schemas';
 import { SessionControlPayloadSchema } from '@pairly/schemas';
 import type { RoomManager } from '../rooms/RoomManager.js';
 import { flushScheduler } from '../buffer/FlushScheduler.js';
+import { roomBuffers } from './room.handler.js';
+import { endSession } from '../../services/session.service.js';
 import { logger } from '../../lib/logger.js';
 
 type PairlySocket = Socket<ClientToServerEvents, ServerToClientEvents, Record<string, never>, SocketData>;
@@ -12,6 +15,7 @@ export function registerSessionHandlers(
   socket: PairlySocket,
   io: PairlyServer,
   roomManager: RoomManager,
+  db?: Db,
 ): void {
   socket.on('session:control', (payload: SessionControlPayload) => {
     const parsed = SessionControlPayloadSchema.safeParse(payload);
@@ -41,12 +45,22 @@ export function registerSessionHandlers(
           io.to(roomCode).emit('session:state', { status: 'active', currentSlideIndex: room.currentSlideIndex });
           break;
 
-        case 'end':
+        case 'end': {
           roomManager.updateRoom(roomCode, { status: 'ended' });
           flushScheduler.stop(roomCode);
           io.to(roomCode).emit('session:state', { status: 'ended', currentSlideIndex: room.currentSlideIndex });
-          // TODO: trigger session.service.endSession() bulk write after emitting
+
+          // Persist aggregated session data at session end — one bulk write to MongoDB
+          const buffer = roomBuffers.get(roomCode);
+          const finalSlideStates = buffer?.getFinalSessionSummary() ?? {};
+          if (db && room.sessionId) {
+            endSession(db, room.sessionId, { finalSlideStates }).catch((err) => {
+              logger.error({ err, sessionId: room.sessionId, roomCode }, 'Failed to persist session end state to MongoDB');
+            });
+          }
+          roomBuffers.delete(roomCode);
           break;
+        }
       }
 
       logger.info({ roomCode, action, role: socket.data.role }, 'Session control event');
