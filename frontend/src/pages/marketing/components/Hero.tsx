@@ -101,7 +101,7 @@ export function Hero() {
           min-height: 100vh;
           position: relative;
           overflow: hidden;
-          background: linear-gradient(180deg, #9ED4EF 0%, #BEE4F7 28%, #DFEFF9 62%, #FAF8F5 100%);
+          background: linear-gradient(180deg, #9ED4EF 0%, #BEE4F7 28%, #DFEFF9 62%, #F0F6FE 100%);
           box-sizing: border-box;
           display: flex;
           align-items: center;
@@ -119,7 +119,7 @@ export function Hero() {
         .hero-sky-gradient {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, #9ED4EF 0%, #BEE4F7 28%, #DFEFF9 62%, #FAF8F5 100%);
+          background: linear-gradient(180deg, #9ED4EF 0%, #BEE4F7 28%, #DFEFF9 62%, #F0F6FE 100%);
         }
 
         .hero-paper-texture-overlay {

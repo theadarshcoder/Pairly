@@ -217,8 +217,8 @@ export function TestimonialRow() {
 
       <style>{`
         .pairly-adapt-section {
-          padding: 120px 32px;
-          margin-top: 140px;
+          padding: 80px 32px 120px 32px;
+          margin-top: 32px;
           box-sizing: border-box;
           display: flex;
           flex-direction: column;
