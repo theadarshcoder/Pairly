@@ -36,10 +36,10 @@ export default function LandingPage() {
             visual={<EngageHeatmapVisual />}
           />
 
-          {/* 2. Understand (Sage, Reversed) */}
+          {/* 2. Understand (Sage) */}
           <FeatureBlock
             accent="sage"
-            reverse={true}
+            reverse={false}
             eyebrow="Understand"
             heading="Watch a concept fade before it costs you a midterm"
             body="Identify cognitive drop-off points weeks before exam day. Longitudinal recall metrics show precisely when reinforcement is needed."
@@ -56,10 +56,10 @@ export default function LandingPage() {
             visual={<GenerateSyllabusVisual />}
           />
 
-          {/* 4. Organize (Coral, Reversed) */}
+          {/* 4. Organize (Coral) */}
           <FeatureBlock
             accent="coral"
-            reverse={true}
+            reverse={false}
             eyebrow="Organize"
             heading="Structure that follows the semester, not the app"
             body="Keep sections, clinical rotations, and lecture archives intuitively structured. Retrieve historical response patterns with one click."

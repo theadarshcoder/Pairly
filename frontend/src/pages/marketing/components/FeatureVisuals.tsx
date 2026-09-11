@@ -1,130 +1,245 @@
 import React from 'react';
-import { NetworkMatchIcon } from '../icons/NetworkMatchIcon.js';
-import { SortingIcon } from '../icons/SortingIcon.js';
-import { HotspotIcon } from '../icons/HotspotIcon.js';
 
 /**
- * Visual 1: Large Heatmap Panel (Engage)
+ * Common Craft.do Bento Box Card Wrapper
  */
-export function EngageHeatmapVisual() {
+function BentoCard({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <div
       style={{
-        backgroundColor: '#0F1216',
-        color: '#F2F2F4',
-        padding: '24px',
-        minHeight: '280px',
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        borderRadius: 'var(--radius-md)',
+        backgroundColor: '#FFFFFF',
+        borderRadius: '18px',
+        padding: '16px 18px',
+        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.03)',
+        border: '1px solid rgba(255, 255, 255, 0.9)',
+        boxSizing: 'border-box',
+        ...style,
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 2 }}>
-        <div style={{ display: 'flex', gap: '6px' }}>
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FF5F56' }} />
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FFBD2E' }} />
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#27C93F' }} />
-        </div>
-        <span style={{ fontSize: '0.78rem', color: '#9A9AA4', fontWeight: 600, letterSpacing: '0.04em' }}>
-          LIVE HEATMAP · DISTAL RADIUS
-        </span>
-      </div>
-
-      {/* Canvas graphics */}
-      <div style={{ position: 'relative', height: '170px', width: '100%', margin: '12px 0', overflow: 'hidden' }}>
-        {/* Abstract bone shape */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '20px',
-            left: '25%',
-            width: '50%',
-            height: '130px',
-            border: '2px solid rgba(255, 255, 255, 0.15)',
-            borderRadius: '40px 10px 40px 10px',
-            background: 'rgba(255, 255, 255, 0.03)',
-            transform: 'rotate(-5deg)',
-          }}
-        />
-
-        {/* Dense Heatmap Blobs */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '40px',
-            left: '42%',
-            width: '100px',
-            height: '100px',
-            borderRadius: '50%',
-            background: 'rgba(255, 77, 109, 0.85)',
-            filter: 'blur(16px)',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: '30px',
-            left: '35%',
-            width: '130px',
-            height: '130px',
-            borderRadius: '50%',
-            background: 'rgba(255, 176, 32, 0.6)',
-            filter: 'blur(20px)',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: '20px',
-            left: '28%',
-            width: '170px',
-            height: '150px',
-            borderRadius: '50%',
-            background: 'rgba(45, 212, 167, 0.35)',
-            filter: 'blur(24px)',
-          }}
-        />
-
-        {/* Hotspot coordinate ticks */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '65px',
-            left: '48%',
-            width: '20px',
-            height: '20px',
-            border: '2px solid #FFFFFF',
-            borderRadius: '50%',
-            boxShadow: '0 0 10px #FF4D6D',
-          }}
-        />
-      </div>
-
-      <div
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          background: 'rgba(255, 255, 255, 0.07)',
-          padding: '6px 14px',
-          borderRadius: '8px',
-          fontSize: '0.82rem',
-          color: '#E2E8F0',
-          width: 'fit-content',
-          zIndex: 2,
-        }}
-      >
-        <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#2DD4A7' }} />
-        <span>312 live taps · updating 10×/sec</span>
-      </div>
+      {children}
     </div>
   );
 }
 
 /**
- * Visual 2: 5-Bar Retention Decay Chart (Understand)
+ * Bento Header (Icon + Title)
+ */
+function BentoHeader({ icon, title }: { icon: string; title: string }) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        fontSize: '13px',
+        fontWeight: 600,
+        color: '#1E293B',
+        letterSpacing: '-0.01em',
+        marginBottom: '12px',
+      }}
+    >
+      <span style={{ fontSize: '14px', opacity: 0.85 }}>{icon}</span>
+      <span>{title}</span>
+    </div>
+  );
+}
+
+/**
+ * 4x2 Icon Box Tile
+ */
+function IconTile({
+  bg,
+  color,
+  label,
+  children,
+}: {
+  bg: string;
+  color: string;
+  label: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div
+      title={label}
+      style={{
+        width: '36px',
+        height: '36px',
+        borderRadius: '10px',
+        backgroundColor: bg,
+        color: color,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '11px',
+        fontWeight: 700,
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.06)',
+        cursor: 'default',
+        transition: 'transform 0.15s ease',
+      }}
+    >
+      {children || label.slice(0, 2).toUpperCase()}
+    </div>
+  );
+}
+
+/**
+ * Bottom Community/Cohort Row with Avatar Circles
+ */
+function BentoBottomRow({
+  icon,
+  label,
+  dotColors,
+  count,
+  subtext,
+}: {
+  icon: string;
+  label: string;
+  dotColors: string[];
+  count: string;
+  subtext: string;
+}) {
+  return (
+    <BentoCard
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '14px 20px',
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 600, color: '#1E293B' }}>
+        <span style={{ fontSize: '15px' }}>{icon}</span>
+        <span>{label}</span>
+      </div>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        {/* Overlapping Avatar Circles */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          {dotColors.map((color, idx) => (
+            <div
+              key={idx}
+              style={{
+                width: '24px',
+                height: '24px',
+                borderRadius: '50%',
+                backgroundColor: color,
+                border: '2px solid #FFFFFF',
+                marginLeft: idx === 0 ? 0 : '-6px',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.08)',
+              }}
+            />
+          ))}
+        </div>
+
+        <div>
+          <div style={{ fontSize: '13px', fontWeight: 700, color: '#0F172A', lineHeight: 1.2 }}>
+            {count}
+          </div>
+          <div style={{ fontSize: '11px', color: '#64748B', lineHeight: 1.2 }}>
+            {subtext}
+          </div>
+        </div>
+      </div>
+    </BentoCard>
+  );
+}
+
+/**
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Visual 1: ENGAGE (Blue Card Bento Box)
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+export function EngageHeatmapVisual() {
+  const tools = [
+    { label: 'Hotspot', bg: '#0F172A', color: '#38BDF8' },
+    { label: 'Sort', bg: '#F8FAFC', color: '#0284C7' },
+    { label: 'Match', bg: '#F0FDF4', color: '#16A34A' },
+    { label: 'Swarm', bg: '#FEF2F2', color: '#DC2626' },
+    { label: 'Q&A', bg: '#FAF5FF', color: '#9333EA' },
+    { label: 'Poll', bg: '#EFF6FF', color: '#2563EB' },
+    { label: 'Decay', bg: '#FFFBEB', color: '#D97706' },
+    { label: 'Matrix', bg: '#F1F5F9', color: '#475569' },
+  ];
+
+  const streamTaps = [
+    { label: 'T1', bg: '#2DD4A7', color: '#FFFFFF' },
+    { label: 'T2', bg: '#38BDF8', color: '#FFFFFF' },
+    { label: 'T3', bg: '#818CF8', color: '#FFFFFF' },
+    { label: 'T4', bg: '#F43F5E', color: '#FFFFFF' },
+    { label: 'T5', bg: '#F59E0B', color: '#FFFFFF' },
+    { label: 'T6', bg: '#10B981', color: '#FFFFFF' },
+    { label: 'T7', bg: '#6366F1', color: '#FFFFFF' },
+    { label: 'T8', bg: '#EC4899', color: '#FFFFFF' },
+  ];
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+      {/* Row 1: Top 2 Bento Cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+        <BentoCard>
+          <BentoHeader icon="✦" title="Spatial Interactions" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', justifyItems: 'center' }}>
+            {tools.map((t, i) => (
+              <IconTile key={i} bg={t.bg} color={t.color} label={t.label} />
+            ))}
+          </div>
+        </BentoCard>
+
+        <BentoCard>
+          <BentoHeader icon="⊞" title="Live Response Stream" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', justifyItems: 'center' }}>
+            {streamTaps.map((t, i) => (
+              <IconTile key={i} bg={t.bg} color={t.color} label={t.label} />
+            ))}
+          </div>
+        </BentoCard>
+      </div>
+
+      {/* Row 2: Active Classrooms (Pill Badges) */}
+      <BentoCard>
+        <BentoHeader icon="🧭" title="Active Classrooms" />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+          {[
+            'Anatomy 201 · 284 students',
+            'Biochem Lecture · 190 students',
+            'Physics Lab · 94 students',
+            'Neurology Ward · 42 students',
+          ].map((text, i) => (
+            <div
+              key={i}
+              style={{
+                backgroundColor: '#A9D5F5',
+                color: '#082642',
+                borderRadius: '9999px',
+                padding: '9px 14px',
+                fontSize: '12.5px',
+                fontWeight: 600,
+                textAlign: 'center',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {text}
+            </div>
+          ))}
+        </div>
+      </BentoCard>
+
+      {/* Row 3: Room Pulse / Community */}
+      <BentoBottomRow
+        icon="👥"
+        label="Room Pulse"
+        dotColors={['#88D49E', '#84BCF0', '#C3B5E8', '#F5D671', '#0F172A']}
+        count="300+ in lecture hall"
+        subtext="Sub-100ms real-time sync"
+      />
+    </div>
+  );
+}
+
+/**
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Visual 2: UNDERSTAND (Sage Green Card Bento Box - Image 1 Match)
+ * ─────────────────────────────────────────────────────────────────────────────
  */
 export function UnderstandDecayVisual() {
   const bars = [
@@ -135,299 +250,310 @@ export function UnderstandDecayVisual() {
     { week: 'W15', height: '38%', retention: '38%', dim: false },
   ];
 
-  return (
-    <div
-      style={{
-        backgroundColor: '#FBF8F1',
-        color: '#1B1712',
-        padding: '24px',
-        minHeight: '280px',
-        borderRadius: 'var(--radius-md)',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        border: '1px solid #E4DBC8',
-      }}
-    >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <div>
-          <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--sage-deep)' }}>
-            CONCEPT RETENTION
-          </div>
-          <div style={{ fontSize: '1.05rem', fontWeight: 600, marginTop: '2px' }}>
-            Mitosis: Prophase to Anaphase
-          </div>
-        </div>
-        <div
-          style={{
-            background: 'var(--sage)',
-            color: 'var(--sage-deep)',
-            padding: '4px 10px',
-            borderRadius: 'var(--radius-pill)',
-            fontSize: '0.78rem',
-            fontWeight: 700,
-          }}
-        >
-          Decay Alert
-        </div>
-      </div>
+  const tracks = [
+    { label: 'Mitosis', bg: '#DCFCE7', color: '#15803D' },
+    { label: 'Krebs', bg: '#FEF3C7', color: '#B45309' },
+    { label: 'Axons', bg: '#E0F2FE', color: '#0369A1' },
+    { label: 'Renal', bg: '#FEE2E2', color: '#B91C1C' },
+    { label: 'Osmosis', bg: '#F3E8FF', color: '#7E22CE' },
+    { label: 'Enzymes', bg: '#F1F5F9', color: '#334155' },
+    { label: 'Synapse', bg: '#CCFBF1', color: '#0F766E' },
+    { label: 'DNA', bg: '#FFEDD5', color: '#C2410C' },
+  ];
 
-      {/* 5-Bar Chart */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'space-around',
-          height: '140px',
-          padding: '10px 0',
-          borderBottom: '1.5px solid var(--line)',
-        }}
-      >
-        {bars.map((bar, idx) => (
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+      {/* Row 1: Top 2 Bento Cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '12px' }}>
+        {/* Concept Retention Chart */}
+        <BentoCard style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+            <BentoHeader icon="✦" title="Concept Retention" />
+            <span
+              style={{
+                backgroundColor: '#DCFCE7',
+                color: '#166534',
+                fontSize: '11px',
+                fontWeight: 700,
+                padding: '2px 8px',
+                borderRadius: '9999px',
+                marginTop: '-8px',
+              }}
+            >
+              Decay Alert
+            </span>
+          </div>
+
           <div
-            key={idx}
             style={{
               display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '6px',
-              height: '100%',
-              justifyContent: 'flex-end',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              height: '76px',
+              paddingBottom: '2px',
             }}
           >
-            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--ink-soft)' }}>
-              {bar.retention}
-            </span>
-            <div
-              style={{
-                width: '38px',
-                height: bar.height,
-                backgroundColor: 'var(--sage-deep)',
-                opacity: bar.dim ? 0.38 : 0.95,
-                borderRadius: '6px 6px 0 0',
-                transition: 'height 0.3s ease',
-              }}
-            />
-            <span style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--ink-soft)', marginTop: '4px' }}>
-              {bar.week}
-            </span>
+            {bars.map((bar, idx) => (
+              <div
+                key={idx}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '4px',
+                  height: '100%',
+                  justifyContent: 'flex-end',
+                }}
+              >
+                <div
+                  style={{
+                    width: '26px',
+                    height: bar.height,
+                    backgroundColor: '#1E3A24',
+                    opacity: bar.dim ? 0.35 : 0.95,
+                    borderRadius: '4px 4px 0 0',
+                  }}
+                />
+                <span style={{ fontSize: '10.5px', fontWeight: 600, color: '#64748B' }}>
+                  {bar.week}
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
+        </BentoCard>
+
+        {/* Knowledge Tracks (8 icons) */}
+        <BentoCard>
+          <BentoHeader icon="⊞" title="Knowledge Tracks" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', justifyItems: 'center' }}>
+            {tracks.map((t, i) => (
+              <IconTile key={i} bg={t.bg} color={t.color} label={t.label} />
+            ))}
+          </div>
+        </BentoCard>
       </div>
 
-      <div style={{ fontSize: '0.82rem', color: 'var(--ink-soft)', marginTop: '8px' }}>
-        Caption: Mitosis · retention across weeks 3, 6, 9, 12, 15
-      </div>
+      {/* Row 2: Cognitive Drop-offs (Exact Match to Craft's "Start Building") */}
+      <BentoCard>
+        <BentoHeader icon="🧭" title="Cognitive Drop-offs" />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+          {[
+            'Mitosis Prophase',
+            'Krebs Cycle',
+            'Action Potentials',
+            'Renal Clearance',
+          ].map((text, i) => (
+            <div
+              key={i}
+              style={{
+                backgroundColor: '#98CFAB',
+                color: '#0A2914',
+                borderRadius: '9999px',
+                padding: '9px 14px',
+                fontSize: '12.5px',
+                fontWeight: 600,
+                textAlign: 'center',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {text}
+            </div>
+          ))}
+        </div>
+      </BentoCard>
+
+      {/* Row 3: Cohort Retention (Exact Match to Craft's "Community") */}
+      <BentoBottomRow
+        icon="👥"
+        label="Cohort Retention"
+        dotColors={['#88D49E', '#84BCF0', '#C3B5E8', '#F5D671', '#0F172A']}
+        count="280+ students tracked"
+        subtext="Longitudinal decay analysis ready"
+      />
     </div>
   );
 }
 
 /**
- * Visual 3: Syllabus Upload & Slide Generator (Generate)
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Visual 3: GENERATE (Butter Yellow Card Bento Box)
+ * ─────────────────────────────────────────────────────────────────────────────
  */
 export function GenerateSyllabusVisual() {
+  const sources = [
+    { label: 'PDF', bg: '#FEE2E2', color: '#DC2626' },
+    { label: 'Slides', bg: '#FEF3C7', color: '#D97706' },
+    { label: 'Notion', bg: '#F1F5F9', color: '#0F172A' },
+    { label: 'Canvas', bg: '#FFEDD5', color: '#EA580C' },
+    { label: 'Docs', bg: '#EFF6FF', color: '#2563EB' },
+    { label: 'Blackboard', bg: '#F8FAFC', color: '#475569' },
+    { label: 'PubMed', bg: '#E0F2FE', color: '#0284C7' },
+    { label: 'Markdown', bg: '#F3E8FF', color: '#9333EA' },
+  ];
+
+  const outputs = [
+    { label: 'Hotspot', bg: '#0F172A', color: '#38BDF8' },
+    { label: 'Sort', bg: '#F8FAFC', color: '#0284C7' },
+    { label: 'Match', bg: '#F0FDF4', color: '#16A34A' },
+    { label: 'Swarm', bg: '#FEF2F2', color: '#DC2626' },
+    { label: 'Case', bg: '#FFFBEB', color: '#D97706' },
+    { label: 'Q&A', bg: '#FAF5FF', color: '#9333EA' },
+    { label: 'Label', bg: '#EFF6FF', color: '#2563EB' },
+    { label: 'Graph', bg: '#F1F5F9', color: '#475569' },
+  ];
+
   return (
-    <div
-      style={{
-        backgroundColor: '#FBF8F1',
-        color: '#1B1712',
-        padding: '22px',
-        minHeight: '280px',
-        borderRadius: 'var(--radius-md)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '14px',
-        border: '1px solid #E4DBC8',
-      }}
-    >
-      {/* Dashed upload card */}
-      <div
-        style={{
-          border: '2px dashed var(--butter-deep)',
-          borderRadius: '12px',
-          padding: '14px 18px',
-          backgroundColor: 'rgba(243, 217, 139, 0.25)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <div>
-          <div style={{ fontWeight: 700, fontSize: '0.92rem', color: 'var(--butter-deep)' }}>
-            Week 4 — Cell Division.pdf
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+      {/* Row 1: Top 2 Bento Cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+        <BentoCard>
+          <BentoHeader icon="✦" title="Source Ingestion" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', justifyItems: 'center' }}>
+            {sources.map((s, i) => (
+              <IconTile key={i} bg={s.bg} color={s.color} label={s.label} />
+            ))}
           </div>
-          <div style={{ fontSize: '0.8rem', color: 'var(--ink-soft)', marginTop: '2px' }}>
-            Generating interactive slides…
+        </BentoCard>
+
+        <BentoCard>
+          <BentoHeader icon="⊞" title="Slide Synthesizer" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', justifyItems: 'center' }}>
+            {outputs.map((s, i) => (
+              <IconTile key={i} bg={s.bg} color={s.color} label={s.label} />
+            ))}
           </div>
-        </div>
-        <div
-          style={{
-            width: '18px',
-            height: '18px',
-            borderRadius: '50%',
-            border: '2.5px solid var(--butter-deep)',
-            borderTopColor: 'transparent',
-            animation: 'spin 1s linear infinite',
-          }}
-        />
+        </BentoCard>
       </div>
 
-      {/* Generated output list (3 rows) */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '10px 14px',
-            backgroundColor: '#FFFFFF',
-            borderRadius: '10px',
-            border: '1px solid var(--line)',
-            fontSize: '0.88rem',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <NetworkMatchIcon size={18} />
-            <span style={{ fontWeight: 600 }}>Network Matching</span>
-          </div>
-          <span style={{ color: 'var(--butter-deep)', fontWeight: 600 }}>mitosis ↔ phases</span>
+      {/* Row 2: Generated Modules */}
+      <BentoCard>
+        <BentoHeader icon="🧭" title="Generated Question Modules" />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+          {[
+            'Diagnostic Hotspots',
+            'Enzyme Sequencing',
+            'Neural Pathways',
+            'Clinical Case Review',
+          ].map((text, i) => (
+            <div
+              key={i}
+              style={{
+                backgroundColor: '#F5DE88',
+                color: '#382803',
+                borderRadius: '9999px',
+                padding: '9px 14px',
+                fontSize: '12.5px',
+                fontWeight: 600,
+                textAlign: 'center',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {text}
+            </div>
+          ))}
         </div>
+      </BentoCard>
 
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '10px 14px',
-            backgroundColor: '#FFFFFF',
-            borderRadius: '10px',
-            border: '1px solid var(--line)',
-            fontSize: '0.88rem',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <SortingIcon size={18} />
-            <span style={{ fontWeight: 600 }}>Sequential Sorting</span>
-          </div>
-          <span style={{ color: 'var(--butter-deep)', fontWeight: 600 }}>prophase → telophase</span>
-        </div>
-
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '10px 14px',
-            backgroundColor: '#FFFFFF',
-            borderRadius: '10px',
-            border: '1px solid var(--line)',
-            fontSize: '0.88rem',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <HotspotIcon size={18} />
-            <span style={{ fontWeight: 600 }}>Spatial Hotspot</span>
-          </div>
-          <span style={{ color: 'var(--butter-deep)', fontWeight: 600 }}>cell diagram, 4 targets</span>
-        </div>
-      </div>
+      {/* Row 3: AI Pipeline */}
+      <BentoBottomRow
+        icon="⚡"
+        label="AI Pipeline"
+        dotColors={['#F59E0B', '#88D49E', '#84BCF0', '#C3B5E8', '#0F172A']}
+        count="Generated in 2.4s"
+        subtext="Direct export to presenter view"
+      />
     </div>
   );
 }
 
 /**
- * Visual 4: Stacked Semester Cards (Organize)
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Visual 4: ORGANIZE (Coral Card Bento Box)
+ * ─────────────────────────────────────────────────────────────────────────────
  */
 export function OrganizeArchiveVisual() {
+  const semesters = [
+    { label: 'W1', bg: '#FEF2F2', color: '#DC2626' },
+    { label: 'W2', bg: '#FFEDD5', color: '#EA580C' },
+    { label: 'Midterm', bg: '#FEF3C7', color: '#D97706' },
+    { label: 'Lab 1', bg: '#F0FDF4', color: '#16A34A' },
+    { label: 'Lab 2', bg: '#EFF6FF', color: '#2563EB' },
+    { label: 'Clinic', bg: '#FAF5FF', color: '#9333EA' },
+    { label: 'Final', bg: '#F1F5F9', color: '#0F172A' },
+    { label: 'Archive', bg: '#FFF1F2', color: '#E11D48' },
+  ];
+
+  const cohorts = [
+    { label: 'Sec A', bg: '#EFF6FF', color: '#1D4ED8' },
+    { label: 'Sec B', bg: '#F0FDF4', color: '#15803D' },
+    { label: 'Honors', bg: '#FEF3C7', color: '#B45309' },
+    { label: 'Med 1', bg: '#FDF2F8', color: '#BE185D' },
+    { label: 'Med 2', bg: '#F3E8FF', color: '#7E22CE' },
+    { label: 'Nursing', bg: '#E0F2FE', color: '#0369A1' },
+    { label: 'Grad', bg: '#F8FAFC', color: '#334155' },
+    { label: 'Online', bg: '#FFF7ED', color: '#C2410C' },
+  ];
+
   return (
-    <div
-      style={{
-        padding: '16px 8px',
-        minHeight: '280px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        gap: '12px',
-      }}
-    >
-      {/* Three stacked white cards */}
-      <div
-        style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '14px',
-          padding: '16px 20px',
-          border: '1px solid rgba(122, 52, 33, 0.15)',
-          boxShadow: '0 6px 16px -4px rgba(122, 52, 33, 0.12)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          transform: 'rotate(-1deg)',
-        }}
-      >
-        <div>
-          <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--coral-deep)', textTransform: 'uppercase' }}>
-            Today's session
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+      {/* Row 1: Top 2 Bento Cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+        <BentoCard>
+          <BentoHeader icon="✦" title="Semester Hierarchy" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', justifyItems: 'center' }}>
+            {semesters.map((s, i) => (
+              <IconTile key={i} bg={s.bg} color={s.color} label={s.label} />
+            ))}
           </div>
-          <div style={{ fontSize: '1.02rem', fontWeight: 600, color: 'var(--ink)', marginTop: '2px' }}>
-            Bio 101 — Section C
+        </BentoCard>
+
+        <BentoCard>
+          <BentoHeader icon="⊞" title="Section Archives" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', justifyItems: 'center' }}>
+            {cohorts.map((c, i) => (
+              <IconTile key={i} bg={c.bg} color={c.color} label={c.label} />
+            ))}
           </div>
-        </div>
-        <span style={{ fontSize: '0.8rem', fontWeight: 600, background: '#F0BBA9', padding: '4px 10px', borderRadius: '12px', color: '#7A3421' }}>
-          Active
-        </span>
+        </BentoCard>
       </div>
 
-      <div
-        style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '14px',
-          padding: '16px 20px',
-          border: '1px solid rgba(122, 52, 33, 0.15)',
-          boxShadow: '0 6px 16px -4px rgba(122, 52, 33, 0.12)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          transform: 'rotate(1deg)',
-        }}
-      >
-        <div>
-          <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--coral-deep)', textTransform: 'uppercase' }}>
-            This semester
-          </div>
-          <div style={{ fontSize: '1.02rem', fontWeight: 600, color: 'var(--ink)', marginTop: '2px' }}>
-            4 sections, 187 students
-          </div>
+      {/* Row 2: Active Sections */}
+      <BentoCard>
+        <BentoHeader icon="🧭" title="Active Sections" />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+          {[
+            'Lecture Hall A · Morning',
+            'Lab Section 3 · Afternoon',
+            'Clinical Rotation · Hospital',
+            'Remote Cohort · Evening',
+          ].map((text, i) => (
+            <div
+              key={i}
+              style={{
+                backgroundColor: '#F7B599',
+                color: '#3D1409',
+                borderRadius: '9999px',
+                padding: '9px 14px',
+                fontSize: '12.5px',
+                fontWeight: 600,
+                textAlign: 'center',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {text}
+            </div>
+          ))}
         </div>
-        <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--ink-soft)' }}>
-          Spring 2026
-        </span>
-      </div>
+      </BentoCard>
 
-      <div
-        style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '14px',
-          padding: '16px 20px',
-          border: '1px solid rgba(122, 52, 33, 0.15)',
-          boxShadow: '0 6px 16px -4px rgba(122, 52, 33, 0.12)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          transform: 'rotate(-0.5deg)',
-        }}
-      >
-        <div>
-          <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--coral-deep)', textTransform: 'uppercase' }}>
-            Concept archive
-          </div>
-          <div style={{ fontSize: '1.02rem', fontWeight: 600, color: 'var(--ink)', marginTop: '2px' }}>
-            15 weeks of tagged history
-          </div>
-        </div>
-        <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--ink-soft)' }}>
-          View all
-        </span>
-      </div>
+      {/* Row 3: Educator Team */}
+      <BentoBottomRow
+        icon="👥"
+        label="Educator Team"
+        dotColors={['#FB7185', '#F59E0B', '#88D49E', '#84BCF0', '#0F172A']}
+        count="4 Course Instructors"
+        subtext="LMS gradebook export ready"
+      />
     </div>
   );
 }

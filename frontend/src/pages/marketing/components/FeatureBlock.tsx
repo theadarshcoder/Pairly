@@ -31,30 +31,22 @@ export function FeatureBlock({
 
   return (
     <section className={classNames}>
+      {/* Craft Paper Texture Overlay */}
+      <div className="craft-card-paper-overlay" aria-hidden="true" />
+
       {/* Copy Column */}
       <div className="feature-copy">
         <span className="feature-eyebrow">{eyebrow}</span>
         <h3 className="feature-h3">{heading}</h3>
         <p className="feature-body">{body}</p>
-        {ctaLabel && (
-          <button className="feature-cta" type="button">
-            {ctaLabel}
-          </button>
-        )}
+        <button className="feature-cta-pill" type="button">
+          {ctaLabel || 'Learn more'}
+        </button>
       </div>
 
       {/* Visual Column */}
       <div className="feature-visual" style={{ width: '100%' }}>
-        <div
-          style={{
-            borderRadius: 'var(--radius-md)',
-            boxShadow: 'var(--shadow)',
-            overflow: 'hidden',
-            width: '100%',
-          }}
-        >
-          {visual}
-        </div>
+        {visual}
       </div>
     </section>
   );
