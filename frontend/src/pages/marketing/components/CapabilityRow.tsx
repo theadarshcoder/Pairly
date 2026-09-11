@@ -4,15 +4,6 @@ import { HotspotIcon } from '../icons/HotspotIcon.js';
 import { SortingIcon } from '../icons/SortingIcon.js';
 import { PeerReviewIcon } from '../icons/PeerReviewIcon.js';
 import { QnaIcon } from '../icons/QnaIcon.js';
-import {
-  StanfordLogo,
-  HarvardLogo,
-  MITLogo,
-  BerkeleyLogo,
-  CambridgeLogo,
-  OxfordLogo,
-} from './PartnerLogos.js';
-
 interface CapabilityItem {
   icon: React.ReactNode;
   label: string;
@@ -89,17 +80,9 @@ export function CapabilityRow() {
 
       {/* ── Content Container ── */}
       <div className="sky-content-container">
-        {/* ── Tier 1: Social Proof Logos Bar ── */}
+        {/* ── Tier 1: Social Proof / Eyebrow Heading ── */}
         <div className="sky-social-proof">
           <p className="sky-social-heading">Your next lecture is in good company</p>
-          <div className="sky-logos-strip">
-            <div className="sky-logo-wrap"><StanfordLogo height={22} className="sky-logo-svg" /></div>
-            <div className="sky-logo-wrap"><HarvardLogo height={20} className="sky-logo-svg" /></div>
-            <div className="sky-logo-wrap"><MITLogo height={18} className="sky-logo-svg" /></div>
-            <div className="sky-logo-wrap"><BerkeleyLogo height={20} className="sky-logo-svg" /></div>
-            <div className="sky-logo-wrap"><CambridgeLogo height={20} className="sky-logo-svg" /></div>
-            <div className="sky-logo-wrap"><OxfordLogo height={20} className="sky-logo-svg" /></div>
-          </div>
         </div>
 
         {/* ── Tier 2: Transition Headline with Luminous Sparkles ── */}
@@ -237,13 +220,12 @@ export function CapabilityRow() {
           text-align: center;
         }
 
-        /* ── Tier 1: Social Proof ── */
+        /* ── Tier 1: Eyebrow / Social Proof ── */
         .sky-social-proof {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 20px;
-          margin-bottom: 70px;
+          margin-bottom: 24px;
           width: 100%;
         }
 
@@ -254,35 +236,6 @@ export function CapabilityRow() {
           letter-spacing: -0.01em;
           color: #557A9E;
           margin: 0;
-        }
-
-        .sky-logos-strip {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-          gap: 32px 52px;
-          width: 100%;
-          max-width: 960px;
-        }
-
-        .sky-logo-wrap {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: rgba(255, 255, 255, 0.88);
-          filter: drop-shadow(0 2px 8px rgba(0, 34, 83, 0.08));
-          transition: all 0.2s ease;
-        }
-
-        .sky-logo-wrap:hover {
-          color: #FFFFFF;
-          transform: translateY(-1px);
-          filter: drop-shadow(0 4px 14px rgba(255, 255, 255, 0.45));
-        }
-
-        .sky-logo-svg {
-          display: block;
         }
 
         /* ── Tier 2: Transition Headline ── */
