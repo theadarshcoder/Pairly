@@ -1,5 +1,111 @@
 import React from 'react';
 
+export function StanfordLogo({ height = 22, className = '' }: { height?: number; className?: string }) {
+  return (
+    <span
+      style={{
+        fontFamily: '"Times New Roman", Times, Georgia, serif',
+        fontSize: `${height * 1.15}px`,
+        fontWeight: 600,
+        letterSpacing: '0.04em',
+        textTransform: 'capitalize',
+        whiteSpace: 'nowrap',
+      }}
+      className={className}
+    >
+      Stanford
+    </span>
+  );
+}
+
+export function HarvardLogo({ height = 22, className = '' }: { height?: number; className?: string }) {
+  return (
+    <span
+      style={{
+        fontFamily: 'Georgia, "Times New Roman", serif',
+        fontSize: `${height * 1.05}px`,
+        fontWeight: 700,
+        letterSpacing: '0.12em',
+        textTransform: 'uppercase',
+        whiteSpace: 'nowrap',
+      }}
+      className={className}
+    >
+      Harvard
+    </span>
+  );
+}
+
+export function MITLogo({ height = 20, className = '' }: { height?: number; className?: string }) {
+  return (
+    <svg height={height} viewBox="0 0 74 34" fill="currentColor" className={className} aria-label="MIT">
+      {/* MIT Iconic geometric bar logo */}
+      {/* M */}
+      <rect x="0" y="0" width="8" height="34" />
+      <rect x="14" y="0" width="8" height="22" />
+      <rect x="28" y="0" width="8" height="34" />
+      {/* I */}
+      <rect x="42" y="0" width="8" height="34" />
+      {/* T */}
+      <rect x="42" y="0" width="32" height="8" />
+      <rect x="54" y="0" width="8" height="34" />
+    </svg>
+  );
+}
+
+export function BerkeleyLogo({ height = 22, className = '' }: { height?: number; className?: string }) {
+  return (
+    <span
+      style={{
+        fontFamily: 'Georgia, "Times New Roman", serif',
+        fontSize: `${height * 1.1}px`,
+        fontWeight: 600,
+        letterSpacing: '0.02em',
+        whiteSpace: 'nowrap',
+      }}
+      className={className}
+    >
+      Berkeley
+    </span>
+  );
+}
+
+export function OxfordLogo({ height = 22, className = '' }: { height?: number; className?: string }) {
+  return (
+    <span
+      style={{
+        fontFamily: '"Times New Roman", Times, Georgia, serif',
+        fontSize: `${height * 1.05}px`,
+        fontWeight: 600,
+        letterSpacing: '0.1em',
+        textTransform: 'uppercase',
+        whiteSpace: 'nowrap',
+      }}
+      className={className}
+    >
+      Oxford
+    </span>
+  );
+}
+
+export function CambridgeLogo({ height = 22, className = '' }: { height?: number; className?: string }) {
+  return (
+    <span
+      style={{
+        fontFamily: '"Times New Roman", Times, Georgia, serif',
+        fontSize: `${height * 1.05}px`,
+        fontWeight: 600,
+        letterSpacing: '0.08em',
+        textTransform: 'capitalize',
+        whiteSpace: 'nowrap',
+      }}
+      className={className}
+    >
+      Cambridge
+    </span>
+  );
+}
+
 export function AmazonLogo({ height = 24, className = '' }: { height?: number; className?: string }) {
   return (
     <svg height={height} viewBox="0 0 100 30" fill="currentColor" className={className} aria-label="Amazon">
@@ -45,14 +151,6 @@ export function LATimesLogo({ height = 24, className = '' }: { height?: number; 
   return (
     <span style={{ fontFamily: '"Old English Text MT", "UnifrakturMaguntia", "Cloister Black", Georgia, serif', fontSize: `${height * 1.05}px`, fontWeight: 700, letterSpacing: '0.02em', whiteSpace: 'nowrap' }} className={className}>
       Los Angeles Times
-    </span>
-  );
-}
-
-export function StanfordLogo({ height = 24, className = '' }: { height?: number; className?: string }) {
-  return (
-    <span style={{ fontFamily: '"Times New Roman", Times, Georgia, serif', fontSize: `${height * 1.1}px`, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'capitalize' }} className={className}>
-      Stanford
     </span>
   );
 }

@@ -5,12 +5,12 @@ import { SortingIcon } from '../icons/SortingIcon.js';
 import { PeerReviewIcon } from '../icons/PeerReviewIcon.js';
 import { QnaIcon } from '../icons/QnaIcon.js';
 import {
-  AmazonLogo,
-  AdobeLogo,
-  VercelLogo,
-  ZoomLogo,
-  LATimesLogo,
   StanfordLogo,
+  HarvardLogo,
+  MITLogo,
+  BerkeleyLogo,
+  CambridgeLogo,
+  OxfordLogo,
 } from './PartnerLogos.js';
 
 interface CapabilityItem {
@@ -91,14 +91,14 @@ export function CapabilityRow() {
       <div className="sky-content-container">
         {/* ── Tier 1: Social Proof Logos Bar ── */}
         <div className="sky-social-proof">
-          <p className="sky-social-heading">Your next big idea is in good company</p>
+          <p className="sky-social-heading">Your next lecture is in good company</p>
           <div className="sky-logos-strip">
-            <div className="sky-logo-wrap"><AmazonLogo height={22} className="sky-logo-svg" /></div>
-            <div className="sky-logo-wrap"><AdobeLogo height={20} className="sky-logo-svg" /></div>
-            <div className="sky-logo-wrap"><VercelLogo height={20} className="sky-logo-svg" /></div>
-            <div className="sky-logo-wrap"><ZoomLogo height={22} className="sky-logo-svg" /></div>
-            <div className="sky-logo-wrap"><LATimesLogo height={20} className="sky-logo-svg" /></div>
             <div className="sky-logo-wrap"><StanfordLogo height={22} className="sky-logo-svg" /></div>
+            <div className="sky-logo-wrap"><HarvardLogo height={20} className="sky-logo-svg" /></div>
+            <div className="sky-logo-wrap"><MITLogo height={18} className="sky-logo-svg" /></div>
+            <div className="sky-logo-wrap"><BerkeleyLogo height={20} className="sky-logo-svg" /></div>
+            <div className="sky-logo-wrap"><CambridgeLogo height={20} className="sky-logo-svg" /></div>
+            <div className="sky-logo-wrap"><OxfordLogo height={20} className="sky-logo-svg" /></div>
           </div>
         </div>
 
