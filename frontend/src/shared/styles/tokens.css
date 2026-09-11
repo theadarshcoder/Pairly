@@ -1,0 +1,201 @@
+/* ── Design Tokens ─────────────────────────────────────────────────── */
+/* Issue 23: --fg-subtle bumped from #5C5C66 (3.4:1) to #7A7A88 (≈5.1:1) for WCAG AA */
+/* Issue 29: Legacy --color-* aliases are a temporary bridge. See docs/PHASE_6.md */
+
+:root {
+  /* ── Surfaces (Warm Near-Black, Luminance-Layered, No Drop Shadows) ── */
+  --bg: #0A0A0C;
+  --surface-1: #121215;
+  --surface-2: #1A1A1F;
+  --surface-3: #222229;
+  --hairline: rgb(255 255 255 / 0.07);
+  --hairline-strong: rgb(255 255 255 / 0.14);
+
+  /* ── Foreground ── */
+  --fg: #F2F2F4;
+  --fg-muted: #9A9AA4;
+  /* Issue 23: bumped for WCAG AA contrast (≈5.1:1 on --bg) */
+  --fg-subtle: #7A7A88;
+  /* Decorative-only usage where the dimmer value is intentional */
+  --fg-decorative: #5C5C66;
+
+  /* ── Semantic (Meaning Only, Never Decoration) ── */
+  --accent: #7C5CFF;
+  --accent-soft: rgb(124 92 255 / 0.14);
+  --ok: #2DD4A7;
+  --warn: #FFB020;
+  --bad: #FF4D6D;
+
+  /* ── shadcn UI / Tailwind CSS variables ── */
+  --background: #0A0A0C;
+  --foreground: #F2F2F4;
+  --primary: #7C5CFF;
+  --primary-foreground: #FFFFFF;
+  --secondary: #1A1A1F;
+  --secondary-foreground: #F2F2F4;
+  --muted: #1A1A1F;
+  --muted-foreground: #9A9AA4;
+  --border: rgb(255 255 255 / 0.14);
+  --input: rgb(255 255 255 / 0.14);
+  --ring: #7C5CFF;
+  --radius: 0.5rem;
+  --spektr-cyan-50: #06b6d4;
+
+  /* ── Typography ── */
+  /* Issue 10: Source Serif 4 chosen. No Lora. No TODO about it. */
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Spacing (4px base) ── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-24: 96px;
+
+  /* ── Radii ── */
+  --r-card: 8px;
+  --r-stage: 12px;
+  --r-pill: 9999px;
+
+  /* ── Transitions ── */
+  --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 350ms;
+
+  /* ── Presenter dock ── */
+  --dock-height: 72px;
+
+  /* ── Z-index ── */
+  --z-dock: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  /* Issue 30: kept — Toast component will use it */
+  --z-toast: 400;
+
+  /* ──────────────────────────────────────────────────────────────────────
+     Legacy compatibility aliases (Issue 29)
+     TEMPORARY BRIDGE — delete after visual regression passes.
+     See docs/PHASE_6.md for removal plan.
+     ────────────────────────────────────────────────────────────────────── */
+  --color-brand-primary: var(--accent);
+  --color-brand-secondary: #9B7CFF;
+  --color-brand-accent: var(--accent);
+  --color-bg-base: var(--bg);
+  --color-bg-surface: var(--surface-1);
+  --color-bg-elevated: var(--surface-2);
+  --color-bg-overlay: var(--surface-3);
+  --color-text-primary: var(--fg);
+  --color-text-secondary: var(--fg-muted);
+  --color-text-tertiary: var(--fg-subtle);
+  --color-border-subtle: var(--hairline);
+  --color-border-default: var(--hairline-strong);
+  --color-border-strong: rgb(255 255 255 / 0.22);
+  --color-success: var(--ok);
+  --color-warning: var(--warn);
+  --color-error: var(--bad);
+  --color-info: hsl(210, 100%, 56%);
+
+  /* Legacy spacing (mapped to new scale) */
+  --space-1: var(--sp-1);
+  --space-2: var(--sp-2);
+  --space-3: var(--sp-3);
+  --space-4: var(--sp-4);
+  --space-5: var(--sp-5);
+  --space-6: var(--sp-6);
+  --space-8: var(--sp-8);
+  --space-10: var(--sp-10);
+  --space-12: var(--sp-12);
+  --space-16: var(--sp-16);
+  --space-20: 80px;
+
+  /* Legacy radii */
+  --radius-sm: 4px;
+  --radius-md: var(--r-card);
+  --radius-lg: var(--r-card);
+  --radius-xl: var(--r-stage);
+  --radius-2xl: var(--r-stage);
+  --radius-full: var(--r-pill);
+
+  /* Legacy typography */
+  --font-sans-legacy: var(--font-sans);
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Legacy shadows */
+  --shadow-sm: 0 1px 3px hsl(0 0% 0% / 0.3);
+  --shadow-md: 0 4px 12px hsl(0 0% 0% / 0.4);
+  --shadow-lg: 0 8px 24px hsl(0 0% 0% / 0.5);
+  --shadow-glow-brand: 0 0 20px hsl(250 84% 60% / 0.25);
+
+  /* Legacy transitions */
+  --transition-fast: var(--dur-fast) var(--ease-out);
+  --transition-base: var(--dur-base) var(--ease-out);
+  --transition-slow: var(--dur-slow) var(--ease-out);
+
+  /* Legacy z-index */
+  --z-base: 0;
+  --z-dropdown: var(--z-dock);
+  --z-sticky: var(--z-overlay);
+}
+
+:root[data-theme="light"],
+[data-theme="light"] {
+  --bg-light: #FBFBFA;
+  --surface-light-1: #FFFFFF;
+  --surface-light-2: #F5F4F1;
+  --hairline-light: rgba(0, 0, 0, 0.06);
+  --hairline-light-strong: rgba(0, 0, 0, 0.12);
+  --fg-light: #1A1A1A;
+  --fg-light-muted: #6B6B6B;
+  --fg-light-subtle: #A0A0A0;
+  --accent-light: #5B4DE8; /* slightly softer violet, less electric on cream */
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.03), 0 4px 12px rgba(0, 0, 0, 0.04), 0 16px 40px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.05), 0 12px 32px rgba(0, 0, 0, 0.08);
+
+  /* Fonts for craft.do editorial style */
+  --font-editorial-serif: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* shadcn UI / Tailwind variables for light theme */
+  --background: #FBFBFA;
+  --foreground: #1A1A1A;
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+  --primary: #1A1A1A;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F5F4F1;
+  --secondary-foreground: #1A1A1A;
+  --muted: #F5F4F1;
+  --muted-foreground: #6B6B6B;
+  --accent: #5B4DE8;
+  --accent-foreground: #FFFFFF;
+  --destructive: #FF4D6D;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(0, 0, 0, 0.12);
+  --input: rgba(0, 0, 0, 0.12);
+  --ring: #5B4DE8;
+  --spektr-cyan-50: #0ea5e9;
+}

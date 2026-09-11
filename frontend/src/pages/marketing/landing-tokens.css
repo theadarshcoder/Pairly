@@ -1,0 +1,241 @@
+@font-face {
+  font-family: 'UntitledSerif';
+  src: url('/fonts/UntitledSerif-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UntitledSerif';
+  src: url('/fonts/UntitledSerif-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+.pairly-marketing-theme {
+  /* ── Color Palette ─────────────────────────────────────────────────── */
+  --paper: #F6F1E6;
+  --paper-card: #FBF8F1;
+  --ink: #1B1712;
+  --ink-soft: #5B5346;
+  --line: #E4DBC8;
+
+  /* Pastel / Deep Pairs */
+  --blue: #AFCBEA;
+  --blue-deep: #28486B;
+  --sage: #C7DAB9;
+  --sage-deep: #33502A;
+  --butter: #F3D98B;
+  --butter-deep: #6B4F0E;
+  --coral: #F0BBA9;
+  --coral-deep: #7A3421;
+  --mint: #BCE6C9;
+  --mint-deep: #194A32;
+
+  /* ── Spacing & Shape ───────────────────────────────────────────────── */
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-pill: 999px;
+
+  /* ── Shadows (Two Depths Only) ─────────────────────────────────────── */
+  --shadow: 0 18px 40px -12px rgba(27, 23, 18, 0.18);
+  --shadow-sm: 0 8px 20px -6px rgba(27, 23, 18, 0.14);
+
+  /* ── Typography ────────────────────────────────────────────────────── */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* ── Adaptive Focus Ring ───────────────────────────────────────────── */
+  --focus-ring: var(--blue-deep);
+
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.pairly-marketing-theme *,
+.pairly-marketing-theme *::before,
+.pairly-marketing-theme *::after {
+  box-sizing: border-box;
+}
+
+/* ── Focus Indicator (WCAG 2.1 SC 1.4.11 ≥ 3:1) ────────────────────────── */
+.pairly-marketing-theme *:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Adaptive focus ring for dark surfaces */
+.pairly-marketing-theme .dark-surface,
+.pairly-marketing-theme .pricing-card.institution,
+.pairly-marketing-theme .hero-mockup-card {
+  --focus-ring: var(--blue);
+}
+
+/* ── Shared Layout Utilities ───────────────────────────────────────────── */
+.landing-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.landing-section {
+  padding: 64px 0;
+}
+
+/* ── Typography Scale ──────────────────────────────────────────────────── */
+.display-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.4vw, 4.1rem);
+  font-weight: 600;
+  line-height: 1.06;
+  color: var(--ink);
+  margin: 0;
+}
+
+.display-h1 .emphasis {
+  font-weight: 500;
+  font-style: italic;
+  display: block;
+}
+
+.section-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0;
+}
+
+.feature-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  font-weight: 600;
+  line-height: 1.12;
+  margin: 0;
+}
+
+.body-lead {
+  font-family: var(--font-body);
+  font-size: 1.06rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── FeatureBlock Unified Styles ───────────────────────────────────────── */
+.feature-block {
+  border-radius: var(--radius-lg);
+  padding: 56px;
+  margin-bottom: 26px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease;
+}
+
+/* Static Accent Classes */
+.feature-block.accent-blue {
+  background-color: var(--blue);
+  color: var(--blue-deep);
+}
+.feature-block.accent-sage {
+  background-color: var(--sage);
+  color: var(--sage-deep);
+}
+.feature-block.accent-butter {
+  background-color: var(--butter);
+  color: var(--butter-deep);
+}
+.feature-block.accent-coral {
+  background-color: var(--coral);
+  color: var(--coral-deep);
+}
+
+.feature-block .feature-eyebrow {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.feature-block .feature-body {
+  font-size: 1.04rem;
+  line-height: 1.55;
+  margin: 16px 0 0 0;
+  max-width: 480px;
+  opacity: 0.92;
+}
+
+.feature-block .feature-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: currentColor;
+  border: none;
+  color: #FFFFFF;
+}
+
+/* Reversal layout */
+.feature-block.is-reversed .feature-copy {
+  order: 2;
+}
+.feature-block.is-reversed .feature-visual {
+  order: 1;
+}
+
+@media (max-width: 860px) {
+  .feature-block {
+    grid-template-columns: 1fr;
+    padding: 36px 26px;
+    gap: 32px;
+  }
+  .feature-block.is-reversed .feature-copy,
+  .feature-block.is-reversed .feature-visual {
+    order: unset;
+  }
+}
+
+/* ── Testimonials Torn Edge ────────────────────────────────────────────── */
+.torn-edge {
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 86% 100%, 58% 91%, 32% 100%, 0 90%);
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Reduced Motion ────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .pairly-marketing-theme *,
+  .pairly-marketing-theme *::before,
+  .pairly-marketing-theme *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

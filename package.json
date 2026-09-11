@@ -8,6 +8,8 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "lint": "turbo run lint",
+    "postbuild": "pnpm --filter frontend check:bundle",
+    "check:bundle": "pnpm --filter frontend check:bundle",
     "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {
