@@ -2,6 +2,22 @@
 /* Issue 23: --fg-subtle bumped from #5C5C66 (3.4:1) to #7A7A88 (≈5.1:1) for WCAG AA */
 /* Issue 29: Legacy --color-* aliases are a temporary bridge. See docs/PHASE_6.md */
 
+@font-face {
+  font-family: 'UntitledSerif';
+  src: url('/fonts/UntitledSerif-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UntitledSerif';
+  src: url('/fonts/UntitledSerif-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   /* ── Surfaces (Warm Near-Black, Luminance-Layered, No Drop Shadows) ── */
   --bg: #0A0A0C;
@@ -42,8 +58,8 @@
   --spektr-cyan-50: #06b6d4;
 
   /* ── Typography ── */
-  /* Issue 10: Source Serif 4 chosen. No Lora. No TODO about it. */
-  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-serif: 'UntitledSerif', 'Fraunces', 'Source Serif 4', Georgia, serif;
+  --font-display: 'UntitledSerif', 'Fraunces', Georgia, serif;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 

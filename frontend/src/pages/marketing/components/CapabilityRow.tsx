@@ -299,7 +299,7 @@ export function CapabilityRow() {
         }
 
         .sky-headline-text {
-          font-family: var(--font-display, 'Fraunces', Georgia, serif);
+          font-family: var(--font-display, 'UntitledSerif', 'Fraunces', Georgia, serif);
           font-size: clamp(34px, 4.4vw, 54px);
           font-weight: 500;
           color: #002253;

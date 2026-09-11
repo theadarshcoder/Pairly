@@ -232,8 +232,8 @@ export function TestimonialRow() {
         }
 
         .adapt-headline {
-          font-family: 'Instrument Serif', Georgia, serif;
-          font-weight: 400;
+          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
+          font-weight: 500;
           font-size: clamp(2.4rem, 4.4vw, 3.6rem);
           line-height: 1.12;
           letter-spacing: -0.025em;
@@ -295,9 +295,9 @@ export function TestimonialRow() {
         }
 
         .card-title {
-          font-family: 'Instrument Serif', Georgia, serif;
+          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
           font-size: 32px;
-          font-weight: 400;
+          font-weight: 500;
           color: #0F0F0F;
           margin: 0;
           line-height: 1.15;

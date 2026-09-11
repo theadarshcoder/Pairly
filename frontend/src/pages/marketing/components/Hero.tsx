@@ -263,7 +263,7 @@ export function Hero() {
         }
 
         .craft-hero-h1 {
-          font-family: var(--font-display, 'Fraunces', Georgia, serif);
+          font-family: var(--font-display, 'UntitledSerif', 'Fraunces', Georgia, serif);
           font-size: clamp(44px, 6vw, 76px);
           font-weight: 500;
           color: #030302;
