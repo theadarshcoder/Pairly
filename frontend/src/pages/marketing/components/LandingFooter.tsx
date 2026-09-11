@@ -12,10 +12,28 @@ function Soc2Badge({ size = 38 }: { size?: number }) {
       <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
         <circle cx="20" cy="20" r="19" stroke="currentColor" strokeWidth="1" strokeDasharray="1.5 1.5" opacity="0.6" />
         <circle cx="20" cy="20" r="17.5" stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
-        <text x="20" y="16" textAnchor="middle" fill="currentColor" fontSize="6" fontWeight="700" letterSpacing="0.08em">
+        <text
+          x="20"
+          y="16"
+          textAnchor="middle"
+          fill="currentColor"
+          fontSize="6"
+          fontWeight="700"
+          letterSpacing="0.08em"
+          fontFamily="var(--font-body, 'Inter', -apple-system, sans-serif)"
+        >
           AICPA
         </text>
-        <text x="20" y="25" textAnchor="middle" fill="currentColor" fontSize="7.5" fontWeight="800" letterSpacing="0.05em">
+        <text
+          x="20"
+          y="25"
+          textAnchor="middle"
+          fill="currentColor"
+          fontSize="7.5"
+          fontWeight="800"
+          letterSpacing="0.05em"
+          fontFamily="var(--font-body, 'Inter', -apple-system, sans-serif)"
+        >
           SOC 2
         </text>
       </svg>
@@ -41,7 +59,16 @@ function HipaaBadge({ size = 38 }: { size?: number }) {
           strokeLinecap="round"
           opacity="0.8"
         />
-        <text x="20" y="34" textAnchor="middle" fill="currentColor" fontSize="4.5" fontWeight="700" letterSpacing="0.06em">
+        <text
+          x="20"
+          y="34"
+          textAnchor="middle"
+          fill="currentColor"
+          fontSize="4.5"
+          fontWeight="700"
+          letterSpacing="0.06em"
+          fontFamily="var(--font-body, 'Inter', -apple-system, sans-serif)"
+        >
           HIPAA
         </text>
       </svg>
@@ -66,7 +93,16 @@ function GdprBadge({ size = 38 }: { size?: number }) {
           const cy = 20 + 13 * Math.sin(angle);
           return <circle key={i} cx={cx} cy={cy} r="0.9" fill="currentColor" opacity="0.75" />;
         })}
-        <text x="20" y="23" textAnchor="middle" fill="currentColor" fontSize="7" fontWeight="800" letterSpacing="0.08em">
+        <text
+          x="20"
+          y="23"
+          textAnchor="middle"
+          fill="currentColor"
+          fontSize="7"
+          fontWeight="800"
+          letterSpacing="0.08em"
+          fontFamily="var(--font-body, 'Inter', -apple-system, sans-serif)"
+        >
           GDPR
         </text>
       </svg>
@@ -156,13 +192,8 @@ export function LandingFooter() {
         <div className="footer-main-grid">
           {/* Left Column: Brand Info */}
           <div className="footer-brand-column">
-            <Link to="/" className="footer-brand-logo">
-              {/* Pairly Geometric Node Logo Mark */}
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="logo-icon-svg">
-                <path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3H6zm10 0a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3h-2z" />
-                <circle cx="19" cy="19" r="2.5" />
-              </svg>
-              <span className="logo-brand-text">Pairly</span>
+            <Link to="/" className="footer-brand-logo" aria-label="Pairly">
+              <span className="pairly-logo-text-footer">pairly</span>
             </Link>
 
             <p className="footer-tagline">Never stop learning</p>
@@ -299,7 +330,10 @@ export function LandingFooter() {
           padding: 80px 24px 44px 24px;
           box-sizing: border-box;
           overflow: hidden;
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
           border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
@@ -348,33 +382,32 @@ export function LandingFooter() {
         .footer-brand-logo {
           display: inline-flex;
           align-items: center;
-          gap: 10px;
-          color: #FFFFFF;
           text-decoration: none;
           transition: opacity 0.2s ease;
         }
 
         .footer-brand-logo:hover {
-          opacity: 0.9;
+          opacity: 0.85;
         }
 
-        .logo-icon-svg {
-          color: #FFFFFF;
-        }
-
-        .logo-brand-text {
-          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
+        .pairly-logo-text-footer {
+          font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
           font-size: 24px;
-          font-weight: 600;
-          letter-spacing: -0.02em;
+          font-weight: 800;
+          letter-spacing: -0.035em;
+          line-height: 1;
           color: #FFFFFF;
         }
 
         .footer-tagline {
-          font-size: 14.5px;
-          color: rgba(255, 255, 255, 0.6);
+          font-family: var(--font-display, 'UntitledSerif', 'Fraunces', Georgia, serif);
+          font-style: italic;
+          font-size: 16.5px;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.72);
           margin: 0;
           line-height: 1.5;
+          letter-spacing: -0.01em;
         }
 
         .footer-compliance-row {
@@ -399,9 +432,11 @@ export function LandingFooter() {
         }
 
         .footer-copyright {
+          font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
           font-size: 13.5px;
           color: rgba(255, 255, 255, 0.42);
           margin: 10px 0 0 0;
+          letter-spacing: -0.01em;
         }
 
         /* Link Columns */
@@ -419,6 +454,7 @@ export function LandingFooter() {
         }
 
         .footer-column-title {
+          font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
           font-size: 11.5px;
           font-weight: 700;
           letter-spacing: 0.12em;
@@ -437,10 +473,13 @@ export function LandingFooter() {
         }
 
         .footer-link-list a {
-          color: rgba(255, 255, 255, 0.82);
+          font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+          color: rgba(255, 255, 255, 0.78);
           text-decoration: none;
           font-size: 14px;
-          line-height: 1.4;
+          font-weight: 400;
+          line-height: 1.5;
+          letter-spacing: -0.01em;
           transition: color 0.15s ease, transform 0.15s ease;
           display: inline-block;
         }
@@ -516,9 +555,10 @@ export function LandingFooter() {
           background: rgba(255, 255, 255, 0.08);
           border: 1px solid rgba(255, 255, 255, 0.1);
           color: rgba(255, 255, 255, 0.9);
-          font-family: inherit;
+          font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
           font-size: 13.5px;
           font-weight: 500;
+          letter-spacing: -0.01em;
           cursor: pointer;
           backdrop-filter: blur(8px);
           transition: all 0.18s ease;
@@ -560,9 +600,10 @@ export function LandingFooter() {
           border: none;
           background: transparent;
           color: rgba(255, 255, 255, 0.8);
-          font-family: inherit;
+          font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
           font-size: 13px;
           font-weight: 500;
+          letter-spacing: -0.01em;
           cursor: pointer;
           text-align: left;
           transition: all 0.15s ease;
