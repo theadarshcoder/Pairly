@@ -102,11 +102,11 @@ export function LandingNav() {
         }
 
         .pairly-logo-text {
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-          font-size: 20px;
-          font-weight: 800;
+          font-family: var(--font-display, 'UntitledSerif', 'Fraunces', Georgia, serif);
+          font-size: 23px;
+          font-weight: 600;
           color: #030302;
-          letter-spacing: -0.035em;
+          letter-spacing: -0.02em;
           line-height: 1;
         }
 

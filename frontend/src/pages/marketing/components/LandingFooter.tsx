@@ -391,10 +391,10 @@ export function LandingFooter() {
         }
 
         .pairly-logo-text-footer {
-          font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
-          font-size: 24px;
-          font-weight: 800;
-          letter-spacing: -0.035em;
+          font-family: var(--font-display, 'UntitledSerif', 'Fraunces', Georgia, serif);
+          font-size: 28px;
+          font-weight: 600;
+          letter-spacing: -0.025em;
           line-height: 1;
           color: #FFFFFF;
         }
