@@ -30,9 +30,15 @@ const DecayPage = lazy(() => import('@pages/dashboard/DecayPage.js'));
 // Issue 25: Post-session analytics
 const ResultsPage = lazy(() => import('@pages/presenter/ResultsPage.js'));
 
-// Marketing layout & placeholder
-const GetStartedPlaceholder = lazy(() => import('@pages/marketing/GetStartedPlaceholder.js'));
+// Marketing layout & pages
 import { MarketingLayout } from '@pages/marketing/MarketingLayout.js';
+const AuthPage = lazy(() => import('@pages/marketing/AuthPage.js'));
+const FeatureDetailPage = lazy(() => import('@pages/marketing/FeatureDetailPage.js'));
+const DownloadPage = lazy(() => import('@pages/marketing/DownloadPage.js'));
+const PricingPage = lazy(() => import('@pages/marketing/PricingPage.js'));
+const AboutPage = lazy(() => import('@pages/marketing/AboutPage.js'));
+const LegalPage = lazy(() => import('@pages/marketing/LegalPage.js'));
+const CommunityPage = lazy(() => import('@pages/marketing/CommunityPage.js'));
 
 function PageLoader() {
   return (
@@ -85,7 +91,7 @@ function LegacyPresenterRedirect() {
 }
 
 export const router = createBrowserRouter([
-  // ── Marketing landing page ────────────────────────────────────────────────
+  // ── Marketing & Public Routes ─────────────────────────────────────────────
   {
     path: '/',
     element: <MarketingLayout />,
@@ -98,19 +104,99 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path: 'login',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <AuthPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'signup',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <AuthPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'get-started',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <AuthPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'features/:slug',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <FeatureDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'features',
+        element: <Navigate to="/features/engage" replace />,
+      },
+      {
+        path: 'download',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <DownloadPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'pricing',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <PricingPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'about',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <AboutPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'privacy',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <LegalPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'terms',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <LegalPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'security',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <LegalPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'community',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <CommunityPage />
+          </Suspense>
+        ),
+      },
     ],
-  },
-
-  // ── Marketing placeholder route ───────────────────────────────────────────
-  {
-    path: '/get-started',
-    element: (
-      // TODO: Replace with real login/signup onboarding flow when implemented.
-      // Static placeholder component; does NOT route to /presenter or any live app route.
-      <Suspense fallback={<PageLoader />}>
-        <GetStartedPlaceholder />
-      </Suspense>
-    ),
   },
 
   // ── Audience routes ───────────────────────────────────────────────────────

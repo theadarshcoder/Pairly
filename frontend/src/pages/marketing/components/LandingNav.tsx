@@ -16,24 +16,24 @@ export function LandingNav() {
         <div className="craft-nav-center">
           <ul className="craft-nav-list">
             <li>
-              <a href="#features" className="craft-nav-item">
+              <Link to="/features/engage" className="craft-nav-item">
                 Features
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#how-it-works" className="craft-nav-item">
+              <Link to="/#how-it-works" className="craft-nav-item">
                 How it works
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#educators" className="craft-nav-item">
+              <Link to="/about" className="craft-nav-item">
                 Educators
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#pricing" className="craft-nav-item">
+              <Link to="/pricing" className="craft-nav-item">
                 Pricing
-              </a>
+              </Link>
             </li>
             <li>
               <Link to="/join" className="craft-nav-item">
@@ -45,11 +45,11 @@ export function LandingNav() {
 
         {/* Right: Actions */}
         <div className="craft-nav-right">
-          <Link to="/get-started?mode=login" className="craft-nav-login">
+          <Link to="/login" className="craft-nav-login">
             Log in
           </Link>
 
-          <Link to="/get-started?mode=signup" className="craft-nav-cta">
+          <Link to="/signup" className="craft-nav-cta">
             <span>Try Pairly Free</span>
           </Link>
         </div>

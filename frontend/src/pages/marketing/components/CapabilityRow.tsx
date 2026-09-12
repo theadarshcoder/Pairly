@@ -1,34 +1,42 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { NetworkMatchIcon } from '../icons/NetworkMatchIcon.js';
 import { HotspotIcon } from '../icons/HotspotIcon.js';
 import { SortingIcon } from '../icons/SortingIcon.js';
 import { PeerReviewIcon } from '../icons/PeerReviewIcon.js';
 import { QnaIcon } from '../icons/QnaIcon.js';
+
 interface CapabilityItem {
   icon: React.ReactNode;
   label: string;
+  link: string;
 }
 
 const CAPABILITIES: CapabilityItem[] = [
   {
     icon: <NetworkMatchIcon size={28} />,
     label: 'Network Matching',
+    link: '/features/engage',
   },
   {
     icon: <HotspotIcon size={28} />,
     label: 'Spatial Hotspots',
+    link: '/features/engage',
   },
   {
     icon: <SortingIcon size={28} />,
     label: 'Sequential Sorting',
+    link: '/features/understand',
   },
   {
     icon: <PeerReviewIcon size={28} />,
     label: 'Peer Review Swarm',
+    link: '/features/understand',
   },
   {
     icon: <QnaIcon size={28} />,
     label: 'Q&A Dedup',
+    link: '/features/organize',
   },
 ];
 
@@ -105,12 +113,12 @@ export function CapabilityRow() {
         {/* ── Tier 3: 5 Glassmorphic Capability Tiles ── */}
         <div className="sky-capabilities-grid">
           {CAPABILITIES.map((item, idx) => (
-            <div key={idx} className="sky-capability-item">
+            <Link key={idx} to={item.link} className="sky-capability-item">
               <div className="sky-icon-tile">
                 {item.icon}
               </div>
               <span className="sky-capability-label">{item.label}</span>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -328,6 +336,7 @@ export function CapabilityRow() {
           gap: 16px;
           min-width: 150px;
           max-width: 190px;
+          text-decoration: none;
         }
 
         .sky-icon-tile {

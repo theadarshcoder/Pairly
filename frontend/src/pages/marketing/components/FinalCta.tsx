@@ -36,18 +36,15 @@ export function FinalCta() {
           {/* Right: Stacked Action Buttons */}
           <div className="final-cta-actions">
             <Link
-              to="/get-started?mode=signup"
+              to="/signup"
               className="final-cta-web-btn"
             >
               Continue on web
             </Link>
 
-            <a
-              href="#download"
+            <Link
+              to="/download"
               className="final-cta-appstore-btn"
-              onClick={(e) => {
-                e.preventDefault();
-              }}
             >
               <span className="appstore-btn-content">
                 <span>Download on the</span>
@@ -61,7 +58,7 @@ export function FinalCta() {
                 </svg>
                 <span>App Store</span>
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export type FeatureAccent = 'blue' | 'sage' | 'butter' | 'coral';
 
@@ -11,6 +12,13 @@ export interface FeatureBlockProps {
   ctaLabel?: string;
   visual: React.ReactNode;
 }
+
+const ACCENT_SLUG_MAP: Record<FeatureAccent, string> = {
+  blue: 'engage',
+  sage: 'understand',
+  butter: 'generate',
+  coral: 'organize',
+};
 
 export function FeatureBlock({
   accent,
@@ -29,6 +37,8 @@ export function FeatureBlock({
     .filter(Boolean)
     .join(' ');
 
+  const slug = ACCENT_SLUG_MAP[accent] || 'engage';
+
   return (
     <section className={classNames}>
       {/* Craft Paper Texture Overlay */}
@@ -39,9 +49,13 @@ export function FeatureBlock({
         <span className="feature-eyebrow">{eyebrow}</span>
         <h3 className="feature-h3">{heading}</h3>
         <p className="feature-body">{body}</p>
-        <button className="feature-cta-pill" type="button">
-          {ctaLabel || 'Learn more'}
-        </button>
+        <Link
+          to={`/features/${slug}`}
+          className="feature-cta-pill"
+          style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          {ctaLabel || 'Learn more →'}
+        </Link>
       </div>
 
       {/* Visual Column */}

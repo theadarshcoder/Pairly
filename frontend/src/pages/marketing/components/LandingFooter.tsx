@@ -251,35 +251,37 @@ export function LandingFooter() {
             </p>
 
             {/* Compliance Badges */}
-            <div className="flim-compliance-row">
+            <Link to="/security" className="flim-compliance-row" style={{ textDecoration: 'none', color: 'inherit' }} title="View Security & Compliance Certifications">
               <Soc2Badge size={30} />
               <HipaaBadge size={30} />
               <GdprBadge size={30} />
-            </div>
+            </Link>
           </div>
 
           {/* Column 2: COMPANY */}
           <div className="flim-col-links">
             <span className="flim-section-tag">COMPANY</span>
             <ul className="flim-nav-list">
-              <li><Link to="/get-started?mode=signup">App.pairly</Link></li>
-              <li><a href="#pricing">Pricing</a></li>
-              <li><a href="#features">Decay Analytics</a></li>
-              <li><a href="#features">Slide Synthesizer</a></li>
-              <li><Link to="/#features">Privacy Policy</Link></li>
-              <li><Link to="/#features">Terms & Conditions</Link></li>
+              <li><Link to="/about">About Pairly</Link></li>
+              <li><Link to="/pricing">Pricing Plans</Link></li>
+              <li><Link to="/features/understand">Decay Analytics</Link></li>
+              <li><Link to="/features/generate">Slide Synthesizer</Link></li>
+              <li><Link to="/download">Companion Apps</Link></li>
+              <li><Link to="/privacy">Privacy Policy</Link></li>
+              <li><Link to="/terms">Terms of Service</Link></li>
+              <li><Link to="/security">Security & SOC 2</Link></li>
             </ul>
           </div>
 
           {/* Column 3: SOCIAL & System Controls */}
           <div className="flim-col-links">
-            <span className="flim-section-tag">SOCIAL</span>
+            <span className="flim-section-tag">COMMUNITY</span>
             <ul className="flim-nav-list">
-              <li><a href="https://github.com/theadarshcoder/Pairly" target="_blank" rel="noopener noreferrer">Github</a></li>
-              <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
-              <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-              <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-              <li><Link to="/#features">Community</Link></li>
+              <li><Link to="/community">Educator Question Banks</Link></li>
+              <li><Link to="/community">Webinars & Workshops</Link></li>
+              <li><a href="https://github.com/theadarshcoder/Pairly" target="_blank" rel="noopener noreferrer">Github ↗</a></li>
+              <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">X (Twitter) ↗</a></li>
+              <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
             </ul>
 
             {/* System Theme & Language Controls */}
