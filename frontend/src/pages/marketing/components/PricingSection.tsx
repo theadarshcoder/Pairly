@@ -220,8 +220,9 @@ export function PricingSection() {
                   }
                 }}
               >
-                {/* Authentic Paper Texture Overlay */}
+                {/* Authentic Textured White Paper Overlays */}
                 <div className="card-paper-texture-overlay" aria-hidden="true" />
+                <div className="card-noise-overlay" aria-hidden="true" />
 
                 {/* Plan Title */}
                 <div className="card-top-row">
@@ -337,10 +338,11 @@ export function PricingSection() {
           max-width: 780px;
           margin: 0 auto 36px;
           padding: 18px 24px 16px;
-          background-color: var(--paper-card, #FBF8F1);
+          background: #FFFFFF;
+          background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
           border-radius: 18px;
-          border: 1px solid var(--line, #E4DBC8);
-          box-shadow: 0 4px 20px -4px rgba(27, 23, 18, 0.06), 0 1px 3px rgba(27, 23, 18, 0.03);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
           position: relative;
           overflow: hidden;
         }
@@ -351,7 +353,7 @@ export function PricingSection() {
           background-image: url('/images/paper-texture.png');
           background-size: cover;
           background-position: center;
-          opacity: 0.38;
+          opacity: 0.12;
           mix-blend-mode: multiply;
           pointer-events: none;
           border-radius: inherit;
@@ -473,7 +475,7 @@ export function PricingSection() {
           transform: translateY(-1px);
         }
 
-        /* ── 4 Modern Pricing Cards (Screenshot 2) ── */
+        /* ── 4 Modern Pricing Cards (Textured Whites) ── */
         .pricing-cards-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -484,13 +486,14 @@ export function PricingSection() {
         }
 
         .modern-pricing-card {
-          background-color: var(--paper-card, #FFFFFF);
+          background: #FFFFFF;
+          background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
           border-radius: 20px;
           padding: 28px 22px;
           display: flex;
           flex-direction: column;
-          border: 1px solid var(--line, #E2E8F0);
-          box-shadow: 0 4px 16px rgba(27, 23, 18, 0.03);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
                       box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
                       border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -506,10 +509,20 @@ export function PricingSection() {
           background-image: url('/images/paper-texture.png');
           background-size: cover;
           background-position: center;
-          opacity: 0.25;
+          opacity: 0.11;
           mix-blend-mode: multiply;
           pointer-events: none;
           border-radius: inherit;
+          z-index: 1;
+        }
+
+        .card-noise-overlay {
+          position: absolute;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+          background-repeat: repeat;
+          pointer-events: none;
+          mix-blend-mode: multiply;
           z-index: 1;
         }
 
@@ -525,13 +538,13 @@ export function PricingSection() {
 
         .modern-pricing-card:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(27, 23, 18, 0.06);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
 
         /* Highlighted / Targeted Card State (Exact match to Pro card in Screenshot 2) */
         .modern-pricing-card.is-targeted {
           border: 2px solid #3B82F6;
-          box-shadow: 0 0 0 1px #3B82F6, 0 16px 36px -6px rgba(59, 130, 246, 0.16);
+          box-shadow: 0 0 0 1px #3B82F6, 0 16px 36px -6px rgba(59, 130, 246, 0.18);
           transform: translateY(-4px);
         }
 
@@ -640,14 +653,15 @@ export function PricingSection() {
 
         /* Inactive outline button */
         .cta-btn-outline {
-          background: transparent;
-          border: 1px solid var(--line, #E2E8F0);
-          color: var(--ink, #0F172A);
+          background: #FFFFFF;
+          border: 1px solid #E2E8F0;
+          color: #0F172A;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
         }
 
         .cta-btn-outline:hover {
-          background: rgba(27, 23, 18, 0.04);
-          border-color: #94A3B8;
+          background: #F8FAFC;
+          border-color: #CBD5E1;
         }
 
         /* Active solid primary button (Screenshot 2: Pro black button) */
