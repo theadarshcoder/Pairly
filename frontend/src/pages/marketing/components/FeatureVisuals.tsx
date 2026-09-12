@@ -6,12 +6,13 @@ import React from 'react';
 function BentoCard({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <div
+      className="bento-inner-card"
       style={{
         backgroundColor: '#FFFFFF',
-        borderRadius: '18px',
-        padding: '16px 18px',
-        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.03)',
-        border: '1px solid rgba(255, 255, 255, 0.9)',
+        borderRadius: '22px',
+        padding: '20px 22px',
+        boxShadow: '0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02)',
+        border: '1px solid rgba(255, 255, 255, 0.95)',
         boxSizing: 'border-box',
         ...style,
       }}
@@ -27,18 +28,19 @@ function BentoCard({ children, style }: { children: React.ReactNode; style?: Rea
 function BentoHeader({ icon, title }: { icon: string; title: string }) {
   return (
     <div
+      className="bento-inner-header"
       style={{
         display: 'flex',
         alignItems: 'center',
         gap: '8px',
         fontSize: '13px',
         fontWeight: 600,
-        color: '#1E293B',
+        color: '#0F172A',
         letterSpacing: '-0.01em',
-        marginBottom: '12px',
+        marginBottom: '14px',
       }}
     >
-      <span style={{ fontSize: '14px', opacity: 0.85 }}>{icon}</span>
+      <span style={{ fontSize: '15px', opacity: 0.9 }}>{icon}</span>
       <span>{title}</span>
     </div>
   );
@@ -62,9 +64,9 @@ function IconTile({
     <div
       title={label}
       style={{
-        width: '36px',
-        height: '36px',
-        borderRadius: '10px',
+        width: '40px',
+        height: '40px',
+        borderRadius: '12px',
         backgroundColor: bg,
         color: color,
         display: 'flex',
@@ -72,7 +74,7 @@ function IconTile({
         justifyContent: 'center',
         fontSize: '11px',
         fontWeight: 700,
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.06)',
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
         cursor: 'default',
         transition: 'transform 0.15s ease',
       }}
@@ -104,10 +106,10 @@ function BentoBottomRow({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '14px 20px',
+        padding: '16px 22px',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 600, color: '#1E293B' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 600, color: '#0F172A' }}>
         <span style={{ fontSize: '15px' }}>{icon}</span>
         <span>{label}</span>
       </div>
@@ -195,10 +197,10 @@ export function EngageHeatmapVisual() {
         </BentoCard>
       </div>
 
-      {/* Row 2: Active Classrooms (Pill Badges) */}
+      {/* Row 2: Active Classrooms (Squircle Rounded Badges) */}
       <BentoCard>
         <BentoHeader icon="🧭" title="Active Classrooms" />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
           {[
             'Anatomy 201 · 284 students',
             'Biochem Lecture · 190 students',
@@ -208,14 +210,15 @@ export function EngageHeatmapVisual() {
             <div
               key={i}
               style={{
-                backgroundColor: '#A9D5F5',
-                color: '#082642',
-                borderRadius: '9999px',
-                padding: '9px 14px',
-                fontSize: '12.5px',
+                backgroundColor: '#B6E0FA',
+                color: '#071E33',
+                borderRadius: '14px',
+                padding: '12px 16px',
+                fontSize: '13px',
                 fontWeight: 600,
                 textAlign: 'center',
                 letterSpacing: '-0.01em',
+                boxShadow: '0 1px 2px rgba(7, 30, 51, 0.04)',
               }}
             >
               {text}
@@ -275,9 +278,9 @@ export function UnderstandDecayVisual() {
                 color: '#166534',
                 fontSize: '11px',
                 fontWeight: 700,
-                padding: '2px 8px',
+                padding: '3px 9px',
                 borderRadius: '9999px',
-                marginTop: '-8px',
+                marginTop: '-12px',
               }}
             >
               Decay Alert
@@ -289,7 +292,7 @@ export function UnderstandDecayVisual() {
               display: 'flex',
               alignItems: 'flex-end',
               justifyContent: 'space-between',
-              height: '76px',
+              height: '82px',
               paddingBottom: '2px',
             }}
           >
@@ -310,8 +313,8 @@ export function UnderstandDecayVisual() {
                     width: '26px',
                     height: bar.height,
                     backgroundColor: '#1E3A24',
-                    opacity: bar.dim ? 0.35 : 0.95,
-                    borderRadius: '4px 4px 0 0',
+                    opacity: bar.dim ? 0.38 : 0.95,
+                    borderRadius: '5px 5px 0 0',
                   }}
                 />
                 <span style={{ fontSize: '10.5px', fontWeight: 600, color: '#64748B' }}>
@@ -333,10 +336,10 @@ export function UnderstandDecayVisual() {
         </BentoCard>
       </div>
 
-      {/* Row 2: Cognitive Drop-offs (Exact Match to Craft's "Start Building") */}
+      {/* Row 2: Cognitive Drop-offs (Squircle Rounded Badges matching Craft Sample) */}
       <BentoCard>
         <BentoHeader icon="🧭" title="Cognitive Drop-offs" />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
           {[
             'Mitosis Prophase',
             'Krebs Cycle',
@@ -346,14 +349,15 @@ export function UnderstandDecayVisual() {
             <div
               key={i}
               style={{
-                backgroundColor: '#98CFAB',
-                color: '#0A2914',
-                borderRadius: '9999px',
-                padding: '9px 14px',
-                fontSize: '12.5px',
+                backgroundColor: '#9BD8A9',
+                color: '#0A2312',
+                borderRadius: '14px',
+                padding: '12px 16px',
+                fontSize: '13px',
                 fontWeight: 600,
                 textAlign: 'center',
                 letterSpacing: '-0.01em',
+                boxShadow: '0 1px 2px rgba(10, 35, 18, 0.04)',
               }}
             >
               {text}
@@ -425,10 +429,10 @@ export function GenerateSyllabusVisual() {
         </BentoCard>
       </div>
 
-      {/* Row 2: Generated Modules */}
+      {/* Row 2: Generated Modules (Squircle Rounded Badges) */}
       <BentoCard>
         <BentoHeader icon="🧭" title="Generated Question Modules" />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
           {[
             'Diagnostic Hotspots',
             'Enzyme Sequencing',
@@ -438,14 +442,15 @@ export function GenerateSyllabusVisual() {
             <div
               key={i}
               style={{
-                backgroundColor: '#F5DE88',
-                color: '#382803',
-                borderRadius: '9999px',
-                padding: '9px 14px',
-                fontSize: '12.5px',
+                backgroundColor: '#F7E18C',
+                color: '#2E2002',
+                borderRadius: '14px',
+                padding: '12px 16px',
+                fontSize: '13px',
                 fontWeight: 600,
                 textAlign: 'center',
                 letterSpacing: '-0.01em',
+                boxShadow: '0 1px 2px rgba(46, 32, 2, 0.04)',
               }}
             >
               {text}
@@ -517,10 +522,10 @@ export function OrganizeArchiveVisual() {
         </BentoCard>
       </div>
 
-      {/* Row 2: Active Sections */}
+      {/* Row 2: Active Sections (Squircle Rounded Badges) */}
       <BentoCard>
         <BentoHeader icon="🧭" title="Active Sections" />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
           {[
             'Lecture Hall A · Morning',
             'Lab Section 3 · Afternoon',
@@ -530,14 +535,15 @@ export function OrganizeArchiveVisual() {
             <div
               key={i}
               style={{
-                backgroundColor: '#F7B599',
-                color: '#3D1409',
-                borderRadius: '9999px',
-                padding: '9px 14px',
-                fontSize: '12.5px',
+                backgroundColor: '#F8B8A0',
+                color: '#2E0F07',
+                borderRadius: '14px',
+                padding: '12px 16px',
+                fontSize: '13px',
                 fontWeight: 600,
                 textAlign: 'center',
                 letterSpacing: '-0.01em',
+                boxShadow: '0 1px 2px rgba(46, 15, 7, 0.04)',
               }}
             >
               {text}
