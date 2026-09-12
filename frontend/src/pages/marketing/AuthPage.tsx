@@ -94,7 +94,6 @@ export default function AuthPage() {
             </svg>
           </span>
           <span className="auth-brand-name">Pairly</span>
-          <span className="auth-portal-badge">PORTAL</span>
         </Link>
 
         <div className="auth-topbar-actions">
@@ -148,14 +147,13 @@ export default function AuthPage() {
 
             {/* Header & Mode Switcher */}
             <div className="auth-heading-area">
-              <span className="auth-eyebrow">Interactive Classroom Suite</span>
               <h1 className="auth-title">
-                {isLogin ? 'Sign in to Pairly' : 'Start your classroom'}
+                {isLogin ? 'Sign in to Pairly' : 'Create your account'}
               </h1>
               <p className="auth-tagline">
                 {isLogin
-                  ? 'Access live lecture rooms, spatial clickers, and cognitive decay grids.'
-                  : 'Join 14,000+ professors transforming lecture comprehension.'}
+                  ? 'Welcome back. Enter your credentials to continue.'
+                  : 'Get started with your classroom in seconds.'}
               </p>
 
               {/* Segmented Mode Switcher */}
@@ -322,11 +320,6 @@ export default function AuthPage() {
                     )}
                   </button>
                 </form>
-
-                {/* Subtle Micro-Security Footnote */}
-                <div className="auth-micro-note">
-                  <span>🔒 256-bit SSL · FERPA & SOC 2 Type II compliant · Zero student data selling</span>
-                </div>
               </>
             )}
           </div>
@@ -440,17 +433,6 @@ export default function AuthPage() {
           font-size: 20px;
           letter-spacing: -0.02em;
           color: #0F172A;
-        }
-
-        .auth-portal-badge {
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 9.5px;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          padding: 2px 7px;
-          border-radius: 6px;
-          background: rgba(15, 23, 42, 0.06);
-          color: #475569;
         }
 
         .auth-topbar-actions {
@@ -567,17 +549,6 @@ export default function AuthPage() {
         .auth-heading-area {
           text-align: center;
           margin-bottom: 16px;
-        }
-
-        .auth-eyebrow {
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: #64748B;
-          display: block;
-          margin-bottom: 4px;
         }
 
         .auth-title {
@@ -773,20 +744,6 @@ export default function AuthPage() {
           opacity: 0.8;
         }
 
-        .auth-micro-note {
-          margin-top: 14px;
-          padding-top: 12px;
-          border-top: 1px solid #F1F5F9;
-          text-align: center;
-        }
-
-        .auth-micro-note span {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 11px;
-          color: #64748B;
-          line-height: 1.4;
-        }
-
         .auth-success-alert {
           background: #F0FDF4;
           border: 1px solid #BBF7D0;
@@ -958,10 +915,6 @@ export default function AuthPage() {
 
         [data-theme="dark"] .auth-action-btn:hover {
           background: #E2E8F0;
-        }
-
-        [data-theme="dark"] .auth-micro-note {
-          border-top-color: rgba(255, 255, 255, 0.08);
         }
 
         [data-theme="dark"] .auth-bottombar {
