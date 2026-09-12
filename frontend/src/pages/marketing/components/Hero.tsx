@@ -34,15 +34,6 @@ export function Hero() {
 
         {/* ── Background Layer 3: Paper Collage Artwork & Horizon ── */}
         <div className="hero-collage-artwork" aria-hidden="true">
-          {/* Vector Horizon Outline */}
-          <div className="hero-vector-horizon">
-            <img
-              src="/images/hero_landscape_outline.svg"
-              alt=""
-              className="hero-horizon-svg"
-              draggable="false"
-            />
-          </div>
 
           {/* Left: Stepped paper stairs and lavender mountain */}
           <div className="hero-mountain-lavender">
@@ -168,24 +159,6 @@ export function Hero() {
           overflow: hidden;
         }
 
-        .hero-vector-horizon {
-          position: absolute;
-          bottom: 100px;
-          left: 0;
-          width: 100%;
-          height: 260px;
-          opacity: 0.22;
-          display: flex;
-          align-items: flex-end;
-          overflow: hidden;
-        }
-
-        .hero-horizon-svg {
-          width: 100%;
-          min-width: 1440px;
-          height: auto;
-          color: #030302;
-        }
 
         .hero-mountain-lavender {
           position: absolute;
