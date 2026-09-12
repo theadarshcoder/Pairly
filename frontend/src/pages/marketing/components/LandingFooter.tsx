@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { applyTheme, getStoredTheme, ThemeMode } from '../../../shared/lib/theme.js';
 
 /* ── Compliance Badges (SOC 2, HIPAA, GDPR) ── */
 function Soc2Badge({ size = 38 }: { size?: number }) {
@@ -167,10 +168,27 @@ const LANGUAGES = [
 ];
 
 export function LandingFooter() {
-  const [theme, setTheme] = useState<'system' | 'light' | 'dark'>('system');
+  const [theme, setTheme] = useState<ThemeMode>(getStoredTheme);
   const [language, setLanguage] = useState('English');
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Sync theme with global events
+  useEffect(() => {
+    const handleThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent<{ mode: ThemeMode }>;
+      if (customEvent.detail?.mode) {
+        setTheme(customEvent.detail.mode);
+      }
+    };
+    window.addEventListener('pairly-theme-change', handleThemeChange);
+    return () => window.removeEventListener('pairly-theme-change', handleThemeChange);
+  }, []);
+
+  const handleSelectTheme = (mode: ThemeMode) => {
+    setTheme(mode);
+    applyTheme(mode);
+  };
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -259,7 +277,7 @@ export function LandingFooter() {
               <button
                 type="button"
                 className={`theme-pill-btn ${theme === 'system' ? 'active' : ''}`}
-                onClick={() => setTheme('system')}
+                onClick={() => handleSelectTheme('system')}
                 title="System theme"
                 aria-label="System theme"
               >
@@ -268,7 +286,7 @@ export function LandingFooter() {
               <button
                 type="button"
                 className={`theme-pill-btn ${theme === 'light' ? 'active' : ''}`}
-                onClick={() => setTheme('light')}
+                onClick={() => handleSelectTheme('light')}
                 title="Light mode"
                 aria-label="Light mode"
               >
@@ -277,7 +295,7 @@ export function LandingFooter() {
               <button
                 type="button"
                 className={`theme-pill-btn ${theme === 'dark' ? 'active' : ''}`}
-                onClick={() => setTheme('dark')}
+                onClick={() => handleSelectTheme('dark')}
                 title="Dark mode"
                 aria-label="Dark mode"
               >

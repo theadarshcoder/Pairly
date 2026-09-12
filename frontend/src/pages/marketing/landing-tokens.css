@@ -299,3 +299,323 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ── Comprehensive Dark Theme Support ─────────────────────────────────────
+   ══════════════════════════════════════════════════════════════════════════ */
+[data-theme="dark"] .pairly-marketing-theme,
+.dark .pairly-marketing-theme,
+:root[data-theme="dark"] body {
+  --paper: #090A0D;
+  --paper-card: #12141A;
+  --ink: #F2F2F4;
+  --ink-soft: #A2A2AD;
+  --line: rgba(255, 255, 255, 0.08);
+
+  --blue: #1B3554;
+  --blue-deep: #A5CFFF;
+  --sage: #163822;
+  --sage-deep: #B1E6BF;
+  --butter: #4A3810;
+  --butter-deep: #FDE293;
+  --coral: #4C2016;
+  --coral-deep: #FCC2B2;
+  --mint: #153B28;
+  --mint-deep: #BCE6C9;
+
+  background-color: #090A0D;
+  color: #F2F2F4;
+}
+
+[data-theme="dark"] .display-h1,
+[data-theme="dark"] .section-h2,
+[data-theme="dark"] .feature-h3 {
+  color: #F2F2F4;
+}
+
+[data-theme="dark"] .body-lead {
+  color: #A2A2AD;
+}
+
+/* ── Dark mode: Navigation Pill ── */
+[data-theme="dark"] .craft-header-pill {
+  background: linear-gradient(180deg, rgba(24, 26, 32, 0.72) 0%, rgba(14, 15, 19, 0.92) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 
+    0 16px 36px 2px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+}
+
+[data-theme="dark"] .pairly-logo-text {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .craft-nav-item {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+[data-theme="dark"] .craft-nav-item:hover {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .craft-nav-login {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+[data-theme="dark"] .craft-nav-login:hover {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .craft-nav-cta {
+  background: #FFFFFF !important;
+  color: #090A0D !important;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="dark"] .craft-nav-cta:hover {
+  background: #ECECF0 !important;
+}
+
+/* ── Dark mode: Hero ── */
+[data-theme="dark"] .hero-sky-gradient {
+  background: linear-gradient(180deg, #070B12 0%, #0B1320 28%, #101B2E 62%, #080D16 100%) !important;
+}
+
+[data-theme="dark"] .craft-hero-h1 {
+  color: #F4F4F5 !important;
+}
+
+[data-theme="dark"] .craft-hero-subhead {
+  color: rgba(244, 244, 245, 0.75) !important;
+}
+
+[data-theme="dark"] .craft-hero-floating-btn {
+  background: #FFFFFF !important;
+  color: #090A0D !important;
+}
+
+[data-theme="dark"] .craft-hero-floating-btn:hover {
+  background: #EAEAEF !important;
+}
+
+[data-theme="dark"] .hero-torn-paper-peak {
+  background: #141720 !important;
+}
+
+[data-theme="dark"] .hero-mountain-lavender {
+  background: linear-gradient(145deg, #38295E 0%, #241A42 100%) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .hero-horizon-svg {
+  color: #070B12 !important;
+}
+
+[data-theme="dark"] .hero-cloud-left,
+[data-theme="dark"] .hero-cloud-right {
+  filter: brightness(0.6) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.6)) !important;
+  opacity: 0.65 !important;
+}
+
+/* ── Dark mode: Capability Sky Canvas ── */
+[data-theme="dark"] .sky-gradient-base {
+  background: linear-gradient(
+    180deg,
+    #080D16 0%,
+    #0A1222 14%,
+    #0C172E 30%,
+    #0E1D3B 50%,
+    #0C172E 70%,
+    #0A1222 88%,
+    #090A0D 100%
+  ) !important;
+}
+
+[data-theme="dark"] .sky-center-radial {
+  background: radial-gradient(
+    ellipse 85% 45% at 50% 32%,
+    rgba(124, 92, 255, 0.15) 0%,
+    rgba(8, 13, 22, 0) 70%
+  ) !important;
+}
+
+[data-theme="dark"] .sky-headline-text {
+  color: #E2EDFD !important;
+}
+
+[data-theme="dark"] .sky-eyebrow-text {
+  color: #799DC2 !important;
+}
+
+[data-theme="dark"] .sunset-cloud-left,
+[data-theme="dark"] .sunset-cloud-right {
+  filter: brightness(0.6) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6)) !important;
+}
+
+[data-theme="dark"] .sky-icon-tile {
+  background: rgba(22, 26, 38, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #B0D7FD !important;
+  box-shadow: 
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+[data-theme="dark"] .sky-capability-item:hover .sky-icon-tile {
+  background: rgba(30, 36, 54, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .sky-capability-label {
+  color: #D6E8FD !important;
+}
+
+/* ── Dark mode: Adapt Section ── */
+[data-theme="dark"] .adapt-headline {
+  color: #F2F2F4 !important;
+}
+
+[data-theme="dark"] .adapt-subtitle {
+  color: #9E9EA8 !important;
+}
+
+[data-theme="dark"] .adapt-card {
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.4), 0 0 1px rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .card-hotspots {
+  background-color: #121524 !important;
+}
+
+[data-theme="dark"] .card-syllabus {
+  background-color: #1A1710 !important;
+}
+
+[data-theme="dark"] .card-decay {
+  background-color: #0E1A13 !important;
+}
+
+[data-theme="dark"] .card-title {
+  color: #F2F2F4 !important;
+}
+
+[data-theme="dark"] .card-desc {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* ── Dark mode: Feature Blocks ── */
+[data-theme="dark"] .feature-block {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .feature-block.accent-blue {
+  background-color: #0E2238 !important;
+  color: #D8ECFB !important;
+}
+[data-theme="dark"] .feature-block.accent-blue .feature-eyebrow { color: #8AC2EE !important; }
+[data-theme="dark"] .feature-block.accent-blue .feature-h3 { color: #FFFFFF !important; }
+[data-theme="dark"] .feature-block.accent-blue .feature-body { color: rgba(216, 236, 251, 0.8) !important; }
+[data-theme="dark"] .feature-block.accent-blue .feature-cta-pill {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .feature-block.accent-sage {
+  background-color: #0E2718 !important;
+  color: #D6F5DE !important;
+}
+[data-theme="dark"] .feature-block.accent-sage .feature-eyebrow { color: #87DC9D !important; }
+[data-theme="dark"] .feature-block.accent-sage .feature-h3 { color: #FFFFFF !important; }
+[data-theme="dark"] .feature-block.accent-sage .feature-body { color: rgba(214, 245, 222, 0.8) !important; }
+[data-theme="dark"] .feature-block.accent-sage .feature-cta-pill {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .feature-block.accent-butter {
+  background-color: #2B2107 !important;
+  color: #FDF0CA !important;
+}
+[data-theme="dark"] .feature-block.accent-butter .feature-eyebrow { color: #E7C254 !important; }
+[data-theme="dark"] .feature-block.accent-butter .feature-h3 { color: #FFFFFF !important; }
+[data-theme="dark"] .feature-block.accent-butter .feature-body { color: rgba(253, 240, 202, 0.8) !important; }
+[data-theme="dark"] .feature-block.accent-butter .feature-cta-pill {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .feature-block.accent-coral {
+  background-color: #2F150D !important;
+  color: #FDDCD2 !important;
+}
+[data-theme="dark"] .feature-block.accent-coral .feature-eyebrow { color: #EA8F6F !important; }
+[data-theme="dark"] .feature-block.accent-coral .feature-h3 { color: #FFFFFF !important; }
+[data-theme="dark"] .feature-block.accent-coral .feature-body { color: rgba(253, 220, 210, 0.8) !important; }
+[data-theme="dark"] .feature-block.accent-coral .feature-cta-pill {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+}
+
+/* ── Dark mode: Pricing ── */
+[data-theme="dark"] .pricing-card.classroom {
+  background-color: #121319 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F2F2F4 !important;
+}
+[data-theme="dark"] .pricing-card.classroom .pricing-tier-label {
+  color: #A2A2AD !important;
+}
+[data-theme="dark"] .pricing-card.classroom .pricing-price {
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .pricing-card.classroom .pricing-desc {
+  color: #A2A2AD !important;
+}
+[data-theme="dark"] .pricing-card.classroom .pricing-features-list li {
+  color: #D4D4D8 !important;
+}
+[data-theme="dark"] .pricing-card.classroom .outline-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .pricing-card.classroom .outline-btn:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+}
+[data-theme="dark"] .pricing-card.institution {
+  background-color: #181922 !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .pricing-card.institution .solid-inverted-btn {
+  background: #FFFFFF !important;
+  color: #090A0D !important;
+}
+
+/* ── Dark mode: Final CTA ── */
+[data-theme="dark"] .final-cta-card {
+  background: linear-gradient(135deg, #0D261B 0%, #153A2A 100%) !important;
+  border: 1px solid rgba(188, 230, 201, 0.2) !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5) !important;
+}
+[data-theme="dark"] .final-cta-heading {
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .final-cta-subline {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+[data-theme="dark"] .final-cta-web-btn {
+  background: #FFFFFF !important;
+  color: #0A1E14 !important;
+}
+[data-theme="dark"] .final-cta-web-btn:hover {
+  background: #ECECF0 !important;
+}
