@@ -486,14 +486,14 @@ export function PricingSection() {
         }
 
         .modern-pricing-card {
+          background-color: #FFFFFF;
           background: #FFFFFF;
-          background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
           border-radius: 20px;
           padding: 28px 22px;
           display: flex;
           flex-direction: column;
           border: 1px solid rgba(0, 0, 0, 0.08);
-          box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+          box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
                       box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
                       border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -509,21 +509,15 @@ export function PricingSection() {
           background-image: url('/images/paper-texture.png');
           background-size: cover;
           background-position: center;
-          opacity: 0.11;
-          mix-blend-mode: multiply;
+          opacity: 0.025;
+          mix-blend-mode: overlay;
           pointer-events: none;
           border-radius: inherit;
           z-index: 1;
         }
 
         .card-noise-overlay {
-          position: absolute;
-          inset: 0;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
-          background-repeat: repeat;
-          pointer-events: none;
-          mix-blend-mode: multiply;
-          z-index: 1;
+          display: none;
         }
 
         .card-top-row,
