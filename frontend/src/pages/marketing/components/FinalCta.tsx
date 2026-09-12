@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export function FinalCta() {
   return (
-    <section className="landing-section final-cta-section" style={{ padding: '40px 0 70px 0' }}>
+    <section className="landing-section final-cta-section" style={{ padding: '24px 0 0 0' }}>
       <div className="landing-container">
         <div className="final-cta-panel">
           {/* Authentic Craft.do paper texture overlay */}

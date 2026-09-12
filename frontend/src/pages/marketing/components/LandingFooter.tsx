@@ -385,13 +385,12 @@ export function LandingFooter() {
           position: relative;
           background: #FFFFFF;
           color: #0A0B0E;
-          padding: 80px 32px 0 32px;
+          padding: 36px 32px 0 32px;
           box-sizing: border-box;
           overflow: hidden;
           font-family: var(--font-body, 'Inter', system-ui, -apple-system, sans-serif);
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
-          border-top: 1px solid rgba(0, 0, 0, 0.08);
           transition: background-color 0.2s ease, color 0.2s ease;
         }
 
@@ -426,7 +425,7 @@ export function LandingFooter() {
 
         /* ── Top Headline ── */
         .flim-top-headline-wrap {
-          margin-bottom: 64px;
+          margin-bottom: 40px;
         }
 
         .flim-main-headline {
@@ -459,7 +458,7 @@ export function LandingFooter() {
           display: grid;
           grid-template-columns: 1.5fr 1fr 1fr;
           gap: 60px;
-          margin-bottom: 72px;
+          margin-bottom: 40px;
           align-items: flex-start;
         }
 
@@ -716,18 +715,14 @@ export function LandingFooter() {
           font-size: 11px;
         }
 
-        /* ── 3. Bottom Giant Wordmark (Full-Bleed Flim Style - 70% Visible) ── */
+        /* ── 3. Bottom Giant Wordmark (Full-Bleed Flim Style) ── */
         .flim-giant-wordmark-container {
           width: 100%;
           overflow: hidden;
-          margin-top: 24px;
-          margin-bottom: 0;
+          margin-top: 20px;
           display: flex;
           justify-content: center;
-          align-items: flex-start;
-          /* Height calibrated so only the top ~70% of the wordmark is visible, clipping the bottom 30% */
-          height: clamp(3.2rem, 12.6vw, 13rem);
-          position: relative;
+          line-height: 0.76;
         }
 
         .flim-giant-wordmark {
@@ -740,11 +735,8 @@ export function LandingFooter() {
           display: inline-flex;
           align-items: baseline;
           position: relative;
+          transform: translateY(4%);
           white-space: nowrap;
-          line-height: 1;
-          margin: 0;
-          padding-top: 0.20em;
-          transform: translateY(0);
         }
 
         /* The Letter "i" with the signature Door Portal */
@@ -888,7 +880,6 @@ export function LandingFooter() {
         [data-theme="dark"] .flim-editorial-footer {
           background: #07080B;
           color: #FFFFFF;
-          border-top-color: rgba(255, 255, 255, 0.08);
         }
 
         [data-theme="dark"] .flim-paper-texture-overlay {
