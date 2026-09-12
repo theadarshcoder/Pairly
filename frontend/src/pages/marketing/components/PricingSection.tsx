@@ -492,7 +492,7 @@ export function PricingSection() {
           padding: 28px 22px;
           display: flex;
           flex-direction: column;
-          border: 1px solid rgba(0, 0, 0, 0.08);
+          border: 1.5px solid rgba(0, 0, 0, 0.08);
           box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
                       box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
@@ -535,10 +535,10 @@ export function PricingSection() {
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
 
-        /* Highlighted / Targeted Card State (Exact match to Pro card in Screenshot 2) */
+        /* Highlighted / Targeted Card State: Slight Premium Black Outline */
         .modern-pricing-card.is-targeted {
-          border: 2px solid #3B82F6;
-          box-shadow: 0 0 0 1px #3B82F6, 0 16px 36px -6px rgba(59, 130, 246, 0.18);
+          border: 1.5px solid #111827;
+          box-shadow: 0 12px 32px -4px rgba(17, 24, 39, 0.10), 0 2px 6px -1px rgba(17, 24, 39, 0.04);
           transform: translateY(-4px);
         }
 
@@ -765,8 +765,8 @@ export function PricingSection() {
         }
 
         [data-theme="dark"] .modern-pricing-card.is-targeted {
-          border-color: #3B82F6;
-          box-shadow: 0 0 0 1px #3B82F6, 0 16px 40px rgba(59, 130, 246, 0.25);
+          border-color: rgba(255, 255, 255, 0.85);
+          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 16px 40px rgba(0, 0, 0, 0.6);
         }
 
         [data-theme="dark"] .card-tier-name {
