@@ -277,7 +277,7 @@ export function PricingSection() {
 
       <style>{`
         .pricing-section {
-          padding: 64px 0 88px;
+          padding: 64px 0 0 0;
         }
 
         .pricing-header-center {
