@@ -716,14 +716,18 @@ export function LandingFooter() {
           font-size: 11px;
         }
 
-        /* ── 3. Bottom Giant Wordmark (Full-Bleed Flim Style) ── */
+        /* ── 3. Bottom Giant Wordmark (Full-Bleed Flim Style - 70% Visible) ── */
         .flim-giant-wordmark-container {
           width: 100%;
           overflow: hidden;
-          margin-top: 20px;
+          margin-top: 24px;
+          margin-bottom: 0;
           display: flex;
           justify-content: center;
-          line-height: 0.76;
+          align-items: flex-start;
+          /* Height calibrated so only the top ~70% of the wordmark is visible, clipping the bottom 30% */
+          height: clamp(3.2rem, 12.6vw, 13rem);
+          position: relative;
         }
 
         .flim-giant-wordmark {
@@ -736,8 +740,11 @@ export function LandingFooter() {
           display: inline-flex;
           align-items: baseline;
           position: relative;
-          transform: translateY(4%);
           white-space: nowrap;
+          line-height: 1;
+          margin: 0;
+          padding-top: 0.20em;
+          transform: translateY(0);
         }
 
         /* The Letter "i" with the signature Door Portal */
