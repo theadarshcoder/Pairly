@@ -13,7 +13,7 @@ const PRICING_FAQS: FaqItem[] = [
   {
     question: 'Is student participation completely free?',
     answer:
-      'Yes. Students never pay a single cent, never need to create an account, and never enter a credit card. They simply navigate to pairly.app/join or scan the projector QR code on their phone or laptop and join immediately.',
+      'Yes. Students never pay a single cent, never need to create an account, and never enter a credit card. They simply navigate to Pairly.app/join or scan the projector QR code on their phone or laptop and join immediately.',
   },
   {
     question: 'How do response limits work with the scale slider?',

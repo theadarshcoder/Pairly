@@ -43,7 +43,7 @@ export default function GetStartedPlaceholder() {
             marginBottom: '20px',
           }}
         >
-          pairly
+          Pairly
         </div>
 
         <h1

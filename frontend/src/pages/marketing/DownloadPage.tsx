@@ -133,7 +133,7 @@ export default function DownloadPage() {
                 </p>
 
                 <div className="student-join-preview">
-                  <span className="join-url-pill">pairly.app/join</span>
+                  <span className="join-url-pill">Pairly.app/join</span>
                   <button
                     type="button"
                     className="copy-join-link-btn"

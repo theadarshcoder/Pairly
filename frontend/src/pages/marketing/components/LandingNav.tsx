@@ -8,7 +8,7 @@ export function LandingNav() {
         {/* Left: Pairly Logo in sleek modern geometric sans matching Craft */}
         <div className="craft-logo-wrapper">
           <Link to="/" className="pairly-logo-link" aria-label="Pairly Logo">
-            <span className="pairly-logo-text">pairly</span>
+            <span className="pairly-logo-text">Pairly</span>
           </Link>
         </div>
 
