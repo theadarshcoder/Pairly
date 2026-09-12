@@ -130,113 +130,9 @@ export default function AuthPage() {
         </div>
       </header>
 
-      {/* Main Expanded Studio Stage — Spanning Throughout the Page */}
-      <main className="auth-expanded-stage">
-        {/* Left Side: Editorial Brand & Interactive Live Preview Showcase */}
-        <div className="auth-showcase-panel">
-          <div className="showcase-content-box">
-            <div className="showcase-badge">
-              <span className="showcase-badge-dot" />
-              <span>Active Classroom System</span>
-            </div>
-
-            <h1 className="showcase-headline">
-              {isLogin ? (
-                <>
-                  Where active lectures<br />
-                  <em>come to life.</em>
-                </>
-              ) : (
-                <>
-                  Every student responds.<br />
-                  <em>Every concept measured.</em>
-                </>
-              )}
-            </h1>
-
-            <p className="showcase-subtext">
-              Replace passive multiple-choice clickers with spatial heatmaps, peer-review swarms, and instant concept decay tracking.
-            </p>
-
-            {/* Simulated Live Active Classroom Card */}
-            <div className="showcase-live-card">
-              <div className="live-card-paper-overlay" aria-hidden="true" />
-              
-              <div className="live-card-header">
-                <div className="live-card-status">
-                  <span className="live-pulse-dot" />
-                  <span className="live-room-label">LIVE SESSION · ROOM #4821</span>
-                </div>
-                <span className="live-count-pill">342 Students Active</span>
-              </div>
-
-              <div className="live-card-visual-area">
-                <div className="visual-hotspot-diagram">
-                  <div className="diagram-grid-lines" />
-                  {/* Glowing Hotspot Heat Points */}
-                  <div className="heat-spot spot-1" style={{ top: '35%', left: '42%' }}>
-                    <span className="heat-ring ring-1" />
-                    <span className="heat-core" />
-                  </div>
-                  <div className="heat-spot spot-2" style={{ top: '55%', left: '60%' }}>
-                    <span className="heat-ring ring-2" />
-                    <span className="heat-core" />
-                  </div>
-                  <div className="heat-spot spot-3" style={{ top: '48%', left: '28%' }}>
-                    <span className="heat-ring ring-3" />
-                    <span className="heat-core" />
-                  </div>
-
-                  <div className="diagram-caption">
-                    <span>Target: Somatosensory Cortex Identification</span>
-                  </div>
-                </div>
-
-                <div className="live-metrics-row">
-                  <div className="live-metric-pill">
-                    <span className="metric-val">94%</span>
-                    <span className="metric-lbl">Comprehension</span>
-                  </div>
-                  <div className="live-metric-pill">
-                    <span className="metric-val">0.4s</span>
-                    <span className="metric-lbl">Avg Response</span>
-                  </div>
-                  <div className="live-metric-pill">
-                    <span className="metric-val">100%</span>
-                    <span className="metric-lbl">Zero-Install</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Educator Quote */}
-              <div className="live-quote-footer">
-                <p className="live-quote-text">
-                  "Pairly eliminated the silence in my 300-person hall. Active participation jumped from 20% to 94%."
-                </p>
-                <div className="live-quote-author">
-                  <strong>Dr. Marcus Vance</strong> · Professor of Cognitive Science, Stanford
-                </div>
-              </div>
-            </div>
-
-            {/* University Trust Badges */}
-            <div className="showcase-trust-bar">
-              <span className="trust-tag">PARTNERED WITH PROFESSORS AT</span>
-              <div className="trust-names">
-                <span>Stanford</span>
-                <span className="trust-dot">·</span>
-                <span>UC Berkeley</span>
-                <span className="trust-dot">·</span>
-                <span>MIT</span>
-                <span className="trust-dot">·</span>
-                <span>Johns Hopkins</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Side: Expanded White Stationery Auth Surface */}
-        <div className="auth-form-panel">
+      {/* Main Centered Stage with Expanded Card */}
+      <main className="auth-stage">
+        <div className="auth-card-wrapper">
           <div className="auth-stationery-card">
             {/* Paper Texture Overlay */}
             <div className="auth-card-texture" aria-hidden="true" />
@@ -251,9 +147,9 @@ export default function AuthPage() {
 
             {/* Header & Mode Switcher */}
             <div className="auth-heading-area">
-              <h2 className="auth-title">
+              <h1 className="auth-title">
                 {isLogin ? 'Sign in to Pairly' : 'Create your account'}
-              </h2>
+              </h1>
               <p className="auth-tagline">
                 {isLogin
                   ? 'Welcome back. Enter your credentials to continue.'
@@ -424,10 +320,6 @@ export default function AuthPage() {
                     )}
                   </button>
                 </form>
-
-                <div className="auth-legal-sub">
-                  <span>By continuing, you agree to Pairly's <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>.</span>
-                </div>
               </>
             )}
           </div>
@@ -484,9 +376,10 @@ export default function AuthPage() {
 
         .auth-bg-radial {
           position: absolute;
-          top: 15%;
-          left: 30%;
-          width: 900px;
+          top: 18%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 1000px;
           height: 600px;
           background: radial-gradient(50% 50% at 50% 50%, rgba(158, 212, 239, 0.25) 0%, rgba(250, 247, 242, 0) 100%);
         }
@@ -587,345 +480,39 @@ export default function AuthPage() {
           background: rgba(0, 0, 0, 0.04);
         }
 
-        /* ── Main Expanded Studio Stage ── */
-        .auth-expanded-stage {
+        /* ── Centered Stage with Expanded Card ── */
+        .auth-stage {
           position: relative;
           z-index: 5;
           flex: 1;
-          display: grid;
-          grid-template-columns: 1.1fr 1fr;
-          min-height: 0;
-          overflow: hidden;
-        }
-
-        /* ── Left Side: Brand Showcase & Live Visual ── */
-        .auth-showcase-panel {
-          padding: 24px 48px;
           display: flex;
-          flex-direction: column;
+          align-items: center;
           justify-content: center;
           min-height: 0;
+          padding: 16px 32px;
           overflow-y: auto;
           scrollbar-width: none;
         }
 
-        .auth-showcase-panel::-webkit-scrollbar {
+        .auth-stage::-webkit-scrollbar {
           display: none;
         }
 
-        .showcase-content-box {
-          max-width: 540px;
+        /* Expanded card wrapper — generous full-width presence */
+        .auth-card-wrapper {
           width: 100%;
-          margin: 0 auto;
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-        }
-
-        .showcase-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 7px;
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #0284C7;
-          background: rgba(2, 132, 199, 0.08);
-          border: 1px solid rgba(2, 132, 199, 0.18);
-          padding: 4px 11px;
-          border-radius: 9999px;
-          align-self: flex-start;
-        }
-
-        .showcase-badge-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #0284C7;
-        }
-
-        .showcase-headline {
-          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
-          font-size: clamp(30px, 3.2vw, 42px);
-          font-weight: 400;
-          line-height: 1.12;
-          color: #0F172A;
-          margin: 0;
-          letter-spacing: -0.025em;
-        }
-
-        .showcase-headline em {
-          font-style: italic;
-          color: #1E293B;
-        }
-
-        .showcase-subtext {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 14px;
-          color: #475569;
-          line-height: 1.5;
-          margin: 0;
-        }
-
-        /* ── Live Classroom Card ── */
-        .showcase-live-card {
-          position: relative;
-          background: #FFFFFF;
-          border-radius: 18px;
-          border: 1.5px solid rgba(0, 0, 0, 0.08);
-          box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
-          padding: 18px 20px;
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-        }
-
-        .live-card-paper-overlay {
-          position: absolute;
-          inset: 0;
-          background-image: url('/images/paper-texture.png');
-          background-size: cover;
-          opacity: 0.025;
-          mix-blend-mode: overlay;
-          pointer-events: none;
-        }
-
-        .live-card-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .live-card-status {
-          display: flex;
-          align-items: center;
-          gap: 7px;
-        }
-
-        .live-pulse-dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: #22C55E;
-          box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
-          animation: pulse 2s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.3); opacity: 0.7; }
-        }
-
-        .live-room-label {
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 10.5px;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          color: #0F172A;
-        }
-
-        .live-count-pill {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 11.5px;
-          font-weight: 600;
-          color: #15803D;
-          background: #F0FDF4;
-          border: 1px solid #BBF7D0;
-          padding: 3px 9px;
-          border-radius: 9999px;
-        }
-
-        /* Diagram Area */
-        .live-card-visual-area {
-          background: #F8FAFC;
-          border-radius: 12px;
-          border: 1px solid #E2E8F0;
-          padding: 14px;
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-        }
-
-        .visual-hotspot-diagram {
-          position: relative;
-          height: 110px;
-          background: linear-gradient(135deg, rgba(224, 242, 254, 0.4) 0%, rgba(240, 253, 250, 0.4) 100%);
-          border-radius: 10px;
-          border: 1px dashed #CBD5E1;
-          overflow: hidden;
-          display: flex;
-          align-items: flex-end;
-          padding: 8px 10px;
-        }
-
-        .diagram-grid-lines {
-          position: absolute;
-          inset: 0;
-          background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px);
-          background-size: 14px 14px;
-        }
-
-        .heat-spot {
-          position: absolute;
-          transform: translate(-50%, -50%);
-          width: 28px;
-          height: 28px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .heat-core {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: #2563EB;
-          box-shadow: 0 0 8px #2563EB;
-        }
-
-        .heat-ring {
-          position: absolute;
-          width: 26px;
-          height: 26px;
-          border-radius: 50%;
-          border: 1.5px solid rgba(37, 99, 235, 0.45);
-          animation: ringPulse 2.4s infinite ease-out;
-        }
-
-        .ring-2 {
-          animation-delay: 0.8s;
-          border-color: rgba(16, 185, 129, 0.5);
-        }
-
-        .ring-3 {
-          animation-delay: 1.6s;
-          border-color: rgba(245, 158, 11, 0.5);
-        }
-
-        @keyframes ringPulse {
-          0% { transform: scale(0.6); opacity: 0.8; }
-          100% { transform: scale(1.6); opacity: 0; }
-        }
-
-        .diagram-caption {
-          position: relative;
-          z-index: 2;
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 10px;
-          font-weight: 600;
-          color: #475569;
-          background: rgba(255, 255, 255, 0.85);
-          padding: 3px 7px;
-          border-radius: 6px;
-          border: 1px solid rgba(226, 232, 240, 0.8);
-        }
-
-        .live-metrics-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          gap: 8px;
-        }
-
-        .live-metric-pill {
-          background: #FFFFFF;
-          border: 1px solid #E2E8F0;
-          border-radius: 8px;
-          padding: 6px 10px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .metric-val {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 14px;
-          font-weight: 700;
-          color: #0F172A;
-        }
-
-        .metric-lbl {
-          font-size: 10px;
-          color: #64748B;
-          font-weight: 500;
-        }
-
-        .live-quote-footer {
-          border-top: 1px solid #F1F5F9;
-          padding-top: 10px;
-        }
-
-        .live-quote-text {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 12px;
-          font-style: italic;
-          color: #334155;
-          line-height: 1.45;
-          margin: 0 0 4px 0;
-        }
-
-        .live-quote-author {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 11px;
-          color: #64748B;
-        }
-
-        .showcase-trust-bar {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          padding-top: 6px;
-        }
-
-        .trust-tag {
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 9.5px;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          color: #64748B;
-        }
-
-        .trust-names {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 12.5px;
-          font-weight: 600;
-          color: #334155;
-        }
-
-        .trust-dot {
-          color: #CBD5E1;
-        }
-
-        /* ── Right Side: Expanded White Stationery Auth Surface ── */
-        .auth-form-panel {
-          position: relative;
-          background: #FFFFFF;
-          border-left: 1.5px solid rgba(0, 0, 0, 0.08);
-          box-shadow: -12px 0 36px -12px rgba(0, 0, 0, 0.04);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 24px 48px;
-          min-height: 0;
-          overflow-y: auto;
-          scrollbar-width: none;
-        }
-
-        .auth-form-panel::-webkit-scrollbar {
-          display: none;
+          max-width: 860px;
+          margin: auto;
         }
 
         .auth-stationery-card {
           position: relative;
-          width: 100%;
-          max-width: 440px;
-          margin: auto;
-          padding: 8px 0;
+          background: #FFFFFF;
+          border-radius: 24px;
+          border: 1.5px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
+          padding: 36px 44px;
+          overflow: hidden;
         }
 
         .auth-card-texture {
@@ -946,10 +533,10 @@ export default function AuthPage() {
           border: 1px solid #BFDBFE;
           color: #1D4ED8;
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 11.5px;
-          padding: 3px 10px;
+          font-size: 12px;
+          padding: 4px 12px;
           border-radius: 9999px;
-          margin-bottom: 12px;
+          margin-bottom: 14px;
         }
 
         .plan-dot {
@@ -962,31 +549,32 @@ export default function AuthPage() {
         /* ── Header Area ── */
         .auth-heading-area {
           text-align: center;
-          margin-bottom: 18px;
+          margin-bottom: 22px;
         }
 
         .auth-title {
           font-family: 'UntitledSerif', Georgia, serif;
           font-style: italic;
           font-weight: 400;
-          font-size: 28px;
+          font-size: 32px;
           color: #0F172A;
-          margin: 0 0 4px 0;
+          margin: 0 0 6px 0;
           line-height: 1.15;
+          letter-spacing: -0.02em;
         }
 
         .auth-tagline {
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13px;
+          font-size: 14px;
           color: #64748B;
-          line-height: 1.4;
-          margin: 0 0 16px 0;
+          line-height: 1.45;
+          margin: 0 0 18px 0;
         }
 
         .auth-segmented-pill {
           display: inline-flex;
           background: rgba(15, 23, 42, 0.05);
-          padding: 3px;
+          padding: 4px;
           border-radius: 9999px;
           border: 1px solid rgba(15, 23, 42, 0.06);
           width: 100%;
@@ -996,10 +584,10 @@ export default function AuthPage() {
           flex: 1;
           background: transparent;
           border: none;
-          padding: 7px 12px;
+          padding: 8px 16px;
           border-radius: 9999px;
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13px;
+          font-size: 13.5px;
           font-weight: 600;
           color: #64748B;
           cursor: pointer;
@@ -1016,21 +604,21 @@ export default function AuthPage() {
         .auth-social-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 10px;
-          margin-bottom: 16px;
+          gap: 14px;
+          margin-bottom: 18px;
         }
 
         .auth-sso-btn {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 8px;
-          height: 40px;
+          gap: 10px;
+          height: 44px;
           background: #FFFFFF;
           border: 1px solid #E2E8F0;
-          border-radius: 10px;
+          border-radius: 12px;
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13px;
+          font-size: 13.5px;
           font-weight: 500;
           color: #1E293B;
           cursor: pointer;
@@ -1044,16 +632,16 @@ export default function AuthPage() {
         }
 
         .sso-icon {
-          width: 16px;
-          height: 16px;
+          width: 18px;
+          height: 18px;
         }
 
         /* ── Separator ── */
         .auth-separator {
           display: flex;
           align-items: center;
-          gap: 10px;
-          margin-bottom: 16px;
+          gap: 14px;
+          margin-bottom: 18px;
         }
 
         .auth-sep-line {
@@ -1064,7 +652,7 @@ export default function AuthPage() {
 
         .auth-sep-label {
           font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 9.5px;
+          font-size: 10px;
           font-weight: 600;
           letter-spacing: 0.1em;
           color: #94A3B8;
@@ -1074,19 +662,19 @@ export default function AuthPage() {
         .auth-input-form {
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 14px;
         }
 
         .auth-grid-split {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 10px;
+          gap: 14px;
         }
 
         .auth-field {
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 5px;
         }
 
         .auth-label-row {
@@ -1097,14 +685,14 @@ export default function AuthPage() {
 
         .auth-label {
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 12.5px;
+          font-size: 13px;
           font-weight: 600;
           color: #334155;
         }
 
         .auth-forgot-link {
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 11.5px;
+          font-size: 12px;
           color: #2563EB;
           text-decoration: none;
         }
@@ -1114,12 +702,12 @@ export default function AuthPage() {
         }
 
         .auth-textbox {
-          height: 40px;
+          height: 42px;
           padding: 0 14px;
           border-radius: 10px;
           border: 1px solid #CBD5E1;
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13.5px;
+          font-size: 14px;
           color: #0F172A;
           background: #FFFFFF;
           outline: none;
@@ -1132,14 +720,14 @@ export default function AuthPage() {
         }
 
         .auth-action-btn {
-          margin-top: 4px;
-          height: 42px;
-          border-radius: 10px;
+          margin-top: 6px;
+          height: 46px;
+          border-radius: 12px;
           background: #0F172A;
           border: none;
           color: #FFFFFF;
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13.5px;
+          font-size: 14px;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.15s ease;
@@ -1156,19 +744,6 @@ export default function AuthPage() {
 
         .btn-spinner {
           opacity: 0.8;
-        }
-
-        .auth-legal-sub {
-          margin-top: 14px;
-          text-align: center;
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 11.5px;
-          color: #64748B;
-        }
-
-        .auth-legal-sub a {
-          color: #0F172A;
-          text-decoration: underline;
         }
 
         .auth-success-alert {
@@ -1206,9 +781,7 @@ export default function AuthPage() {
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 11.5px;
           color: #64748B;
-          border-top: 1px solid rgba(0, 0, 0, 0.05);
-          background: rgba(250, 247, 242, 0.6);
-          backdrop-filter: blur(8px);
+          border-top: 1px solid rgba(0, 0, 0, 0.04);
         }
 
         .auth-bottom-center {
@@ -1279,69 +852,10 @@ export default function AuthPage() {
           background: rgba(255, 255, 255, 0.06);
         }
 
-        [data-theme="dark"] .showcase-headline {
-          color: #FFFFFF;
-        }
-
-        [data-theme="dark"] .showcase-headline em {
-          color: #CBD5E1;
-        }
-
-        [data-theme="dark"] .showcase-subtext {
-          color: #94A3B8;
-        }
-
-        [data-theme="dark"] .showcase-live-card {
+        [data-theme="dark"] .auth-stationery-card {
           background: #11141C;
           border-color: rgba(255, 255, 255, 0.1);
-          box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.6);
-        }
-
-        [data-theme="dark"] .live-room-label {
-          color: #FFFFFF;
-        }
-
-        [data-theme="dark"] .live-card-visual-area {
-          background: #1A1F2C;
-          border-color: rgba(255, 255, 255, 0.08);
-        }
-
-        [data-theme="dark"] .visual-hotspot-diagram {
-          background: linear-gradient(135deg, rgba(30, 58, 138, 0.25) 0%, rgba(6, 78, 59, 0.25) 100%);
-          border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        [data-theme="dark"] .diagram-caption {
-          background: rgba(17, 20, 28, 0.85);
-          color: #CBD5E1;
-          border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        [data-theme="dark"] .live-metric-pill {
-          background: #141824;
-          border-color: rgba(255, 255, 255, 0.08);
-        }
-
-        [data-theme="dark"] .metric-val {
-          color: #FFFFFF;
-        }
-
-        [data-theme="dark"] .live-quote-footer {
-          border-top-color: rgba(255, 255, 255, 0.08);
-        }
-
-        [data-theme="dark"] .live-quote-text {
-          color: #CBD5E1;
-        }
-
-        [data-theme="dark"] .trust-names {
-          color: #CBD5E1;
-        }
-
-        [data-theme="dark"] .auth-form-panel {
-          background: #0D1017;
-          border-left-color: rgba(255, 255, 255, 0.08);
-          box-shadow: -12px 0 36px -12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.7);
         }
 
         [data-theme="dark"] .auth-title {
@@ -1363,13 +877,13 @@ export default function AuthPage() {
         }
 
         [data-theme="dark"] .auth-sso-btn {
-          background: #1A1F2C;
+          background: #1E293B;
           border-color: rgba(255, 255, 255, 0.1);
           color: #F1F5F9;
         }
 
         [data-theme="dark"] .auth-sso-btn:hover {
-          background: #242B3D;
+          background: #283548;
         }
 
         [data-theme="dark"] .auth-sep-line {
@@ -1381,8 +895,8 @@ export default function AuthPage() {
         }
 
         [data-theme="dark"] .auth-textbox {
-          background: #161B26;
-          border-color: rgba(255, 255, 255, 0.12);
+          background: #1E293B;
+          border-color: rgba(255, 255, 255, 0.15);
           color: #FFFFFF;
         }
 
@@ -1400,16 +914,7 @@ export default function AuthPage() {
           background: #E2E8F0;
         }
 
-        [data-theme="dark"] .auth-legal-sub {
-          color: #94A3B8;
-        }
-
-        [data-theme="dark"] .auth-legal-sub a {
-          color: #FFFFFF;
-        }
-
         [data-theme="dark"] .auth-bottombar {
-          background: rgba(7, 8, 11, 0.8);
           border-top-color: rgba(255, 255, 255, 0.06);
           color: #64748B;
         }
@@ -1418,34 +923,13 @@ export default function AuthPage() {
           color: #E2E8F0;
         }
 
-        /* ── Responsive Collapse for Mobile/Tablet ── */
-        @media (max-width: 980px) {
-          .auth-expanded-stage {
-            grid-template-columns: 1fr;
-          }
-
-          .auth-showcase-panel {
-            display: none;
-          }
-
-          .auth-form-panel {
-            border-left: none;
-            box-shadow: none;
-            padding: 16px 24px;
-            background: transparent;
+        @media (max-width: 900px) {
+          .auth-stage {
+            padding: 16px 20px;
           }
 
           .auth-stationery-card {
-            background: #FFFFFF;
-            border-radius: 20px;
-            border: 1.5px solid rgba(0, 0, 0, 0.08);
-            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.07);
-            padding: 24px;
-          }
-
-          [data-theme="dark"] .auth-stationery-card {
-            background: #11141C;
-            border-color: rgba(255, 255, 255, 0.1);
+            padding: 28px 24px;
           }
         }
 
