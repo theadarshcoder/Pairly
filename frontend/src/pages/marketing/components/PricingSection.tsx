@@ -150,8 +150,11 @@ export function PricingSection() {
           </div>
         </div>
 
-        {/* ── Dynamic Scale Slider (Screenshot 1 Match) ── */}
+        {/* ── Compact Textured Dynamic Scale Slider ── */}
         <div className="pricing-slider-container">
+          {/* Authentic Paper Texture Overlay */}
+          <div className="slider-paper-texture-overlay" aria-hidden="true" />
+
           <div className="slider-top-meta">
             <span className="slider-label">Scale with your monthly responses:</span>
             <span className="slider-selected-badge">
@@ -192,7 +195,7 @@ export function PricingSection() {
           </div>
         </div>
 
-        {/* ── 4 Modern SaaS Pricing Cards (Screenshot 2 Match) ── */}
+        {/* ── 4 Modern SaaS Pricing Cards ── */}
         <div className="pricing-cards-grid">
           {TIERS.map((tier) => {
             const isTargeted = tier.id === targetedTierId;
@@ -217,6 +220,9 @@ export function PricingSection() {
                   }
                 }}
               >
+                {/* Authentic Paper Texture Overlay */}
+                <div className="card-paper-texture-overlay" aria-hidden="true" />
+
                 {/* Plan Title */}
                 <div className="card-top-row">
                   <h3 className="card-tier-name">{tier.name}</h3>
@@ -270,39 +276,39 @@ export function PricingSection() {
 
       <style>{`
         .pricing-section {
-          padding: 80px 0 96px;
+          padding: 64px 0 88px;
         }
 
         .pricing-header-center {
           text-align: center;
-          margin-bottom: 40px;
+          margin-bottom: 32px;
         }
 
         /* ── Billing Cycle Toggle ── */
         .billing-cycle-toggle-wrapper {
           display: flex;
           justify-content: center;
-          margin-top: 24px;
+          margin-top: 20px;
         }
 
         .billing-cycle-toggle {
           display: inline-flex;
           align-items: center;
-          background: rgba(0, 0, 0, 0.05);
+          background: rgba(27, 23, 18, 0.05);
           padding: 4px;
           border-radius: 9999px;
-          border: 1px solid rgba(0, 0, 0, 0.06);
+          border: 1px solid rgba(27, 23, 18, 0.08);
         }
 
         .cycle-btn {
           background: transparent;
           border: none;
-          padding: 8px 18px;
+          padding: 7px 16px;
           border-radius: 9999px;
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13.5px;
+          font-size: 13px;
           font-weight: 500;
-          color: var(--ink-soft, #64748B);
+          color: var(--ink-soft, #5B5346);
           cursor: pointer;
           transition: all 0.15s ease;
           display: inline-flex;
@@ -312,9 +318,9 @@ export function PricingSection() {
 
         .cycle-btn.active {
           background: #FFFFFF;
-          color: #0F172A;
+          color: var(--ink, #1B1712);
           font-weight: 600;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 2px 8px rgba(27, 23, 18, 0.08);
         }
 
         .toggle-discount-chip {
@@ -326,38 +332,60 @@ export function PricingSection() {
           border-radius: 9999px;
         }
 
-        /* ── Scale Slider (Screenshot 1) ── */
+        /* ── Compact Textured Scale Slider ── */
         .pricing-slider-container {
-          max-width: 920px;
-          margin: 0 auto 52px;
-          padding: 28px 32px;
-          background: #0B0F17;
-          border-radius: 20px;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+          max-width: 780px;
+          margin: 0 auto 36px;
+          padding: 18px 24px 16px;
+          background-color: var(--paper-card, #FBF8F1);
+          border-radius: 18px;
+          border: 1px solid var(--line, #E4DBC8);
+          box-shadow: 0 4px 20px -4px rgba(27, 23, 18, 0.06), 0 1px 3px rgba(27, 23, 18, 0.03);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .slider-paper-texture-overlay {
+          position: absolute;
+          inset: 0;
+          background-image: url('/images/paper-texture.png');
+          background-size: cover;
+          background-position: center;
+          opacity: 0.38;
+          mix-blend-mode: multiply;
+          pointer-events: none;
+          border-radius: inherit;
+          z-index: 1;
+        }
+
+        .slider-top-meta,
+        .slider-track-wrap,
+        .slider-milestone-ticks {
+          position: relative;
+          z-index: 2;
         }
 
         .slider-top-meta {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 20px;
+          margin-bottom: 14px;
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13.5px;
+          font-size: 13px;
         }
 
         .slider-label {
-          color: #94A3B8;
+          color: var(--ink-soft, #5B5346);
           font-weight: 500;
         }
 
         .slider-selected-badge {
-          color: #F8FAFC;
+          color: var(--ink, #1B1712);
         }
 
         .slider-tier-highlight {
-          color: #60A5FA;
-          font-weight: 600;
+          color: #2563EB;
+          font-weight: 700;
         }
 
         .slider-track-wrap {
@@ -365,7 +393,7 @@ export function PricingSection() {
           width: 100%;
           display: flex;
           align-items: center;
-          margin-bottom: 14px;
+          margin-bottom: 10px;
         }
 
         /* Custom Range Slider Styling */
@@ -378,10 +406,10 @@ export function PricingSection() {
           outline: none;
           background: linear-gradient(
             to right,
-            #FFFFFF 0%,
-            #FFFFFF var(--slider-progress),
-            #262B35 var(--slider-progress),
-            #262B35 100%
+            #1E293B 0%,
+            #1E293B var(--slider-progress),
+            #E2E8F0 var(--slider-progress),
+            #E2E8F0 100%
           );
           cursor: pointer;
         }
@@ -389,12 +417,12 @@ export function PricingSection() {
         .tier-range-input::-webkit-slider-thumb {
           -webkit-appearance: none;
           appearance: none;
-          width: 22px;
-          height: 22px;
+          width: 20px;
+          height: 20px;
           border-radius: 50%;
           background: #FFFFFF;
-          border: 2px solid #0F172A;
-          box-shadow: 0 0 12px rgba(255, 255, 255, 0.75), 0 2px 6px rgba(0, 0, 0, 0.4);
+          border: 2.5px solid #1E293B;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
           cursor: grab;
           transition: transform 0.1s ease, box-shadow 0.1s ease;
         }
@@ -402,16 +430,16 @@ export function PricingSection() {
         .tier-range-input:active::-webkit-slider-thumb {
           cursor: grabbing;
           transform: scale(1.15);
-          box-shadow: 0 0 18px rgba(255, 255, 255, 0.95), 0 2px 8px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
         }
 
         .tier-range-input::-moz-range-thumb {
-          width: 22px;
-          height: 22px;
+          width: 20px;
+          height: 20px;
           border-radius: 50%;
           background: #FFFFFF;
-          border: 2px solid #0F172A;
-          box-shadow: 0 0 12px rgba(255, 255, 255, 0.75), 0 2px 6px rgba(0, 0, 0, 0.4);
+          border: 2.5px solid #1E293B;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
           cursor: grab;
         }
 
@@ -426,21 +454,21 @@ export function PricingSection() {
         .milestone-tick-btn {
           background: transparent;
           border: none;
-          padding: 4px 0;
+          padding: 3px 0;
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 11.5px;
+          font-size: 11px;
           font-weight: 500;
-          color: #64748B;
+          color: #78716C;
           cursor: pointer;
           transition: color 0.15s ease, transform 0.15s ease;
         }
 
         .milestone-tick-btn:hover {
-          color: #CBD5E1;
+          color: var(--ink, #1B1712);
         }
 
         .milestone-tick-btn.is-selected {
-          color: #FFFFFF;
+          color: var(--ink, #1B1712);
           font-weight: 700;
           transform: translateY(-1px);
         }
@@ -449,31 +477,55 @@ export function PricingSection() {
         .pricing-cards-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 20px;
+          gap: 18px;
           max-width: 1140px;
           margin: 0 auto;
           align-items: stretch;
         }
 
         .modern-pricing-card {
-          background: #FFFFFF;
+          background-color: var(--paper-card, #FFFFFF);
           border-radius: 20px;
-          padding: 32px 24px;
+          padding: 28px 22px;
           display: flex;
           flex-direction: column;
-          border: 1px solid #E2E8F0;
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+          border: 1px solid var(--line, #E2E8F0);
+          box-shadow: 0 4px 16px rgba(27, 23, 18, 0.03);
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
                       box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
                       border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: pointer;
           position: relative;
+          overflow: hidden;
           user-select: none;
+        }
+
+        .card-paper-texture-overlay {
+          position: absolute;
+          inset: 0;
+          background-image: url('/images/paper-texture.png');
+          background-size: cover;
+          background-position: center;
+          opacity: 0.25;
+          mix-blend-mode: multiply;
+          pointer-events: none;
+          border-radius: inherit;
+          z-index: 1;
+        }
+
+        .card-top-row,
+        .card-price-row,
+        .card-period-text,
+        .card-description,
+        .card-features-list,
+        .card-cta-wrapper {
+          position: relative;
+          z-index: 2;
         }
 
         .modern-pricing-card:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 8px 24px rgba(27, 23, 18, 0.06);
         }
 
         /* Highlighted / Targeted Card State (Exact match to Pro card in Screenshot 2) */
@@ -484,14 +536,14 @@ export function PricingSection() {
         }
 
         .card-top-row {
-          margin-bottom: 20px;
+          margin-bottom: 18px;
         }
 
         .card-tier-name {
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 17px;
           font-weight: 600;
-          color: #0F172A;
+          color: var(--ink, #0F172A);
           margin: 0;
         }
 
@@ -504,10 +556,10 @@ export function PricingSection() {
 
         .card-price-val {
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 38px;
+          font-size: 36px;
           font-weight: 700;
           line-height: 1;
-          color: #0F172A;
+          color: var(--ink, #0F172A);
           letter-spacing: -0.03em;
         }
 
@@ -524,16 +576,16 @@ export function PricingSection() {
         .card-period-text {
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 12px;
-          color: #64748B;
-          margin-bottom: 24px;
+          color: var(--ink-soft, #64748B);
+          margin-bottom: 20px;
         }
 
         .card-description {
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13.5px;
+          font-size: 13px;
           line-height: 1.45;
-          color: #334155;
-          margin: 0 0 24px 0;
+          color: var(--ink-soft, #334155);
+          margin: 0 0 22px 0;
           min-height: 38px;
         }
 
@@ -541,10 +593,10 @@ export function PricingSection() {
         .card-features-list {
           list-style: none;
           padding: 0;
-          margin: 0 0 32px 0;
+          margin: 0 0 28px 0;
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 11px;
           flex: 1;
         }
 
@@ -555,7 +607,7 @@ export function PricingSection() {
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 13px;
           line-height: 1.4;
-          color: #334155;
+          color: var(--ink, #334155);
         }
 
         .feature-check-icon {
@@ -589,13 +641,13 @@ export function PricingSection() {
         /* Inactive outline button */
         .cta-btn-outline {
           background: transparent;
-          border: 1px solid #E2E8F0;
-          color: #0F172A;
+          border: 1px solid var(--line, #E2E8F0);
+          color: var(--ink, #0F172A);
         }
 
         .cta-btn-outline:hover {
-          background: #F8FAFC;
-          border-color: #CBD5E1;
+          background: rgba(27, 23, 18, 0.04);
+          border-color: #94A3B8;
         }
 
         /* Active solid primary button (Screenshot 2: Pro black button) */
@@ -632,14 +684,72 @@ export function PricingSection() {
         }
 
         [data-theme="dark"] .pricing-slider-container {
-          background: #0D111A;
+          background-color: #0E131F;
           border-color: rgba(255, 255, 255, 0.1);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .slider-paper-texture-overlay {
+          opacity: 0.14;
+          mix-blend-mode: overlay;
+        }
+
+        [data-theme="dark"] .slider-label {
+          color: #94A3B8;
+        }
+
+        [data-theme="dark"] .slider-selected-badge {
+          color: #F8FAFC;
+        }
+
+        [data-theme="dark"] .slider-tier-highlight {
+          color: #60A5FA;
+        }
+
+        [data-theme="dark"] .tier-range-input {
+          background: linear-gradient(
+            to right,
+            #FFFFFF 0%,
+            #FFFFFF var(--slider-progress),
+            #262B35 var(--slider-progress),
+            #262B35 100%
+          );
+        }
+
+        [data-theme="dark"] .tier-range-input::-webkit-slider-thumb {
+          background: #FFFFFF;
+          border: 2px solid #0F172A;
+          box-shadow: 0 0 12px rgba(255, 255, 255, 0.75), 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .tier-range-input::-moz-range-thumb {
+          background: #FFFFFF;
+          border: 2px solid #0F172A;
+          box-shadow: 0 0 12px rgba(255, 255, 255, 0.75), 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .milestone-tick-btn {
+          color: #64748B;
+        }
+
+        [data-theme="dark"] .milestone-tick-btn:hover {
+          color: #CBD5E1;
+        }
+
+        [data-theme="dark"] .milestone-tick-btn.is-selected {
+          color: #FFFFFF;
+          font-weight: 700;
         }
 
         [data-theme="dark"] .modern-pricing-card {
-          background: #11141C;
+          background-color: #11141C;
           border-color: rgba(255, 255, 255, 0.1);
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        [data-theme="dark"] .card-paper-texture-overlay {
+          opacity: 0.1;
+          mix-blend-mode: overlay;
         }
 
         [data-theme="dark"] .modern-pricing-card:hover {
@@ -711,13 +821,13 @@ export function PricingSection() {
             grid-template-columns: 1fr;
           }
           .pricing-slider-container {
-            padding: 20px 16px;
+            padding: 16px 14px 12px;
           }
           .slider-milestone-ticks {
             overflow-x: auto;
-            gap: 12px;
+            gap: 10px;
             justify-content: flex-start;
-            padding-bottom: 6px;
+            padding-bottom: 4px;
           }
         }
       `}</style>
