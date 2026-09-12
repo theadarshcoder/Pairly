@@ -123,9 +123,9 @@ export default function AuthPage() {
             )}
           </button>
 
-          <Link to="/" className="auth-back-link">
+          <Link to="/" className="auth-back-link" title="Return to Home">
             <span>←</span>
-            <span>Back to site</span>
+            <span>Home</span>
           </Link>
         </div>
       </header>
