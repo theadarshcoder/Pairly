@@ -57,7 +57,7 @@ export default function AuthPage() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setSuccessMsg(isLogin ? 'Welcome back! Redirecting to your dashboard...' : 'Account created successfully! Setting up your workspace...');
+      setSuccessMsg(isLogin ? 'Welcome back! Redirecting to your dashboard...' : 'Account created successfully! Preparing your workspace...');
       setTimeout(() => {
         navigate('/dashboard');
       }, 1200);
@@ -72,142 +72,34 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="auth-split-viewport">
-      {/* ── Left Pane: Interactive Showcase & Pedagogical Platform ── */}
-      <aside className="auth-showcase-pane">
-        {/* Background Paper Ambience */}
-        <div className="auth-showcase-bg-overlay" aria-hidden="true">
-          <div className="auth-showcase-radial" />
-          <img
-            src="/images/paper-texture.png"
-            alt=""
-            className="auth-showcase-paper"
-          />
-        </div>
+    <div className="auth-fixed-viewport">
+      {/* Background Ambience */}
+      <div className="auth-bg-decor" aria-hidden="true">
+        <div className="auth-bg-radial" />
+        <img
+          src="/images/paper-texture.png"
+          alt=""
+          className="auth-paper-texture"
+        />
+      </div>
 
-        {/* Top Branding */}
-        <div className="auth-showcase-top">
-          <Link to="/" className="auth-showcase-brand" title="Return to Pairly Home">
-            <span className="auth-logo-badge">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-              </svg>
-            </span>
-            <span className="auth-brand-name">Pairly</span>
-          </Link>
-          <span className="auth-feature-pill">Spatial Active-Learning</span>
-        </div>
+      {/* Sleek Fixed Header Bar */}
+      <header className="auth-topbar">
+        <Link to="/" className="auth-brand-link" title="Return to Pairly Home">
+          <span className="auth-logo-symbol">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5" />
+              <path d="M2 12l10 5 10-5" />
+            </svg>
+          </span>
+          <span className="auth-brand-name">Pairly</span>
+        </Link>
 
-        {/* Central Editorial & Live Simulator */}
-        <div className="auth-showcase-body">
-          <div className="auth-showcase-text">
-            <h2 className="auth-showcase-heading">
-              Turn passive lecture halls into <span className="highlight-italic">active comprehension.</span>
-            </h2>
-            <p className="auth-showcase-description">
-              Replace multiple-choice clickers with real-time spatial canvases, cognitive decay mapping, and interactive peer grading.
-            </p>
-          </div>
-
-          {/* Interactive Classroom Bento Card */}
-          <div className="auth-bento-preview">
-            <div className="bento-paper-tooth" aria-hidden="true" />
-
-            <div className="bento-card-topbar">
-              <div className="bento-status-pill">
-                <span className="bento-pulse-dot" />
-                <span>BIOCHEM 302 · ACTIVE SESSION</span>
-              </div>
-              <span className="bento-occupancy">412 Students Connected</span>
-            </div>
-
-            <p className="bento-prompt-title">
-              “Pinpoint the primary catalytic pocket on the hexokinase enzyme structure.”
-            </p>
-
-            {/* Spatial Canvas Heatmap Simulation */}
-            <div className="bento-canvas-visual">
-              <div className="canvas-grid-bg" />
-              
-              {/* Heatmap Clusters */}
-              <div className="canvas-heat-cloud" />
-              <div className="canvas-hotspot-center">
-                <span className="hotspot-pulse" />
-                <span className="hotspot-core" />
-              </div>
-
-              {/* Student Dot Swarm */}
-              <div className="canvas-dot d1" style={{ top: '38%', left: '52%' }} />
-              <div className="canvas-dot d2" style={{ top: '44%', left: '48%' }} />
-              <div className="canvas-dot d3" style={{ top: '41%', left: '56%' }} />
-              <div className="canvas-dot d4" style={{ top: '47%', left: '53%' }} />
-              <div className="canvas-dot d5" style={{ top: '35%', left: '49%' }} />
-              <div className="canvas-dot d6" style={{ top: '43%', left: '51%' }} />
-              <div className="canvas-dot d7" style={{ top: '49%', left: '55%' }} />
-              
-              <div className="canvas-target-tag">
-                <span className="tag-dot" />
-                <span>Catalytic Pocket (88.4% Consensus)</span>
-              </div>
-            </div>
-
-            {/* Micro Metrics Row */}
-            <div className="bento-metrics-row">
-              <div className="bento-metric-cell">
-                <span className="metric-val">3.8s</span>
-                <span className="metric-label">Response Velocity</span>
-              </div>
-              <div className="bento-metric-cell">
-                <span className="metric-val">94.8%</span>
-                <span className="metric-label">Concept Recall</span>
-              </div>
-              <div className="bento-metric-cell">
-                <span className="metric-val">0</span>
-                <span className="metric-label">Student App Installs</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Educator Testimonial Quote */}
-          <div className="auth-educator-quote-card">
-            <div className="quote-initials">AT</div>
-            <div className="quote-copy-wrap">
-              <p className="quote-body">
-                “Pairly replaced four disjointed tools across our 400-seat lecture series. We diagnose student misconceptions within minutes instead of midterms.”
-              </p>
-              <div className="quote-author-meta">
-                <strong>Dr. Aris Thorne</strong> · Dept. of Molecular Biology, UC Berkeley
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom University Faculty Trust */}
-        <div className="auth-showcase-footer">
-          <span className="showcase-trust-tag">ADOPTED BY FACULTY AT LEADING INSTITUTIONS</span>
-          <div className="showcase-uni-strip">
-            <span>Stanford</span>
-            <span className="uni-dot">·</span>
-            <span>UC Berkeley</span>
-            <span className="uni-dot">·</span>
-            <span>MIT</span>
-            <span className="uni-dot">·</span>
-            <span>Johns Hopkins</span>
-            <span className="uni-dot">·</span>
-            <span>UCLA</span>
-          </div>
-        </div>
-      </aside>
-
-      {/* ── Right Pane: Clean, Spacious Authentication Portal ── */}
-      <main className="auth-form-pane">
-        {/* Top Actions Bar */}
-        <div className="auth-form-topbar">
+        <div className="auth-topbar-actions">
           <button
             type="button"
-            className="auth-theme-toggle"
+            className="auth-theme-btn"
             onClick={toggleTheme}
             title={`Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} mode`}
             aria-label="Toggle theme"
@@ -231,46 +123,155 @@ export default function AuthPage() {
             )}
           </button>
 
-          <Link to="/" className="auth-back-action">
+          <Link to="/" className="auth-back-link">
             <span>←</span>
             <span>Back to site</span>
           </Link>
         </div>
+      </header>
 
-        {/* Centered Form Area */}
-        <div className="auth-form-stage">
-          <div className="auth-form-card">
-            {/* Plan Badge if from /pricing */}
+      {/* Main Expanded Studio Stage — Spanning Throughout the Page */}
+      <main className="auth-expanded-stage">
+        {/* Left Side: Editorial Brand & Interactive Live Preview Showcase */}
+        <div className="auth-showcase-panel">
+          <div className="showcase-content-box">
+            <div className="showcase-badge">
+              <span className="showcase-badge-dot" />
+              <span>Active Classroom System</span>
+            </div>
+
+            <h1 className="showcase-headline">
+              {isLogin ? (
+                <>
+                  Where active lectures<br />
+                  <em>come to life.</em>
+                </>
+              ) : (
+                <>
+                  Every student responds.<br />
+                  <em>Every concept measured.</em>
+                </>
+              )}
+            </h1>
+
+            <p className="showcase-subtext">
+              Replace passive multiple-choice clickers with spatial heatmaps, peer-review swarms, and instant concept decay tracking.
+            </p>
+
+            {/* Simulated Live Active Classroom Card */}
+            <div className="showcase-live-card">
+              <div className="live-card-paper-overlay" aria-hidden="true" />
+              
+              <div className="live-card-header">
+                <div className="live-card-status">
+                  <span className="live-pulse-dot" />
+                  <span className="live-room-label">LIVE SESSION · ROOM #4821</span>
+                </div>
+                <span className="live-count-pill">342 Students Active</span>
+              </div>
+
+              <div className="live-card-visual-area">
+                <div className="visual-hotspot-diagram">
+                  <div className="diagram-grid-lines" />
+                  {/* Glowing Hotspot Heat Points */}
+                  <div className="heat-spot spot-1" style={{ top: '35%', left: '42%' }}>
+                    <span className="heat-ring ring-1" />
+                    <span className="heat-core" />
+                  </div>
+                  <div className="heat-spot spot-2" style={{ top: '55%', left: '60%' }}>
+                    <span className="heat-ring ring-2" />
+                    <span className="heat-core" />
+                  </div>
+                  <div className="heat-spot spot-3" style={{ top: '48%', left: '28%' }}>
+                    <span className="heat-ring ring-3" />
+                    <span className="heat-core" />
+                  </div>
+
+                  <div className="diagram-caption">
+                    <span>Target: Somatosensory Cortex Identification</span>
+                  </div>
+                </div>
+
+                <div className="live-metrics-row">
+                  <div className="live-metric-pill">
+                    <span className="metric-val">94%</span>
+                    <span className="metric-lbl">Comprehension</span>
+                  </div>
+                  <div className="live-metric-pill">
+                    <span className="metric-val">0.4s</span>
+                    <span className="metric-lbl">Avg Response</span>
+                  </div>
+                  <div className="live-metric-pill">
+                    <span className="metric-val">100%</span>
+                    <span className="metric-lbl">Zero-Install</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Educator Quote */}
+              <div className="live-quote-footer">
+                <p className="live-quote-text">
+                  "Pairly eliminated the silence in my 300-person hall. Active participation jumped from 20% to 94%."
+                </p>
+                <div className="live-quote-author">
+                  <strong>Dr. Marcus Vance</strong> · Professor of Cognitive Science, Stanford
+                </div>
+              </div>
+            </div>
+
+            {/* University Trust Badges */}
+            <div className="showcase-trust-bar">
+              <span className="trust-tag">PARTNERED WITH PROFESSORS AT</span>
+              <div className="trust-names">
+                <span>Stanford</span>
+                <span className="trust-dot">·</span>
+                <span>UC Berkeley</span>
+                <span className="trust-dot">·</span>
+                <span>MIT</span>
+                <span className="trust-dot">·</span>
+                <span>Johns Hopkins</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side: Expanded White Stationery Auth Surface */}
+        <div className="auth-form-panel">
+          <div className="auth-stationery-card">
+            {/* Paper Texture Overlay */}
+            <div className="auth-card-texture" aria-hidden="true" />
+
+            {/* Plan Badge if coming from /pricing */}
             {planParam && planTitles[planParam] && (
-              <div className="auth-plan-banner">
+              <div className="auth-plan-pill">
                 <span className="plan-dot" />
                 <span>Selected Plan: <strong>{planTitles[planParam]}</strong></span>
               </div>
             )}
 
             {/* Header & Mode Switcher */}
-            <div className="auth-form-header">
-              <h1 className="auth-form-title">
+            <div className="auth-heading-area">
+              <h2 className="auth-title">
                 {isLogin ? 'Sign in to Pairly' : 'Create your account'}
-              </h1>
-              <p className="auth-form-subtitle">
+              </h2>
+              <p className="auth-tagline">
                 {isLogin
-                  ? 'Welcome back. Enter your credentials to access your classrooms.'
-                  : 'Start using Pairly with your academic email in seconds.'}
+                  ? 'Welcome back. Enter your credentials to continue.'
+                  : 'Get started with your classroom in seconds.'}
               </p>
 
               {/* Segmented Mode Switcher */}
-              <div className="auth-segmented-switcher">
+              <div className="auth-segmented-pill">
                 <button
                   type="button"
-                  className={`auth-tab-btn ${!isLogin ? 'active' : ''}`}
+                  className={`auth-segment ${!isLogin ? 'is-active' : ''}`}
                   onClick={() => switchMode(false)}
                 >
                   Create Account
                 </button>
                 <button
                   type="button"
-                  className={`auth-tab-btn ${isLogin ? 'active' : ''}`}
+                  className={`auth-segment ${isLogin ? 'is-active' : ''}`}
                   onClick={() => switchMode(true)}
                 >
                   Log In
@@ -280,23 +281,23 @@ export default function AuthPage() {
 
             {/* Success State */}
             {successMsg ? (
-              <div className="auth-success-box">
-                <span className="success-icon-badge">✓</span>
+              <div className="auth-success-alert">
+                <span className="auth-success-badge">✓</span>
                 <p>{successMsg}</p>
               </div>
             ) : (
               <>
                 {/* Single-Click Social SSO Grid */}
-                <div className="auth-sso-row">
+                <div className="auth-social-row">
                   <button
                     type="button"
-                    className="auth-sso-action"
+                    className="auth-sso-btn"
                     onClick={() => {
                       setIsLoading(true);
                       setTimeout(() => navigate('/dashboard'), 900);
                     }}
                   >
-                    <svg className="sso-svg" viewBox="0 0 24 24">
+                    <svg className="sso-icon" viewBox="0 0 24 24">
                       <path
                         fill="#4285F4"
                         d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -319,13 +320,13 @@ export default function AuthPage() {
 
                   <button
                     type="button"
-                    className="auth-sso-action"
+                    className="auth-sso-btn"
                     onClick={() => {
                       setIsLoading(true);
                       setTimeout(() => navigate('/dashboard'), 900);
                     }}
                   >
-                    <svg className="sso-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="sso-icon" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.58.67-.99 1.74-.86 2.78.99.08 2.01-.53 2.57-1.28z" />
                     </svg>
                     <span>Apple</span>
@@ -333,63 +334,63 @@ export default function AuthPage() {
                 </div>
 
                 {/* Divider */}
-                <div className="auth-line-divider">
-                  <span className="line" />
-                  <span className="label">OR WITH EMAIL</span>
-                  <span className="line" />
+                <div className="auth-separator">
+                  <span className="auth-sep-line" />
+                  <span className="auth-sep-label">OR WITH EMAIL</span>
+                  <span className="auth-sep-line" />
                 </div>
 
                 {/* Credentials Form */}
-                <form onSubmit={handleSubmit} className="auth-form-fields">
+                <form onSubmit={handleSubmit} className="auth-input-form">
                   {!isLogin && (
-                    <div className="auth-row-2col">
-                      <div className="auth-input-group">
-                        <label className="auth-field-label" htmlFor="user-name">Full Name</label>
+                    <div className="auth-grid-split">
+                      <div className="auth-field">
+                        <label className="auth-label" htmlFor="user-name">Full Name</label>
                         <input
                           id="user-name"
                           type="text"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Dr. Eleanor Vance"
-                          className="auth-text-input"
+                          className="auth-textbox"
                           required
                         />
                       </div>
-                      <div className="auth-input-group">
-                        <label className="auth-field-label" htmlFor="user-institution">Institution</label>
+                      <div className="auth-field">
+                        <label className="auth-label" htmlFor="user-institution">Institution</label>
                         <input
                           id="user-institution"
                           type="text"
                           value={institution}
                           onChange={(e) => setInstitution(e.target.value)}
                           placeholder="Stanford University"
-                          className="auth-text-input"
+                          className="auth-textbox"
                           required
                         />
                       </div>
                     </div>
                   )}
 
-                  <div className="auth-input-group">
-                    <label className="auth-field-label" htmlFor="user-email">Academic Email</label>
+                  <div className="auth-field">
+                    <label className="auth-label" htmlFor="user-email">Academic Email</label>
                     <input
                       id="user-email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="vance@stanford.edu"
-                      className="auth-text-input"
+                      className="auth-textbox"
                       required
                     />
                   </div>
 
-                  <div className="auth-input-group">
-                    <div className="auth-label-split">
-                      <label className="auth-field-label" htmlFor="user-password">Password</label>
+                  <div className="auth-field">
+                    <div className="auth-label-row">
+                      <label className="auth-label" htmlFor="user-password">Password</label>
                       {isLogin && (
                         <a
                           href="#forgot"
-                          className="auth-pass-forgot"
+                          className="auth-forgot-link"
                           onClick={(e) => {
                             e.preventDefault();
                             alert('Password reset link sent to your academic email.');
@@ -405,7 +406,7 @@ export default function AuthPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••••••"
-                      className="auth-text-input"
+                      className="auth-textbox"
                       required
                       minLength={8}
                     />
@@ -413,7 +414,7 @@ export default function AuthPage() {
 
                   <button
                     type="submit"
-                    className="auth-primary-btn"
+                    className="auth-action-btn"
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -424,36 +425,41 @@ export default function AuthPage() {
                   </button>
                 </form>
 
-                {/* Terms agreement note */}
-                <div className="auth-agreement-text">
-                  By continuing, you agree to Pairly’s{' '}
-                  <Link to="/terms">Terms of Service</Link> and{' '}
-                  <Link to="/privacy">Privacy Policy</Link>.
+                <div className="auth-legal-sub">
+                  <span>By continuing, you agree to Pairly's <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>.</span>
                 </div>
               </>
             )}
           </div>
         </div>
-
-        {/* Right Pane Bottom Footer Links */}
-        <footer className="auth-form-footer">
-          <span>© 2026 Pairly Inc. All rights reserved.</span>
-          <div className="footer-links-cluster">
-            <Link to="/privacy">Privacy</Link>
-            <span className="sep">·</span>
-            <Link to="/terms">Terms</Link>
-            <span className="sep">·</span>
-            <Link to="/security">Security</Link>
-            <span className="sep">·</span>
-            <Link to="/community">Community</Link>
-          </div>
-        </footer>
       </main>
 
-      {/* ── CSS Styles ── */}
+      {/* Fixed Non-Scrollable Bottom Bar */}
+      <footer className="auth-bottombar">
+        <div className="auth-bottom-left">
+          <span>© 2026 Pairly Inc. All rights reserved.</span>
+        </div>
+
+        <div className="auth-bottom-center">
+          <Link to="/privacy">Privacy</Link>
+          <span className="auth-dot-sep">·</span>
+          <Link to="/terms">Terms</Link>
+          <span className="auth-dot-sep">·</span>
+          <Link to="/security">Security</Link>
+          <span className="auth-dot-sep">·</span>
+          <Link to="/community">Community</Link>
+        </div>
+
+        <div className="auth-bottom-right">
+          <span className="auth-system-dot" />
+          <span>All systems operational</span>
+        </div>
+      </footer>
+
+      {/* Styling */}
       <style>{`
-        /* ── Full Viewport Split Container ── */
-        .auth-split-viewport {
+        /* ── Fixed Non-Scrollable Viewport Container ── */
+        .auth-fixed-viewport {
           position: fixed;
           inset: 0;
           width: 100vw;
@@ -461,26 +467,14 @@ export default function AuthPage() {
           height: 100dvh;
           overflow: hidden;
           display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           background-color: var(--paper, #FAF7F2);
           z-index: 999;
         }
 
-        /* ── Left Pane: Showcase ── */
-        .auth-showcase-pane {
-          position: relative;
-          width: 52%;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          padding: 36px 48px 28px 48px;
-          border-right: 1px solid rgba(0, 0, 0, 0.08);
-          background-color: var(--paper, #FAF7F2);
-          overflow: hidden;
-          flex-shrink: 0;
-        }
-
-        .auth-showcase-bg-overlay {
+        /* ── Background Ambience ── */
+        .auth-bg-decor {
           position: absolute;
           inset: 0;
           pointer-events: none;
@@ -488,35 +482,39 @@ export default function AuthPage() {
           z-index: 1;
         }
 
-        .auth-showcase-radial {
+        .auth-bg-radial {
           position: absolute;
           top: 15%;
           left: 30%;
-          width: 650px;
-          height: 500px;
-          background: radial-gradient(50% 50% at 50% 50%, rgba(158, 212, 239, 0.28) 0%, rgba(250, 247, 242, 0) 100%);
+          width: 900px;
+          height: 600px;
+          background: radial-gradient(50% 50% at 50% 50%, rgba(158, 212, 239, 0.25) 0%, rgba(250, 247, 242, 0) 100%);
         }
 
-        .auth-showcase-paper {
+        .auth-paper-texture {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          opacity: 0.16;
+          opacity: 0.14;
           mix-blend-mode: multiply;
         }
 
-        /* Left Header */
-        .auth-showcase-top {
+        /* ── Top Bar ── */
+        .auth-topbar {
           position: relative;
-          z-index: 5;
+          z-index: 10;
+          height: 56px;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          padding: 0 36px;
+          flex-shrink: 0;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         }
 
-        .auth-showcase-brand {
+        .auth-brand-link {
           display: flex;
           align-items: center;
           gap: 10px;
@@ -524,7 +522,7 @@ export default function AuthPage() {
           color: #0F172A;
         }
 
-        .auth-logo-badge {
+        .auth-logo-symbol {
           width: 32px;
           height: 32px;
           border-radius: 9px;
@@ -539,362 +537,23 @@ export default function AuthPage() {
         .auth-brand-name {
           font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
           font-weight: 700;
-          font-size: 22px;
+          font-size: 21px;
           letter-spacing: -0.02em;
           color: #0F172A;
         }
 
-        .auth-feature-pill {
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.06em;
-          padding: 4px 10px;
-          border-radius: 9999px;
-          background: rgba(15, 23, 42, 0.05);
-          border: 1px solid rgba(15, 23, 42, 0.08);
-          color: #475569;
-        }
-
-        /* Left Body Content */
-        .auth-showcase-body {
-          position: relative;
-          z-index: 5;
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          margin: auto 0;
-        }
-
-        .auth-showcase-heading {
-          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
-          font-weight: 400;
-          font-size: clamp(28px, 2.6vw, 36px);
-          line-height: 1.18;
-          color: #0F172A;
-          margin: 0 0 10px 0;
-          letter-spacing: -0.02em;
-        }
-
-        .auth-showcase-heading .highlight-italic {
-          font-style: italic;
-          color: #0F172A;
-        }
-
-        .auth-showcase-description {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 14px;
-          line-height: 1.5;
-          color: #64748B;
-          margin: 0;
-          max-width: 520px;
-        }
-
-        /* Bento Interactive Card */
-        .auth-bento-preview {
-          position: relative;
-          background: #FFFFFF;
-          border-radius: 18px;
-          border: 1.5px solid rgba(0, 0, 0, 0.08);
-          box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
-          padding: 18px 22px;
-          overflow: hidden;
-          max-width: 540px;
-        }
-
-        .bento-paper-tooth {
-          position: absolute;
-          inset: 0;
-          background-image: url('/images/paper-texture.png');
-          background-size: cover;
-          opacity: 0.025;
-          mix-blend-mode: overlay;
-          pointer-events: none;
-        }
-
-        .bento-card-topbar {
+        .auth-topbar-actions {
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          margin-bottom: 10px;
-        }
-
-        .bento-status-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 10.5px;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          color: #047857;
-          background: #ECFDF5;
-          padding: 3px 8px;
-          border-radius: 6px;
-          border: 1px solid #A7F3D0;
-        }
-
-        .bento-pulse-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #10B981;
-          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
-          animation: pulse 2s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.3); opacity: 0.7; }
-        }
-
-        .bento-occupancy {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 11.5px;
-          font-weight: 500;
-          color: #64748B;
-        }
-
-        .bento-prompt-title {
-          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
-          font-style: italic;
-          font-size: 15px;
-          line-height: 1.35;
-          color: #1E293B;
-          margin: 0 0 12px 0;
-        }
-
-        /* Spatial Canvas Mockup */
-        .bento-canvas-visual {
-          position: relative;
-          height: 120px;
-          background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
-          border-radius: 12px;
-          border: 1px solid #E2E8F0;
-          overflow: hidden;
-          margin-bottom: 14px;
-        }
-
-        .canvas-grid-bg {
-          position: absolute;
-          inset: 0;
-          background-size: 16px 16px;
-          background-image: linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-                            linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
-        }
-
-        .canvas-heat-cloud {
-          position: absolute;
-          top: 36%;
-          left: 52%;
-          transform: translate(-50%, -50%);
-          width: 140px;
-          height: 90px;
-          background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, rgba(14, 165, 233, 0.15) 50%, transparent 75%);
-          filter: blur(12px);
-        }
-
-        .canvas-hotspot-center {
-          position: absolute;
-          top: 42%;
-          left: 52%;
-          transform: translate(-50%, -50%);
-        }
-
-        .hotspot-pulse {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          border: 1.5px solid rgba(37, 99, 235, 0.5);
-          animation: pulse 2.2s infinite;
-        }
-
-        .hotspot-core {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: #2563EB;
-          box-shadow: 0 0 10px rgba(37, 99, 235, 0.8);
-        }
-
-        .canvas-dot {
-          position: absolute;
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          background: #0284C7;
-          box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-        }
-
-        .canvas-target-tag {
-          position: absolute;
-          bottom: 8px;
-          right: 10px;
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(0, 0, 0, 0.08);
-          border-radius: 6px;
-          padding: 3px 8px;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 10px;
-          font-weight: 600;
-          color: #1E293B;
-        }
-
-        .tag-dot {
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          background: #2563EB;
-        }
-
-        /* Metrics Row */
-        .bento-metrics-row {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 8px;
-          padding-top: 10px;
-          border-top: 1px solid #F1F5F9;
-        }
-
-        .bento-metric-cell {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .metric-val {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 14px;
-          font-weight: 700;
-          color: #0F172A;
-          line-height: 1.1;
-        }
-
-        .metric-label {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 10px;
-          color: #64748B;
-          margin-top: 2px;
-        }
-
-        /* Educator Quote */
-        .auth-educator-quote-card {
-          display: flex;
-          align-items: flex-start;
-          gap: 12px;
-          background: rgba(255, 255, 255, 0.65);
-          border: 1px solid rgba(0, 0, 0, 0.06);
-          border-radius: 12px;
-          padding: 12px 16px;
-          max-width: 540px;
-        }
-
-        .quote-initials {
-          width: 32px;
-          height: 32px;
-          border-radius: 8px;
-          background: #E2E8F0;
-          color: #334155;
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 11px;
-          font-weight: 700;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
-
-        .quote-body {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 12px;
-          line-height: 1.45;
-          color: #334155;
-          margin: 0 0 4px 0;
-          font-style: italic;
-        }
-
-        .quote-author-meta {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 11px;
-          color: #64748B;
-        }
-
-        /* Showcase Footer */
-        .auth-showcase-footer {
-          position: relative;
-          z-index: 5;
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-        }
-
-        .showcase-trust-tag {
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 9.5px;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #94A3B8;
-        }
-
-        .showcase-uni-strip {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 12px;
-          font-weight: 600;
-          color: #475569;
-        }
-
-        .uni-dot {
-          color: #CBD5E1;
-        }
-
-        /* ── Right Pane: Authentication Form ── */
-        .auth-form-pane {
-          position: relative;
-          width: 48%;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          background-color: #FFFFFF;
-          overflow-y: auto;
-          scrollbar-width: none;
-          padding: 32px 48px 24px 48px;
-        }
-
-        .auth-form-pane::-webkit-scrollbar {
-          display: none;
-        }
-
-        /* Top Bar */
-        .auth-form-topbar {
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
           gap: 14px;
-          flex-shrink: 0;
         }
 
-        .auth-theme-toggle {
+        .auth-theme-btn {
           width: 34px;
           height: 34px;
           border-radius: 50%;
           border: 1px solid rgba(0, 0, 0, 0.08);
-          background: #F8FAFC;
+          background: rgba(255, 255, 255, 0.8);
           color: #475569;
           display: flex;
           align-items: center;
@@ -903,13 +562,13 @@ export default function AuthPage() {
           transition: all 0.15s ease;
         }
 
-        .auth-theme-toggle:hover {
+        .auth-theme-btn:hover {
           background: #FFFFFF;
           color: #0F172A;
           border-color: rgba(0, 0, 0, 0.15);
         }
 
-        .auth-back-action {
+        .auth-back-link {
           display: flex;
           align-items: center;
           gap: 6px;
@@ -923,27 +582,363 @@ export default function AuthPage() {
           transition: all 0.15s ease;
         }
 
-        .auth-back-action:hover {
+        .auth-back-link:hover {
           color: #0F172A;
-          background: #F1F5F9;
+          background: rgba(0, 0, 0, 0.04);
         }
 
-        /* Center Stage */
-        .auth-form-stage {
+        /* ── Main Expanded Studio Stage ── */
+        .auth-expanded-stage {
+          position: relative;
+          z-index: 5;
+          flex: 1;
+          display: grid;
+          grid-template-columns: 1.1fr 1fr;
+          min-height: 0;
+          overflow: hidden;
+        }
+
+        /* ── Left Side: Brand Showcase & Live Visual ── */
+        .auth-showcase-panel {
+          padding: 24px 48px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-height: 0;
+          overflow-y: auto;
+          scrollbar-width: none;
+        }
+
+        .auth-showcase-panel::-webkit-scrollbar {
+          display: none;
+        }
+
+        .showcase-content-box {
+          max-width: 540px;
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .showcase-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #0284C7;
+          background: rgba(2, 132, 199, 0.08);
+          border: 1px solid rgba(2, 132, 199, 0.18);
+          padding: 4px 11px;
+          border-radius: 9999px;
+          align-self: flex-start;
+        }
+
+        .showcase-badge-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #0284C7;
+        }
+
+        .showcase-headline {
+          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
+          font-size: clamp(30px, 3.2vw, 42px);
+          font-weight: 400;
+          line-height: 1.12;
+          color: #0F172A;
+          margin: 0;
+          letter-spacing: -0.025em;
+        }
+
+        .showcase-headline em {
+          font-style: italic;
+          color: #1E293B;
+        }
+
+        .showcase-subtext {
+          font-family: var(--font-body, 'Inter', sans-serif);
+          font-size: 14px;
+          color: #475569;
+          line-height: 1.5;
+          margin: 0;
+        }
+
+        /* ── Live Classroom Card ── */
+        .showcase-live-card {
+          position: relative;
+          background: #FFFFFF;
+          border-radius: 18px;
+          border: 1.5px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
+          padding: 18px 20px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        .live-card-paper-overlay {
+          position: absolute;
+          inset: 0;
+          background-image: url('/images/paper-texture.png');
+          background-size: cover;
+          opacity: 0.025;
+          mix-blend-mode: overlay;
+          pointer-events: none;
+        }
+
+        .live-card-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .live-card-status {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+        }
+
+        .live-pulse-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #22C55E;
+          box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+          animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        .live-room-label {
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 10.5px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: #0F172A;
+        }
+
+        .live-count-pill {
+          font-family: var(--font-body, 'Inter', sans-serif);
+          font-size: 11.5px;
+          font-weight: 600;
+          color: #15803D;
+          background: #F0FDF4;
+          border: 1px solid #BBF7D0;
+          padding: 3px 9px;
+          border-radius: 9999px;
+        }
+
+        /* Diagram Area */
+        .live-card-visual-area {
+          background: #F8FAFC;
+          border-radius: 12px;
+          border: 1px solid #E2E8F0;
+          padding: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .visual-hotspot-diagram {
+          position: relative;
+          height: 110px;
+          background: linear-gradient(135deg, rgba(224, 242, 254, 0.4) 0%, rgba(240, 253, 250, 0.4) 100%);
+          border-radius: 10px;
+          border: 1px dashed #CBD5E1;
+          overflow: hidden;
+          display: flex;
+          align-items: flex-end;
+          padding: 8px 10px;
+        }
+
+        .diagram-grid-lines {
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px);
+          background-size: 14px 14px;
+        }
+
+        .heat-spot {
+          position: absolute;
+          transform: translate(-50%, -50%);
+          width: 28px;
+          height: 28px;
           display: flex;
           align-items: center;
           justify-content: center;
-          flex: 1;
-          min-height: 0;
-          padding: 12px 0;
         }
 
-        .auth-form-card {
+        .heat-core {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #2563EB;
+          box-shadow: 0 0 8px #2563EB;
+        }
+
+        .heat-ring {
+          position: absolute;
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          border: 1.5px solid rgba(37, 99, 235, 0.45);
+          animation: ringPulse 2.4s infinite ease-out;
+        }
+
+        .ring-2 {
+          animation-delay: 0.8s;
+          border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .ring-3 {
+          animation-delay: 1.6s;
+          border-color: rgba(245, 158, 11, 0.5);
+        }
+
+        @keyframes ringPulse {
+          0% { transform: scale(0.6); opacity: 0.8; }
+          100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        .diagram-caption {
+          position: relative;
+          z-index: 2;
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 10px;
+          font-weight: 600;
+          color: #475569;
+          background: rgba(255, 255, 255, 0.85);
+          padding: 3px 7px;
+          border-radius: 6px;
+          border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .live-metrics-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 8px;
+        }
+
+        .live-metric-pill {
+          background: #FFFFFF;
+          border: 1px solid #E2E8F0;
+          border-radius: 8px;
+          padding: 6px 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .metric-val {
+          font-family: var(--font-body, 'Inter', sans-serif);
+          font-size: 14px;
+          font-weight: 700;
+          color: #0F172A;
+        }
+
+        .metric-lbl {
+          font-size: 10px;
+          color: #64748B;
+          font-weight: 500;
+        }
+
+        .live-quote-footer {
+          border-top: 1px solid #F1F5F9;
+          padding-top: 10px;
+        }
+
+        .live-quote-text {
+          font-family: var(--font-body, 'Inter', sans-serif);
+          font-size: 12px;
+          font-style: italic;
+          color: #334155;
+          line-height: 1.45;
+          margin: 0 0 4px 0;
+        }
+
+        .live-quote-author {
+          font-family: var(--font-body, 'Inter', sans-serif);
+          font-size: 11px;
+          color: #64748B;
+        }
+
+        .showcase-trust-bar {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          padding-top: 6px;
+        }
+
+        .trust-tag {
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 9.5px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          color: #64748B;
+        }
+
+        .trust-names {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-family: var(--font-body, 'Inter', sans-serif);
+          font-size: 12.5px;
+          font-weight: 600;
+          color: #334155;
+        }
+
+        .trust-dot {
+          color: #CBD5E1;
+        }
+
+        /* ── Right Side: Expanded White Stationery Auth Surface ── */
+        .auth-form-panel {
+          position: relative;
+          background: #FFFFFF;
+          border-left: 1.5px solid rgba(0, 0, 0, 0.08);
+          box-shadow: -12px 0 36px -12px rgba(0, 0, 0, 0.04);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px 48px;
+          min-height: 0;
+          overflow-y: auto;
+          scrollbar-width: none;
+        }
+
+        .auth-form-panel::-webkit-scrollbar {
+          display: none;
+        }
+
+        .auth-stationery-card {
+          position: relative;
           width: 100%;
           max-width: 440px;
+          margin: auto;
+          padding: 8px 0;
         }
 
-        .auth-plan-banner {
+        .auth-card-texture {
+          position: absolute;
+          inset: 0;
+          background-image: url('/images/paper-texture.png');
+          background-size: cover;
+          opacity: 0.02;
+          mix-blend-mode: overlay;
+          pointer-events: none;
+        }
+
+        .auth-plan-pill {
           display: inline-flex;
           align-items: center;
           gap: 6px;
@@ -957,38 +952,38 @@ export default function AuthPage() {
           margin-bottom: 12px;
         }
 
-        .auth-plan-banner .plan-dot {
+        .plan-dot {
           width: 5px;
           height: 5px;
           border-radius: 50%;
           background: #2563EB;
         }
 
-        /* Form Header */
-        .auth-form-header {
+        /* ── Header Area ── */
+        .auth-heading-area {
+          text-align: center;
           margin-bottom: 18px;
         }
 
-        .auth-form-title {
-          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
+        .auth-title {
+          font-family: 'UntitledSerif', Georgia, serif;
           font-style: italic;
           font-weight: 400;
-          font-size: 30px;
+          font-size: 28px;
           color: #0F172A;
-          margin: 0 0 6px 0;
+          margin: 0 0 4px 0;
           line-height: 1.15;
-          letter-spacing: -0.01em;
         }
 
-        .auth-form-subtitle {
+        .auth-tagline {
           font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13.5px;
+          font-size: 13px;
           color: #64748B;
-          line-height: 1.45;
+          line-height: 1.4;
           margin: 0 0 16px 0;
         }
 
-        .auth-segmented-switcher {
+        .auth-segmented-pill {
           display: inline-flex;
           background: rgba(15, 23, 42, 0.05);
           padding: 3px;
@@ -997,11 +992,11 @@ export default function AuthPage() {
           width: 100%;
         }
 
-        .auth-tab-btn {
+        .auth-segment {
           flex: 1;
           background: transparent;
           border: none;
-          padding: 7px 14px;
+          padding: 7px 12px;
           border-radius: 9999px;
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 13px;
@@ -1011,21 +1006,21 @@ export default function AuthPage() {
           transition: all 0.15s ease;
         }
 
-        .auth-tab-btn.active {
+        .auth-segment.is-active {
           background: #FFFFFF;
           color: #0F172A;
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
         }
 
-        /* Social SSO */
-        .auth-sso-row {
+        /* ── Social SSO ── */
+        .auth-social-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 10px;
           margin-bottom: 16px;
         }
 
-        .auth-sso-action {
+        .auth-sso-btn {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1043,31 +1038,31 @@ export default function AuthPage() {
           box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
         }
 
-        .auth-sso-action:hover {
+        .auth-sso-btn:hover {
           background: #F8FAFC;
           border-color: #CBD5E1;
         }
 
-        .sso-svg {
+        .sso-icon {
           width: 16px;
           height: 16px;
         }
 
-        /* Divider */
-        .auth-line-divider {
+        /* ── Separator ── */
+        .auth-separator {
           display: flex;
           align-items: center;
           gap: 10px;
           margin-bottom: 16px;
         }
 
-        .auth-line-divider .line {
+        .auth-sep-line {
           flex: 1;
           height: 1px;
           background: #E2E8F0;
         }
 
-        .auth-line-divider .label {
+        .auth-sep-label {
           font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
           font-size: 9.5px;
           font-weight: 600;
@@ -1075,53 +1070,53 @@ export default function AuthPage() {
           color: #94A3B8;
         }
 
-        /* Fields */
-        .auth-form-fields {
+        /* ── Form Inputs ── */
+        .auth-input-form {
           display: flex;
           flex-direction: column;
-          gap: 13px;
+          gap: 12px;
         }
 
-        .auth-row-2col {
+        .auth-grid-split {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 10px;
         }
 
-        .auth-input-group {
+        .auth-field {
           display: flex;
           flex-direction: column;
-          gap: 5px;
+          gap: 4px;
         }
 
-        .auth-label-split {
+        .auth-label-row {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
 
-        .auth-field-label {
+        .auth-label {
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 12.5px;
           font-weight: 600;
           color: #334155;
         }
 
-        .auth-pass-forgot {
+        .auth-forgot-link {
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 11.5px;
           color: #2563EB;
           text-decoration: none;
         }
 
-        .auth-pass-forgot:hover {
+        .auth-forgot-link:hover {
           text-decoration: underline;
         }
 
-        .auth-text-input {
+        .auth-textbox {
           height: 40px;
-          padding: 0 12px;
-          border-radius: 9px;
+          padding: 0 14px;
+          border-radius: 10px;
           border: 1px solid #CBD5E1;
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 13.5px;
@@ -1131,12 +1126,12 @@ export default function AuthPage() {
           transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
 
-        .auth-text-input:focus {
+        .auth-textbox:focus {
           border-color: #0F172A;
           box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
         }
 
-        .auth-primary-btn {
+        .auth-action-btn {
           margin-top: 4px;
           height: 42px;
           border-radius: 10px;
@@ -1154,7 +1149,7 @@ export default function AuthPage() {
           box-shadow: 0 3px 10px rgba(15, 23, 42, 0.12);
         }
 
-        .auth-primary-btn:hover {
+        .auth-action-btn:hover {
           background: #1E293B;
           transform: translateY(-1px);
         }
@@ -1163,30 +1158,29 @@ export default function AuthPage() {
           opacity: 0.8;
         }
 
-        .auth-agreement-text {
+        .auth-legal-sub {
           margin-top: 14px;
+          text-align: center;
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 11.5px;
           color: #64748B;
-          line-height: 1.45;
-          text-align: center;
         }
 
-        .auth-agreement-text a {
+        .auth-legal-sub a {
           color: #0F172A;
           text-decoration: underline;
         }
 
-        .auth-success-box {
+        .auth-success-alert {
           background: #F0FDF4;
           border: 1px solid #BBF7D0;
           padding: 24px;
-          border-radius: 12px;
+          border-radius: 14px;
           text-align: center;
           color: #166534;
         }
 
-        .success-icon-badge {
+        .auth-success-badge {
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -1199,246 +1193,270 @@ export default function AuthPage() {
           margin-bottom: 8px;
         }
 
-        /* Form Bottom Bar */
-        .auth-form-footer {
+        /* ── Fixed Non-Scrollable Bottom Bar ── */
+        .auth-bottombar {
+          position: relative;
+          z-index: 10;
+          height: 42px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding-top: 12px;
-          border-top: 1px solid rgba(0, 0, 0, 0.05);
+          padding: 0 36px;
+          flex-shrink: 0;
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 11.5px;
-          color: #94A3B8;
-          flex-shrink: 0;
+          color: #64748B;
+          border-top: 1px solid rgba(0, 0, 0, 0.05);
+          background: rgba(250, 247, 242, 0.6);
+          backdrop-filter: blur(8px);
         }
 
-        .footer-links-cluster {
+        .auth-bottom-center {
           display: flex;
           align-items: center;
           gap: 8px;
         }
 
-        .footer-links-cluster a {
+        .auth-bottom-center a {
           color: #64748B;
           text-decoration: none;
           transition: color 0.15s ease;
         }
 
-        .footer-links-cluster a:hover {
+        .auth-bottom-center a:hover {
           color: #0F172A;
           text-decoration: underline;
         }
 
-        .footer-links-cluster .sep {
+        .auth-dot-sep {
           color: #CBD5E1;
         }
 
+        .auth-bottom-right {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .auth-system-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #22C55E;
+          box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+        }
+
         /* ── Dark Mode Overrides ── */
-        [data-theme="dark"] .auth-split-viewport {
+        [data-theme="dark"] .auth-fixed-viewport {
           background-color: #07080B;
         }
 
-        [data-theme="dark"] .auth-showcase-pane {
-          background-color: #080B10;
-          border-right-color: rgba(255, 255, 255, 0.08);
+        [data-theme="dark"] .auth-topbar {
+          border-bottom-color: rgba(255, 255, 255, 0.06);
         }
 
-        [data-theme="dark"] .auth-showcase-brand,
         [data-theme="dark"] .auth-brand-name {
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .auth-feature-pill {
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(255, 255, 255, 0.1);
-          color: #94A3B8;
+        [data-theme="dark"] .auth-theme-btn {
+          border-color: rgba(255, 255, 255, 0.12);
+          background: rgba(30, 41, 59, 0.6);
+          color: #CBD5E1;
         }
 
-        [data-theme="dark"] .auth-showcase-heading {
+        [data-theme="dark"] .auth-theme-btn:hover {
+          background: #1E293B;
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .auth-showcase-heading .highlight-italic {
-          color: #93C5FD;
-        }
-
-        [data-theme="dark"] .auth-showcase-description {
+        [data-theme="dark"] .auth-back-link {
           color: #94A3B8;
         }
 
-        [data-theme="dark"] .auth-bento-preview {
-          background: #0F141F;
+        [data-theme="dark"] .auth-back-link:hover {
+          color: #FFFFFF;
+          background: rgba(255, 255, 255, 0.06);
+        }
+
+        [data-theme="dark"] .showcase-headline {
+          color: #FFFFFF;
+        }
+
+        [data-theme="dark"] .showcase-headline em {
+          color: #CBD5E1;
+        }
+
+        [data-theme="dark"] .showcase-subtext {
+          color: #94A3B8;
+        }
+
+        [data-theme="dark"] .showcase-live-card {
+          background: #11141C;
           border-color: rgba(255, 255, 255, 0.1);
           box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.6);
         }
 
-        [data-theme="dark"] .bento-status-pill {
-          background: rgba(16, 185, 129, 0.15);
-          color: #34D399;
-          border-color: rgba(16, 185, 129, 0.3);
+        [data-theme="dark"] .live-room-label {
+          color: #FFFFFF;
         }
 
-        [data-theme="dark"] .bento-occupancy {
-          color: #94A3B8;
-        }
-
-        [data-theme="dark"] .bento-prompt-title {
-          color: #F1F5F9;
-        }
-
-        [data-theme="dark"] .bento-canvas-visual {
-          background: #090D14;
+        [data-theme="dark"] .live-card-visual-area {
+          background: #1A1F2C;
           border-color: rgba(255, 255, 255, 0.08);
         }
 
-        [data-theme="dark"] .canvas-grid-bg {
-          background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                            linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        [data-theme="dark"] .visual-hotspot-diagram {
+          background: linear-gradient(135deg, rgba(30, 58, 138, 0.25) 0%, rgba(6, 78, 59, 0.25) 100%);
+          border-color: rgba(255, 255, 255, 0.15);
         }
 
-        [data-theme="dark"] .canvas-target-tag {
-          background: rgba(15, 23, 42, 0.85);
-          border-color: rgba(255, 255, 255, 0.12);
-          color: #F1F5F9;
+        [data-theme="dark"] .diagram-caption {
+          background: rgba(17, 20, 28, 0.85);
+          color: #CBD5E1;
+          border-color: rgba(255, 255, 255, 0.1);
         }
 
-        [data-theme="dark"] .bento-metrics-row {
-          border-top-color: rgba(255, 255, 255, 0.06);
+        [data-theme="dark"] .live-metric-pill {
+          background: #141824;
+          border-color: rgba(255, 255, 255, 0.08);
         }
 
         [data-theme="dark"] .metric-val {
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .metric-label {
-          color: #94A3B8;
+        [data-theme="dark"] .live-quote-footer {
+          border-top-color: rgba(255, 255, 255, 0.08);
         }
 
-        [data-theme="dark"] .auth-educator-quote-card {
-          background: rgba(15, 20, 31, 0.65);
-          border-color: rgba(255, 255, 255, 0.08);
-        }
-
-        [data-theme="dark"] .quote-initials {
-          background: #1E293B;
-          color: #E2E8F0;
-        }
-
-        [data-theme="dark"] .quote-body {
-          color: #E2E8F0;
-        }
-
-        [data-theme="dark"] .quote-author-meta {
-          color: #94A3B8;
-        }
-
-        [data-theme="dark"] .showcase-uni-strip {
-          color: #94A3B8;
-        }
-
-        [data-theme="dark"] .auth-form-pane {
-          background-color: #0E121A;
-        }
-
-        [data-theme="dark"] .auth-theme-toggle {
-          background: rgba(30, 41, 59, 0.6);
-          border-color: rgba(255, 255, 255, 0.12);
+        [data-theme="dark"] .live-quote-text {
           color: #CBD5E1;
         }
 
-        [data-theme="dark"] .auth-theme-toggle:hover {
-          background: #1E293B;
+        [data-theme="dark"] .trust-names {
+          color: #CBD5E1;
+        }
+
+        [data-theme="dark"] .auth-form-panel {
+          background: #0D1017;
+          border-left-color: rgba(255, 255, 255, 0.08);
+          box-shadow: -12px 0 36px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="dark"] .auth-title {
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .auth-back-action {
+        [data-theme="dark"] .auth-tagline {
           color: #94A3B8;
         }
 
-        [data-theme="dark"] .auth-back-action:hover {
-          background: rgba(255, 255, 255, 0.06);
-          color: #FFFFFF;
-        }
-
-        [data-theme="dark"] .auth-form-title {
-          color: #FFFFFF;
-        }
-
-        [data-theme="dark"] .auth-form-subtitle {
-          color: #94A3B8;
-        }
-
-        [data-theme="dark"] .auth-segmented-switcher {
+        [data-theme="dark"] .auth-segmented-pill {
           background: rgba(255, 255, 255, 0.06);
           border-color: rgba(255, 255, 255, 0.08);
         }
 
-        [data-theme="dark"] .auth-tab-btn.active {
+        [data-theme="dark"] .auth-segment.is-active {
           background: #1E293B;
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .auth-sso-action {
-          background: #1A2130;
+        [data-theme="dark"] .auth-sso-btn {
+          background: #1A1F2C;
           border-color: rgba(255, 255, 255, 0.1);
           color: #F1F5F9;
         }
 
-        [data-theme="dark"] .auth-sso-action:hover {
-          background: #242D3F;
+        [data-theme="dark"] .auth-sso-btn:hover {
+          background: #242B3D;
         }
 
-        [data-theme="dark"] .auth-line-divider .line {
+        [data-theme="dark"] .auth-sep-line {
           background: rgba(255, 255, 255, 0.1);
         }
 
-        [data-theme="dark"] .auth-field-label {
+        [data-theme="dark"] .auth-label {
           color: #E2E8F0;
         }
 
-        [data-theme="dark"] .auth-text-input {
-          background: #161C27;
+        [data-theme="dark"] .auth-textbox {
+          background: #161B26;
           border-color: rgba(255, 255, 255, 0.12);
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .auth-text-input:focus {
+        [data-theme="dark"] .auth-textbox:focus {
           border-color: #60A5FA;
           box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
         }
 
-        [data-theme="dark"] .auth-primary-btn {
+        [data-theme="dark"] .auth-action-btn {
           background: #FFFFFF;
           color: #090A0D;
         }
 
-        [data-theme="dark"] .auth-primary-btn:hover {
+        [data-theme="dark"] .auth-action-btn:hover {
           background: #E2E8F0;
         }
 
-        [data-theme="dark"] .auth-agreement-text a {
-          color: #E2E8F0;
+        [data-theme="dark"] .auth-legal-sub {
+          color: #94A3B8;
         }
 
-        [data-theme="dark"] .auth-form-footer {
+        [data-theme="dark"] .auth-legal-sub a {
+          color: #FFFFFF;
+        }
+
+        [data-theme="dark"] .auth-bottombar {
+          background: rgba(7, 8, 11, 0.8);
           border-top-color: rgba(255, 255, 255, 0.06);
           color: #64748B;
         }
 
-        [data-theme="dark"] .footer-links-cluster a:hover {
+        [data-theme="dark"] .auth-bottom-center a:hover {
           color: #E2E8F0;
         }
 
-        /* ── Responsive Stacking ── */
-        @media (max-width: 1024px) {
-          .auth-showcase-pane {
+        /* ── Responsive Collapse for Mobile/Tablet ── */
+        @media (max-width: 980px) {
+          .auth-expanded-stage {
+            grid-template-columns: 1fr;
+          }
+
+          .auth-showcase-panel {
             display: none;
           }
-          .auth-form-pane {
-            width: 100%;
-            padding: 24px 20px;
+
+          .auth-form-panel {
+            border-left: none;
+            box-shadow: none;
+            padding: 16px 24px;
+            background: transparent;
           }
-          .auth-row-2col {
+
+          .auth-stationery-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            border: 1.5px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.07);
+            padding: 24px;
+          }
+
+          [data-theme="dark"] .auth-stationery-card {
+            background: #11141C;
+            border-color: rgba(255, 255, 255, 0.1);
+          }
+        }
+
+        @media (max-width: 640px) {
+          .auth-topbar, .auth-bottombar {
+            padding: 0 16px;
+          }
+          .auth-bottom-center {
+            display: none;
+          }
+          .auth-grid-split {
             grid-template-columns: 1fr;
           }
         }
