@@ -204,6 +204,8 @@ export function LandingFooter() {
   return (
     <footer className="adaline-footer">
       <div className="footer-glow-vignette" aria-hidden="true" />
+      <div className="footer-paper-texture-overlay" aria-hidden="true" />
+      <div className="footer-noise-overlay" aria-hidden="true" />
 
       <div className="footer-container">
         {/* ── Top Main Row: Brand & Columns ── */}
@@ -343,7 +345,8 @@ export function LandingFooter() {
       <style>{`
         .adaline-footer {
           position: relative;
-          background: #08090B;
+          background: #090B0E;
+          background: linear-gradient(180deg, #0F1116 0%, #090A0E 50%, #050608 100%);
           color: #FFFFFF;
           padding: 80px 24px 44px 24px;
           box-sizing: border-box;
@@ -355,19 +358,43 @@ export function LandingFooter() {
           border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        .footer-paper-texture-overlay {
+          position: absolute;
+          inset: 0;
+          background-image: url('/images/paper-texture.png');
+          background-size: cover;
+          background-position: center;
+          opacity: 0.22;
+          mix-blend-mode: overlay;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .footer-noise-overlay {
+          position: absolute;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+          background-repeat: repeat;
+          pointer-events: none;
+          opacity: 0.55;
+          mix-blend-mode: screen;
+          z-index: 1;
+        }
+
         .footer-glow-vignette {
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
-          height: 160px;
+          height: 180px;
           background: radial-gradient(
             50% 100% at 50% 0%,
-            rgba(34, 48, 38, 0.28) 0%,
+            rgba(45, 212, 167, 0.05) 0%,
             rgba(8, 9, 11, 0) 100%
           );
           pointer-events: none;
-          opacity: 0.65;
+          opacity: 0.75;
+          z-index: 1;
         }
 
         .footer-container {
