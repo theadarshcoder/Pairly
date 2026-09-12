@@ -245,10 +245,11 @@ export function CreateSessionModal({
 
         .modal-title {
           margin: 0 0 4px 0;
-          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
-          font-size: 22px;
-          font-weight: 700;
-          color: #0F172A;
+          font-family: inherit;
+          font-size: 20px;
+          font-weight: 600;
+          color: #111827;
+          letter-spacing: -0.015em;
         }
 
         .modal-subtitle {

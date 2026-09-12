@@ -82,11 +82,7 @@ export default function DecayPage() {
         {/* Top Header */}
         <div className="decay-header">
           <div>
-            <div className="decay-badge">
-              <Sliders size={13} />
-              <span>Cognitive Decay Architecture</span>
-            </div>
-            <h1 className="decay-h1">15-Week Concept Decay Tracking</h1>
+            <h1 className="decay-h1">15-Week Concept Retention Matrix</h1>
             <p className="decay-sub">
               Monitor retention curves across lecture cohorts. Identify concepts undergoing memory decay and automatically trigger spaced repetition questions during live sessions.
             </p>

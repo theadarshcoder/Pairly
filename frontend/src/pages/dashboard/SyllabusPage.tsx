@@ -74,13 +74,9 @@ export default function SyllabusPage() {
         {/* Top Header */}
         <div className="syllabus-header">
           <div>
-            <div className="syllabus-badge">
-              <Sparkles size={13} className="sparkle-icon" />
-              <span>AI Pedagogical Pipeline</span>
-            </div>
-            <h1 className="syllabus-h1">AI Slide & Syllabus Synthesizer</h1>
+            <h1 className="syllabus-h1">Import & Syllabus Synthesizer</h1>
             <p className="syllabus-sub">
-              Upload course syllabus modules (PDF, PPTX, or DOCX) to automatically generate spatial diagram questions, cognitive decay probes, and live debate prompts.
+              Upload course syllabus modules or presentation slides (PDF, PPTX) to extract interactive questions and spatial diagram polls.
             </p>
           </div>
 

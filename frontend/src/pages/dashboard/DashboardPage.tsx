@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Plus, Sliders, UploadCloud, Star, Filter, Sparkles, Layers } from 'lucide-react';
+import { Plus, Smartphone, Upload, Star, Layers } from 'lucide-react';
 import { DashboardLayout } from './components/DashboardLayout.js';
 import { AiQuickStartSection } from './components/AiQuickStartCard.js';
 import { SessionCard, DashboardSession } from './components/SessionCard.js';
@@ -12,11 +12,10 @@ export default function DashboardPage() {
   const filterParam = searchParams.get('filter');
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'presentation' | 'survey' | 'spatial'>('all');
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<'presentation' | 'survey' | 'import'>('presentation');
 
-  // Realistic sample course decks matching Mentimeter/Pairly architecture
+  // Decks matching Mentimeter/Pairly architecture
   const [sessions, setSessions] = useState<DashboardSession[]>([
     {
       id: 'dsa-contest-1',
@@ -27,8 +26,6 @@ export default function DashboardPage() {
       lastEdited: 'Edited 2h ago',
       category: 'presentation',
       status: 'live',
-      previewColor: 'dark-navy',
-      thumbnailType: 'tree',
     },
     {
       id: 'cardiac-cycle-2',
@@ -39,8 +36,6 @@ export default function DashboardPage() {
       lastEdited: 'Edited yesterday',
       category: 'spatial',
       status: 'analyzed',
-      previewColor: 'deep-ruby',
-      thumbnailType: 'cardiac',
     },
     {
       id: 'orgo-mechanisms-3',
@@ -51,8 +46,6 @@ export default function DashboardPage() {
       lastEdited: 'Edited 3d ago',
       category: 'survey',
       status: 'analyzed',
-      previewColor: 'forest',
-      thumbnailType: 'chemistry',
     },
     {
       id: 'newton-laws-4',
@@ -63,8 +56,6 @@ export default function DashboardPage() {
       lastEdited: 'Edited 5d ago',
       category: 'spatial',
       status: 'draft',
-      previewColor: 'indigo',
-      thumbnailType: 'physics',
     },
   ]);
 
@@ -93,16 +84,12 @@ export default function DashboardPage() {
     setSessions((prev) => [dupe, ...prev]);
   };
 
-  // Filter sessions by search and category
+  // Filter sessions by search
   const filteredSessions = useMemo(() => {
-    return sessions.filter((s) => {
-      const matchesSearch = s.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        s.courseTag.toLowerCase().includes(searchQuery.toLowerCase());
-      
-      const matchesCategory = selectedCategory === 'all' || s.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    });
-  }, [sessions, searchQuery, selectedCategory]);
+    if (!searchQuery.trim()) return sessions;
+    const q = searchQuery.toLowerCase();
+    return sessions.filter((s) => s.title.toLowerCase().includes(q) || s.courseTag.toLowerCase().includes(q));
+  }, [sessions, searchQuery]);
 
   return (
     <DashboardLayout
@@ -113,93 +100,62 @@ export default function DashboardPage() {
       onSearchChange={setSearchQuery}
     >
       {/* ── Welcome Greeting Section ───────────────────────────────────── */}
-      <section className="dash-hero-banner">
-        <h1 className="dash-welcome-h1">
+      <section className="menti-hero-banner">
+        <h1 className="menti-welcome-title">
           Welcome Adarsh Pratap singh!
         </h1>
 
         {/* 3 Quick Action Pills matching user screenshot */}
-        <div className="dash-quick-actions">
+        <div className="menti-actions-row">
           <button
             type="button"
-            className="action-pill primary"
+            className="menti-action-pill"
             onClick={() => handleOpenCreateModal('presentation')}
           >
-            <Plus size={15} strokeWidth={2.5} />
+            <span className="pill-icon">+</span>
             <span>New presentation</span>
           </button>
 
           <button
             type="button"
-            className="action-pill"
+            className="menti-action-pill"
             onClick={() => handleOpenCreateModal('survey')}
           >
-            <Sliders size={15} />
+            <Smartphone size={15} strokeWidth={1.8} className="pill-icon-svg" />
             <span>New survey</span>
           </button>
 
-          <button
-            type="button"
-            className="action-pill import"
-            onClick={() => navigate('/dashboard/syllabus')}
-          >
-            <UploadCloud size={15} />
-            <span>Import presentation</span>
-            <span className="import-star-badge" title="AI Syllabus & Slide Synthesizer">
-              <Star size={11} fill="#15803D" color="#15803D" />
+          <div className="menti-pill-wrap">
+            <button
+              type="button"
+              className="menti-action-pill import-pill"
+              onClick={() => navigate('/dashboard/syllabus')}
+            >
+              <Upload size={14} strokeWidth={1.9} className="pill-icon-svg" />
+              <span>Import presentation</span>
+            </button>
+            {/* Green star badge floating on top-right corner matching screenshot */}
+            <span className="menti-star-badge" title="AI Import">
+              <Star size={10} fill="#166534" color="#166534" />
             </span>
-          </button>
+          </div>
         </div>
       </section>
 
-      {/* ── Start with AI Row ─────────────────────────────────────────── */}
+      {/* ── Start with AI Section ──────────────────────────────────────── */}
       <AiQuickStartSection
         onOpenSyllabus={() => navigate('/dashboard/syllabus')}
         onOpenDecay={() => navigate('/dashboard/decay')}
-        onOpenNewSession={() => handleOpenCreateModal('presentation')}
+        onOpenNewSession={(type) => handleOpenCreateModal(type === 'survey' ? 'survey' : 'presentation')}
+        onOpenHelp={() => navigate('/tutorials')}
       />
 
-      {/* ── Recently Viewed Sessions Grid ─────────────────────────────── */}
-      <section className="dash-recents-section">
-        <div className="dash-recents-header">
-          <h2 className="dash-section-title">Recently viewed</h2>
+      {/* ── Recently Viewed Section ────────────────────────────────────── */}
+      <section className="menti-recents-section">
+        <h2 className="menti-recents-title">Recently viewed</h2>
 
-          {/* Filter Pills */}
-          <div className="dash-filter-pills">
-            <button
-              type="button"
-              className={`filter-pill ${selectedCategory === 'all' ? 'is-active' : ''}`}
-              onClick={() => setSelectedCategory('all')}
-            >
-              All Decks ({sessions.length})
-            </button>
-            <button
-              type="button"
-              className={`filter-pill ${selectedCategory === 'presentation' ? 'is-active' : ''}`}
-              onClick={() => setSelectedCategory('presentation')}
-            >
-              Presentations
-            </button>
-            <button
-              type="button"
-              className={`filter-pill ${selectedCategory === 'spatial' ? 'is-active' : ''}`}
-              onClick={() => setSelectedCategory('spatial')}
-            >
-              Spatial Canvases
-            </button>
-            <button
-              type="button"
-              className={`filter-pill ${selectedCategory === 'survey' ? 'is-active' : ''}`}
-              onClick={() => setSelectedCategory('survey')}
-            >
-              Decay Diagnostics
-            </button>
-          </div>
-        </div>
-
-        {/* Sessions Grid */}
         {filteredSessions.length > 0 ? (
-          <div className="dash-session-grid">
+          <div className="menti-decks-grid">
             {filteredSessions.map((session) => (
               <SessionCard
                 key={session.id}
@@ -210,17 +166,17 @@ export default function DashboardPage() {
             ))}
           </div>
         ) : (
-          <div className="dash-empty-state">
-            <Layers size={32} className="empty-icon" />
-            <h3>No sessions found</h3>
-            <p>Try searching for a different keyword or create a new presentation.</p>
+          <div className="menti-empty-box">
+            <Layers size={36} strokeWidth={1.5} className="empty-glyph" />
+            <h3>No presentations found</h3>
+            <p>Try searching for a different course code or create a new presentation.</p>
             <button
               type="button"
-              className="action-pill primary mt"
+              className="menti-action-pill mt-3"
               onClick={() => handleOpenCreateModal('presentation')}
             >
               <Plus size={15} />
-              <span>Create New Session</span>
+              <span>Create New Presentation</span>
             </button>
           </div>
         )}
@@ -235,217 +191,189 @@ export default function DashboardPage() {
       />
 
       <style>{`
-        /* ── Welcome Banner ── */
-        .dash-hero-banner {
-          margin-bottom: 32px;
+        /* Hero Banner */
+        .menti-hero-banner {
+          margin-top: 6px;
+          margin-bottom: 34px;
         }
 
-        .dash-welcome-h1 {
-          font-family: var(--font-body, 'Inter', -apple-system, sans-serif);
-          font-size: 32px;
+        .menti-welcome-title {
+          font-family: inherit;
+          font-size: 33px;
           font-weight: 500;
-          color: #0F172A;
-          letter-spacing: -0.02em;
+          color: #111827;
+          letter-spacing: -0.025em;
           margin: 0 0 20px 0;
+          line-height: 1.2;
         }
 
-        .dash-quick-actions {
+        /* 3 Action Pills */
+        .menti-actions-row {
           display: flex;
           align-items: center;
           gap: 12px;
           flex-wrap: wrap;
         }
 
-        .action-pill {
+        .menti-action-pill {
           display: inline-flex;
           align-items: center;
           gap: 8px;
           height: 38px;
-          padding: 0 16px;
+          padding: 0 18px;
           border-radius: 9999px;
-          border: 1px solid #E2E8F0;
-          background: #F1F5F9;
-          color: #1E293B;
-          font-family: var(--font-body, 'Inter', sans-serif);
+          border: none;
+          background: #F3F4F6;
+          color: #111827;
+          font-family: inherit;
           font-size: 13.5px;
           font-weight: 500;
           cursor: pointer;
-          transition: all 0.15s ease;
+          transition: background 0.12s ease, transform 0.1s ease;
+        }
+
+        .menti-action-pill:hover {
+          background: #E5E7EB;
+        }
+
+        .menti-action-pill:active {
+          transform: scale(0.98);
+        }
+
+        .pill-icon {
+          font-size: 16px;
+          font-weight: 400;
+          margin-right: -2px;
+        }
+
+        .pill-icon-svg {
+          color: #374151;
+        }
+
+        /* Import pill with floating star badge */
+        .menti-pill-wrap {
           position: relative;
-        }
-
-        .action-pill:hover {
-          background: #E2E8F0;
-          transform: translateY(-1px);
-        }
-
-        .action-pill.primary {
-          background: #FFFFFF;
-          border-color: #CBD5E1;
-          color: #0F172A;
-          font-weight: 600;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-        }
-
-        .action-pill.primary:hover {
-          background: #F8FAFC;
-          border-color: #0F172A;
-        }
-
-        .action-pill.import {
-          padding-right: 12px;
-        }
-
-        .import-star-badge {
           display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 18px;
-          height: 18px;
+        }
+
+        .menti-action-pill.import-pill {
+          padding-right: 20px;
+        }
+
+        .menti-star-badge {
+          position: absolute;
+          top: -4px;
+          right: -4px;
+          width: 19px;
+          height: 19px;
           border-radius: 50%;
           background: #DCFCE7;
-          margin-left: 2px;
+          border: 2px solid #FFFFFF;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          pointer-events: none;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
-        /* ── Recents Section ── */
-        .dash-recents-section {
+        /* Recents Section */
+        .menti-recents-section {
           margin-top: 10px;
         }
 
-        .dash-recents-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 20px;
-          flex-wrap: wrap;
-          gap: 14px;
-        }
-
-        .dash-section-title {
-          font-family: var(--font-body, 'Inter', sans-serif);
+        .menti-recents-title {
           font-size: 17px;
-          font-weight: 700;
-          color: #0F172A;
-          margin: 0;
+          font-weight: 600;
+          color: #111827;
+          margin: 0 0 16px 0;
           letter-spacing: -0.01em;
         }
 
-        .dash-filter-pills {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-
-        .filter-pill {
-          height: 30px;
-          padding: 0 12px;
-          border-radius: 9999px;
-          border: 1px solid transparent;
-          background: transparent;
-          font-size: 12.5px;
-          font-weight: 500;
-          color: #64748B;
-          cursor: pointer;
-          transition: all 0.12s ease;
-        }
-
-        .filter-pill:hover {
-          background: #F1F5F9;
-          color: #0F172A;
-        }
-
-        .filter-pill.is-active {
-          background: #FFFFFF;
-          border-color: #CBD5E1;
-          color: #0F172A;
-          font-weight: 600;
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-        }
-
-        /* Sessions Grid */
-        .dash-session-grid {
+        .menti-decks-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-          gap: 22px;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 20px;
         }
 
-        .dash-empty-state {
-          padding: 60px 20px;
-          text-align: center;
+        /* Empty State */
+        .menti-empty-box {
           background: #FFFFFF;
-          border-radius: 16px;
-          border: 1px dashed #CBD5E1;
-          color: #64748B;
+          border: 1px dashed #D1D5DB;
+          border-radius: 12px;
+          padding: 48px 24px;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
         }
 
-        .empty-icon {
-          color: #94A3B8;
-          margin-bottom: 12px;
+        .empty-glyph {
+          color: #9CA3AF;
+          margin-bottom: 6px;
         }
 
-        .dash-empty-state h3 {
-          margin: 0 0 6px 0;
-          color: #0F172A;
+        .menti-empty-box h3 {
           font-size: 16px;
-        }
-
-        .dash-empty-state p {
+          font-weight: 600;
+          color: #111827;
           margin: 0;
+        }
+
+        .menti-empty-box p {
           font-size: 13.5px;
+          color: #6B7280;
+          margin: 0;
+          max-width: 380px;
         }
 
-        .action-pill.mt {
-          margin-top: 16px;
+        .mt-3 {
+          margin-top: 12px;
         }
 
-        /* ── Dark Mode ── */
-        [data-theme="dark"] .dash-welcome-h1 {
-          color: #FFFFFF;
+        /* Dark Mode Overrides */
+        [data-theme="dark"] .menti-welcome-title {
+          color: #F9FAFB;
         }
 
-        [data-theme="dark"] .action-pill {
-          background: #161B24;
-          border-color: rgba(255, 255, 255, 0.1);
-          color: #CBD5E1;
+        [data-theme="dark"] .menti-action-pill {
+          background: #181C24;
+          color: #F3F4F6;
         }
 
-        [data-theme="dark"] .action-pill:hover {
-          background: #1F2633;
-          color: #FFFFFF;
+        [data-theme="dark"] .menti-action-pill:hover {
+          background: #232936;
         }
 
-        [data-theme="dark"] .action-pill.primary {
-          background: #1E293B;
-          border-color: rgba(255, 255, 255, 0.15);
-          color: #FFFFFF;
+        [data-theme="dark"] .pill-icon-svg {
+          color: #D1D5DB;
         }
 
-        [data-theme="dark"] .dash-section-title {
-          color: #FFFFFF;
+        [data-theme="dark"] .menti-star-badge {
+          background: #14532D;
+          border-color: #0E1015;
         }
 
-        [data-theme="dark"] .filter-pill {
-          color: #94A3B8;
+        [data-theme="dark"] .menti-star-badge svg {
+          fill: #86EFAC;
+          color: #86EFAC;
         }
 
-        [data-theme="dark"] .filter-pill:hover {
-          background: rgba(255, 255, 255, 0.08);
-          color: #FFFFFF;
+        [data-theme="dark"] .menti-recents-title {
+          color: #F9FAFB;
         }
 
-        [data-theme="dark"] .filter-pill.is-active {
-          background: #161B24;
-          border-color: rgba(255, 255, 255, 0.15);
-          color: #FFFFFF;
+        [data-theme="dark"] .menti-empty-box {
+          background: #151820;
+          border-color: #2D3544;
         }
 
-        [data-theme="dark"] .dash-empty-state {
-          background: #111620;
-          border-color: rgba(255, 255, 255, 0.1);
+        [data-theme="dark"] .menti-empty-box h3 {
+          color: #F9FAFB;
         }
 
-        [data-theme="dark"] .dash-empty-state h3 {
-          color: #FFFFFF;
+        [data-theme="dark"] .menti-empty-box p {
+          color: #9CA3AF;
         }
       `}</style>
     </DashboardLayout>

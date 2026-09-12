@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
-  Sparkles,
-  Plus,
   Home,
   Clock,
-  Layers,
-  Users,
+  User,
   Share2,
-  Folder,
+  FolderKanban,
+  FileText,
+  Sparkles,
   Sliders,
-  HelpCircle,
-  Trash2,
   Search,
   Bell,
   Sun,
@@ -19,8 +16,11 @@ import {
   ChevronDown,
   LogOut,
   Settings,
-  BookOpen,
-  LayoutGrid,
+  HelpCircle,
+  Trash2,
+  ExternalLink,
+  MessageCircle,
+  X,
   Check,
 } from 'lucide-react';
 import { getStoredTheme, applyTheme } from '../../../shared/lib/theme.js';
@@ -47,7 +47,8 @@ export function DashboardLayout({
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark' | 'system'>(() => getStoredTheme());
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
-  const [unreadCount, setUnreadCount] = useState(2);
+  const [showHelpModal, setShowHelpModal] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(1);
 
   useEffect(() => {
     const handleStorage = () => {
@@ -68,189 +69,194 @@ export function DashboardLayout({
   };
 
   return (
-    <div className="dash-container">
+    <div className="menti-shell">
       {/* ── Left Sidebar ────────────────────────────────────────────────── */}
-      <aside className="dash-sidebar">
-        <div className="dash-sidebar-top">
+      <aside className="menti-sidebar" aria-label="Main sidebar navigation">
+        <div className="menti-sidebar-inner">
           {/* Logo */}
-          <Link to="/" className="dash-brand-link" title="Pairly Home">
-            <div className="dash-brand-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <span className="dash-brand-title">Pairly</span>
-          </Link>
+          <div className="menti-brand-row">
+            <Link to="/" className="menti-brand" title="Pairly Home">
+              {/* Colorful geometric logo mark matching Mentimeter/Pairly aesthetic */}
+              <div className="menti-logo-icon" aria-hidden="true">
+                <svg width="28" height="24" viewBox="0 0 28 24" fill="none">
+                  <rect x="2" y="10" width="6" height="14" rx="2" fill="#3B82F6" />
+                  <rect x="11" y="4" width="6" height="20" rx="2" fill="#EC4899" />
+                  <rect x="20" y="0" width="6" height="24" rx="2" fill="#6366F1" />
+                </svg>
+              </div>
+              <span className="menti-brand-name">Pairly</span>
+            </Link>
+          </div>
 
-          {/* Primary Action Button: + New Session / Presentation */}
+          {/* New Pairly Button (Black pill with + on the right) */}
           <button
             type="button"
-            className="dash-new-btn"
+            className="menti-new-btn"
             onClick={onOpenCreateModal}
           >
-            <Plus size={16} strokeWidth={2.5} />
-            <span>New Session</span>
+            <span>New Pairly</span>
+            <span className="menti-plus-sign">+</span>
           </button>
 
-          {/* Primary Nav Links */}
-          <nav className="dash-nav-section" aria-label="Main Dashboard Navigation">
+          {/* Primary Nav Section */}
+          <nav className="menti-nav" aria-label="Personal navigation">
             <Link
               to="/dashboard"
-              className={`dash-nav-item ${activeNav === 'home' ? 'is-active' : ''}`}
+              className={`menti-nav-link ${activeNav === 'home' ? 'is-active' : ''}`}
             >
-              <Home size={18} className="dash-nav-icon" />
+              <Home size={18} strokeWidth={1.8} className="menti-link-icon" />
               <span>Home</span>
             </Link>
 
             <Link
               to="/dashboard?filter=recents"
-              className={`dash-nav-item ${activeNav === 'recents' ? 'is-active' : ''}`}
+              className={`menti-nav-link ${activeNav === 'recents' ? 'is-active' : ''}`}
             >
-              <Clock size={18} className="dash-nav-icon" />
+              <Clock size={18} strokeWidth={1.8} className="menti-link-icon" />
               <span>Recents</span>
             </Link>
 
             <Link
               to="/dashboard?filter=sessions"
-              className={`dash-nav-item ${activeNav === 'sessions' ? 'is-active' : ''}`}
+              className={`menti-nav-link ${activeNav === 'sessions' ? 'is-active' : ''}`}
             >
-              <Layers size={18} className="dash-nav-icon" />
-              <span>My Sessions</span>
+              <User size={18} strokeWidth={1.8} className="menti-link-icon" />
+              <span>My Pairlys</span>
             </Link>
 
             <Link
               to="/dashboard?filter=shared"
-              className={`dash-nav-item ${activeNav === 'shared' ? 'is-active' : ''}`}
+              className={`menti-nav-link ${activeNav === 'shared' ? 'is-active' : ''}`}
             >
-              <Share2 size={18} className="dash-nav-icon" />
+              <Share2 size={18} strokeWidth={1.8} className="menti-link-icon" />
               <span>Shared with me</span>
             </Link>
           </nav>
 
-          {/* Team / Workspace Section */}
-          <div className="dash-team-section">
-            <div className="dash-section-header">
-              <span>Adarsh Pratap's Team</span>
-              <span className="dash-team-badge">Stanford</span>
-            </div>
+          {/* Team Section */}
+          <div className="menti-team-group">
+            <div className="menti-group-title">Adarsh Pratap's team</div>
 
-            <nav className="dash-nav-section">
+            <nav className="menti-nav" aria-label="Team navigation">
               <Link
-                to="/dashboard/decay"
-                className={`dash-nav-item ${activeNav === 'decay' ? 'is-active' : ''}`}
-                title="15-Week Concept Decay Analytics"
+                to="/dashboard?filter=workspace"
+                className={`menti-nav-link ${location.search.includes('workspace') ? 'is-active' : ''}`}
               >
-                <Sliders size={18} className="dash-nav-icon" />
-                <span>Concept Decay</span>
-                <span className="dash-item-chip">Live</span>
+                <FolderKanban size={18} strokeWidth={1.8} className="menti-link-icon" />
+                <span>Workspace Pairlys</span>
               </Link>
 
               <Link
-                to="/dashboard/syllabus"
-                className={`dash-nav-item ${activeNav === 'syllabus' ? 'is-active' : ''}`}
-                title="AI Syllabus & Slide Synthesizer"
+                to="/dashboard?filter=templates"
+                className={`menti-nav-link ${location.search.includes('templates') ? 'is-active' : ''}`}
               >
-                <BookOpen size={18} className="dash-nav-icon" />
-                <span>Slide Synthesizer</span>
-                <span className="dash-item-chip ai">AI</span>
-              </Link>
-
-              <Link
-                to="/community"
-                className={`dash-nav-item ${activeNav === 'templates' ? 'is-active' : ''}`}
-              >
-                <LayoutGrid size={18} className="dash-nav-icon" />
-                <span>Shared Templates</span>
+                <FileText size={18} strokeWidth={1.8} className="menti-link-icon" />
+                <span>Shared templates</span>
               </Link>
             </nav>
           </div>
-        </div>
 
-        {/* Sidebar Footer Utility Links */}
-        <div className="dash-sidebar-bottom">
-          <nav className="dash-nav-section secondary">
-            <Link to="/features/engage" className="dash-nav-item small">
-              <Folder size={16} className="dash-nav-icon" />
-              <span>Question Banks</span>
-            </Link>
+          {/* Deep Features Shortcut */}
+          <div className="menti-team-group">
+            <div className="menti-group-title">Features</div>
 
-            <Link to="/download" className="dash-nav-item small">
-              <Layers size={16} className="dash-nav-icon" />
-              <span>Presenter Client</span>
-            </Link>
+            <nav className="menti-nav" aria-label="Features navigation">
+              <Link
+                to="/dashboard/syllabus"
+                className={`menti-nav-link ${activeNav === 'syllabus' ? 'is-active' : ''}`}
+              >
+                <Sparkles size={18} strokeWidth={1.8} className="menti-link-icon" />
+                <span>Slide Synthesizer</span>
+              </Link>
 
-            <Link to="/about" className="dash-nav-item small">
-              <HelpCircle size={16} className="dash-nav-icon" />
-              <span>Pedagogy & Help</span>
-            </Link>
-          </nav>
+              <Link
+                to="/dashboard/decay"
+                className={`menti-nav-link ${activeNav === 'decay' ? 'is-active' : ''}`}
+              >
+                <Sliders size={18} strokeWidth={1.8} className="menti-link-icon" />
+                <span>Concept Decay</span>
+              </Link>
+            </nav>
+          </div>
+
+          {/* Bottom Utility Links */}
+          <div className="menti-bottom-nav">
+            <Link to="/templates" className="menti-sub-link">Templates</Link>
+            <Link to="/integrations" className="menti-sub-link">Integrations</Link>
+            <Link to="/tutorials" className="menti-sub-link">Tutorials</Link>
+            <button type="button" className="menti-sub-link text-btn" onClick={() => setShowHelpModal(true)}>Help</button>
+            <Link to="/trash" className="menti-sub-link">Trash</Link>
+          </div>
         </div>
       </aside>
 
-      {/* ── Main Workspace Body ─────────────────────────────────────────── */}
-      <div className="dash-main-pane">
+      {/* ── Main Content Stage ─────────────────────────────────────────── */}
+      <div className="menti-main">
         {/* Top Header Bar */}
-        <header className="dash-topbar">
-          {/* Global Search Bar */}
-          <div className="dash-search-box">
-            <Search size={16} className="dash-search-icon" />
+        <header className="menti-header">
+          {/* Search Bar matching screenshot */}
+          <div className="menti-search-box">
+            <Search size={16} className="menti-search-icon" />
             <input
               type="text"
-              className="dash-search-input"
-              placeholder="Search sessions, folders, and questions..."
+              className="menti-search-input"
+              placeholder="Search Pairlys, folders, and pages"
               value={searchQuery}
               onChange={(e) => onSearchChange?.(e.target.value)}
+              aria-label="Search Pairlys"
             />
           </div>
 
-          {/* Right Action Icons */}
-          <div className="dash-topbar-right">
+          {/* Top Right Actions */}
+          <div className="menti-header-actions">
+            {/* Theme Toggle */}
+            <button
+              type="button"
+              className="menti-icon-btn"
+              onClick={toggleTheme}
+              title={`Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} mode`}
+              aria-label="Toggle theme"
+            >
+              {currentTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
             {/* Notification Bell */}
-            <div className="dash-dropdown-anchor">
+            <div className="menti-relative">
               <button
                 type="button"
-                className="dash-icon-btn"
+                className="menti-icon-btn"
                 onClick={() => setShowNotifications(!showNotifications)}
                 title="Notifications"
-                aria-label="View notifications"
+                aria-label="Notifications"
               >
-                <Bell size={18} />
-                {unreadCount > 0 && <span className="dash-unread-dot" />}
+                <Bell size={18} strokeWidth={1.9} />
+                {unreadCount > 0 && <span className="menti-bell-dot" />}
               </button>
 
               {showNotifications && (
-                <div className="dash-dropdown-panel notifications">
-                  <div className="dash-dropdown-head">
-                    <h4>Notifications</h4>
+                <div className="menti-dropdown notifs-dropdown">
+                  <div className="notif-head">
+                    <span className="notif-title">Notifications</span>
                     <button
                       type="button"
-                      className="dash-text-link"
+                      className="notif-clear"
                       onClick={() => setUnreadCount(0)}
                     >
-                      Mark all as read
+                      Mark as read
                     </button>
                   </div>
-                  <div className="dash-notif-list">
-                    <div className="dash-notif-item unread">
-                      <div className="dash-notif-dot" />
-                      <div className="dash-notif-body">
-                        <p className="dash-notif-title">DSA Contest session finalized</p>
-                        <p className="dash-notif-time">142 students submitted responses · 10m ago</p>
+                  <div className="notif-list">
+                    <div className="notif-item">
+                      <div className="notif-indicator" />
+                      <div className="notif-body">
+                        <p className="notif-text"><strong>142 students</strong> completed DSA Contest: Binary Trees</p>
+                        <span className="notif-time">2 hours ago</span>
                       </div>
                     </div>
-                    <div className="dash-notif-item unread">
-                      <div className="dash-notif-dot" />
-                      <div className="dash-notif-body">
-                        <p className="dash-notif-title">Concept Decay Alert: Binary Trees</p>
-                        <p className="dash-notif-time">Retention dropped to 64% · 1h ago</p>
-                      </div>
-                    </div>
-                    <div className="dash-notif-item">
-                      <div className="dash-notif-body">
-                        <p className="dash-notif-title">Stanford Medical LMS Connected</p>
-                        <p className="dash-notif-time">Canvas roster synchronized · Yesterday</p>
+                    <div className="notif-item">
+                      <div className="notif-body">
+                        <p className="notif-text">Concept decay alert for Week 3 Recursion milestone</p>
+                        <span className="notif-time">Yesterday</span>
                       </div>
                     </div>
                   </div>
@@ -258,456 +264,623 @@ export function DashboardLayout({
               )}
             </div>
 
-            {/* Theme Toggle Button */}
-            <button
-              type="button"
-              className="dash-icon-btn"
-              onClick={toggleTheme}
-              title={`Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} mode`}
-              aria-label="Toggle theme"
-            >
-              {currentTheme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
-            </button>
-
-            {/* User Profile Avatar with Dropdown */}
-            <div className="dash-dropdown-anchor">
+            {/* User Avatar Circle matching screenshot (Pinkish pastel with dark AP) */}
+            <div className="menti-relative">
               <button
                 type="button"
-                className="dash-user-avatar"
+                className="menti-avatar-btn"
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                title="Adarsh Pratap Singh (AP)"
-                aria-label="User profile menu"
+                title="Adarsh Pratap singh"
+                aria-label="Open profile menu"
               >
                 <span>AP</span>
               </button>
 
               {showProfileMenu && (
-                <div className="dash-dropdown-panel profile">
-                  <div className="dash-profile-head">
-                    <div className="dash-user-avatar large">
-                      <span>AP</span>
-                    </div>
-                    <div className="dash-profile-details">
-                      <p className="dash-user-name">Adarsh Pratap Singh</p>
-                      <p className="dash-user-email">vance@stanford.edu</p>
-                      <span className="dash-pro-badge">Professor Workspace</span>
+                <div className="menti-dropdown profile-dropdown">
+                  <div className="profile-card">
+                    <div className="profile-avatar-large">AP</div>
+                    <div className="profile-details">
+                      <span className="profile-name">Adarsh Pratap singh</span>
+                      <span className="profile-email">adarsh@pairly.internal</span>
+                      <span className="profile-org">Stanford University</span>
                     </div>
                   </div>
 
-                  <div className="dash-dropdown-divider" />
+                  <div className="dropdown-divider" />
 
-                  <nav className="dash-dropdown-menu">
-                    <Link to="/pricing" className="dash-dropdown-item">
-                      <Sparkles size={16} />
-                      <span>Upgrade Plan (Pro)</span>
-                    </Link>
-                    <Link to="/download" className="dash-dropdown-item">
-                      <Settings size={16} />
-                      <span>Desktop & iPad Apps</span>
-                    </Link>
+                  <div className="dropdown-section">
                     <button
                       type="button"
-                      className="dash-dropdown-item danger"
-                      onClick={handleLogout}
+                      className="dropdown-item"
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        navigate('/dashboard');
+                      }}
                     >
-                      <LogOut size={16} />
-                      <span>Log Out</span>
+                      <Home size={15} />
+                      <span>Dashboard</span>
                     </button>
-                  </nav>
+                    <button
+                      type="button"
+                      className="dropdown-item"
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        navigate('/dashboard/decay');
+                      }}
+                    >
+                      <Sliders size={15} />
+                      <span>Concept Decay Matrix</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="dropdown-item"
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        navigate('/dashboard/syllabus');
+                      }}
+                    >
+                      <Sparkles size={15} />
+                      <span>AI Slide Synthesizer</span>
+                    </button>
+                  </div>
+
+                  <div className="dropdown-divider" />
+
+                  <button
+                    type="button"
+                    className="dropdown-item logout"
+                    onClick={handleLogout}
+                  >
+                    <LogOut size={15} />
+                    <span>Log out</span>
+                  </button>
                 </div>
               )}
             </div>
           </div>
         </header>
 
-        {/* Dynamic Content Surface */}
-        <main className="dash-content-area">
+        {/* Page Body */}
+        <main className="menti-content">
           {children}
         </main>
       </div>
 
-      {/* ── Component Styling ───────────────────────────────────────────── */}
+      {/* ── Floating Help/Feedback Widget (Bottom Right with Smile & Red Dot) ── */}
+      <button
+        type="button"
+        className="menti-floating-widget"
+        onClick={() => setShowHelpModal(!showHelpModal)}
+        title="Pairly Support & Quick Help"
+        aria-label="Support and feedback"
+      >
+        {/* Smiling speech bubble icon */}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M21 11.5C21.0034 12.8199 20.6951 14.1219 20.1 15.3C19.3944 16.7118 18.3098 17.8992 16.9674 18.7293C15.6251 19.5594 14.0782 19.9994 12.5 20C11.1801 20.0034 9.87812 19.6951 8.7 19.1L3 21L4.9 15.3C4.30493 14.1219 3.99656 12.8199 4 11.5C4.00061 9.92179 4.44061 8.37488 5.27072 7.03258C6.10083 5.69028 7.28825 4.6056 8.7 3.90003C9.87812 3.30496 11.1801 2.99659 12.5 3.00003H13C15.0843 3.11502 17.053 3.99479 18.5291 5.47089C20.0052 6.94699 20.885 8.91568 21 11V11.5Z"
+            fill="currentColor"
+          />
+          {/* Smile arc */}
+          <path
+            d="M8.5 13C9.5 15 13.5 15 15.5 13"
+            stroke="#1B2234"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+        <span className="floating-red-dot" />
+      </button>
+
+      {/* Help Modal */}
+      {showHelpModal && (
+        <div className="help-modal-overlay" onClick={() => setShowHelpModal(false)}>
+          <div className="help-modal-card" onClick={(e) => e.stopPropagation()}>
+            <div className="help-modal-header">
+              <h3>Pairly Help & Quick Start</h3>
+              <button type="button" className="close-help-btn" onClick={() => setShowHelpModal(false)}>
+                <X size={18} />
+              </button>
+            </div>
+            <div className="help-modal-body">
+              <p className="help-p">
+                Welcome to Pairly! Here are three quick ways to get started in your classroom:
+              </p>
+              <div className="help-item">
+                <span className="help-num">1</span>
+                <div>
+                  <strong>Start with AI:</strong> Pick any verb card above (Brainstorm, Make decisions, Check-in) to instantly generate an interactive lecture slide.
+                </div>
+              </div>
+              <div className="help-item">
+                <span className="help-num">2</span>
+                <div>
+                  <strong>Import Presentation:</strong> Click the import pill with the green star to bring in your PDF or PPTX slides.
+                </div>
+              </div>
+              <div className="help-item">
+                <span className="help-num">3</span>
+                <div>
+                  <strong>Launch Live Studio:</strong> Click "Present" on any deck to open the interactive student audience view on your projector.
+                </div>
+              </div>
+            </div>
+            <div className="help-modal-footer">
+              <button type="button" className="help-primary-btn" onClick={() => setShowHelpModal(false)}>
+                Got it, thanks!
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Global Styles ─────────────────────────────────────────────── */}
       <style>{`
-        /* ── Layout Framework ── */
-        .dash-container {
+        /* Reset & Layout Shell */
+        .menti-shell {
           display: flex;
-          width: 100vw;
           min-height: 100vh;
-          background-color: #FAFAFA;
-          color: #0F172A;
-          font-family: var(--font-body, 'Inter', -apple-system, sans-serif);
-          overflow-x: hidden;
+          min-height: 100dvh;
+          background: #FFFFFF;
+          color: #111827;
+          font-family: var(--font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
         }
 
-        /* ── Left Sidebar ── */
-        .dash-sidebar {
-          width: 250px;
-          flex-shrink: 0;
+        /* ── Sidebar ── */
+        .menti-sidebar {
+          width: 236px;
+          min-width: 236px;
           background: #FFFFFF;
-          border-right: 1px solid #E5E7EB;
+          border-right: 1px solid #EFEFEF;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          padding: 24px 16px 20px 16px;
-          min-height: 100vh;
           position: sticky;
           top: 0;
           height: 100vh;
-          box-sizing: border-box;
-          z-index: 40;
+          height: 100dvh;
+          z-index: 20;
+          user-select: none;
         }
 
-        .dash-brand-link {
+        .menti-sidebar-inner {
           display: flex;
+          flex-direction: column;
+          height: 100%;
+          padding: 20px 16px;
+          overflow-y: auto;
+        }
+
+        /* Brand Row */
+        .menti-brand-row {
+          margin-bottom: 24px;
+        }
+
+        .menti-brand {
+          display: inline-flex;
           align-items: center;
           gap: 10px;
           text-decoration: none;
-          color: #0F172A;
-          padding: 4px 8px;
-          margin-bottom: 22px;
+          color: #111827;
         }
 
-        .dash-brand-icon {
-          width: 32px;
-          height: 32px;
-          border-radius: 8px;
-          background: #0F172A;
-          color: #FFFFFF;
+        .menti-logo-icon {
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
         }
 
-        .dash-brand-title {
-          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
-          font-size: 20px;
+        .menti-brand-name {
+          font-size: 19px;
           font-weight: 700;
-          letter-spacing: -0.02em;
-          color: #0F172A;
+          letter-spacing: -0.03em;
+          color: #111827;
         }
 
-        /* Prominent New Menti / New Session Button */
-        .dash-new-btn {
+        /* New Pairly Button (Black pill with + on right) */
+        .menti-new-btn {
           width: 100%;
-          height: 42px;
-          border-radius: 9999px;
-          background: #0F172A;
-          color: #FFFFFF;
-          border: none;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 8px;
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13.5px;
+          height: 42px;
+          background: #19191D;
+          color: #FFFFFF;
+          border: none;
+          border-radius: 9999px;
+          font-size: 14px;
           font-weight: 600;
           cursor: pointer;
-          transition: all 0.15s ease;
-          box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
-          margin-bottom: 24px;
+          margin-bottom: 28px;
+          transition: background 0.15s ease, transform 0.1s ease;
         }
 
-        .dash-new-btn:hover {
-          background: #1E293B;
-          transform: translateY(-1px);
-          box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+        .menti-new-btn:hover {
+          background: #2D2D34;
         }
 
-        /* Nav lists */
-        .dash-nav-section {
+        .menti-new-btn:active {
+          transform: scale(0.98);
+        }
+
+        .menti-plus-sign {
+          font-size: 16px;
+          font-weight: 400;
+        }
+
+        /* Nav List */
+        .menti-nav {
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 2px;
         }
 
-        .dash-nav-item {
+        .menti-nav-link {
           display: flex;
           align-items: center;
           gap: 12px;
           height: 38px;
           padding: 0 12px;
-          border-radius: 8px;
+          border-radius: 6px;
+          color: #374151;
           text-decoration: none;
-          color: #475569;
-          font-size: 13.5px;
+          font-size: 14px;
           font-weight: 500;
-          transition: all 0.12s ease;
           position: relative;
+          transition: background 0.12s ease, color 0.12s ease;
         }
 
-        .dash-nav-item:hover {
-          background: #F1F5F9;
-          color: #0F172A;
+        .menti-nav-link:hover {
+          background: #F4F4F5;
+          color: #111827;
         }
 
-        .dash-nav-item.is-active {
-          color: #0F172A;
+        /* Active Item with blue bar on the left edge */
+        .menti-nav-link.is-active {
+          color: #111827;
           font-weight: 600;
-          background: #F1F5F9;
+          background: #F4F4F5;
         }
 
-        /* Active blue indicator bar on left edge matching screenshot */
-        .dash-nav-item.is-active::before {
+        .menti-nav-link.is-active::before {
           content: '';
           position: absolute;
-          left: -4px;
-          top: 8px;
-          bottom: 8px;
-          width: 4px;
-          border-radius: 4px;
+          left: -16px;
+          top: 4px;
+          bottom: 4px;
+          width: 3.5px;
           background: #2563EB;
+          border-radius: 0 3px 3px 0;
         }
 
-        .dash-nav-icon {
-          color: #64748B;
+        .menti-link-icon {
+          color: #6B7280;
           flex-shrink: 0;
         }
 
-        .dash-nav-item.is-active .dash-nav-icon {
-          color: #2563EB;
+        .menti-nav-link.is-active .menti-link-icon {
+          color: #111827;
         }
 
-        .dash-item-chip {
-          margin-left: auto;
-          font-size: 10px;
-          font-weight: 700;
-          text-transform: uppercase;
-          padding: 2px 6px;
-          border-radius: 4px;
-          background: #E2E8F0;
-          color: #475569;
-          letter-spacing: 0.05em;
+        /* Team & Groups */
+        .menti-team-group {
+          margin-top: 24px;
         }
 
-        .dash-item-chip.ai {
-          background: linear-gradient(135deg, #DBEAFE 0%, #EDE9FE 100%);
-          color: #4338CA;
-        }
-
-        /* Team section */
-        .dash-team-section {
-          margin-top: 26px;
-          padding-top: 18px;
-          border-top: 1px solid #F1F5F9;
-        }
-
-        .dash-section-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 8px 10px 8px;
+        .menti-group-title {
           font-size: 12px;
-          font-weight: 600;
-          color: #94A3B8;
-          text-transform: capitalize;
+          font-weight: 500;
+          color: #9CA3AF;
+          padding: 0 12px 6px 12px;
         }
 
-        .dash-team-badge {
-          font-size: 10px;
-          font-weight: 600;
-          padding: 2px 6px;
-          border-radius: 9999px;
-          background: #EFF6FF;
-          color: #1D4ED8;
+        /* Bottom Utility Links */
+        .menti-bottom-nav {
+          margin-top: auto;
+          padding-top: 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
         }
 
-        .dash-nav-item.small {
-          height: 32px;
-          font-size: 12.5px;
-          color: #64748B;
+        .menti-sub-link {
+          font-size: 13px;
+          color: #6B7280;
+          text-decoration: none;
+          padding: 4px 12px;
+          border-radius: 4px;
+          text-align: left;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          font-family: inherit;
         }
 
-        /* ── Main Workspace Body ── */
-        .dash-main-pane {
+        .menti-sub-link:hover {
+          color: #111827;
+          background: #F4F4F5;
+        }
+
+        /* ── Main Area ── */
+        .menti-main {
           flex: 1;
           display: flex;
           flex-direction: column;
           min-width: 0;
+          background: #FFFFFF;
         }
 
-        /* Top Header Bar */
-        .dash-topbar {
+        /* Top Header */
+        .menti-header {
           height: 64px;
-          background: #FFFFFF;
-          border-bottom: 1px solid #E5E7EB;
           display: flex;
           align-items: center;
           justify-content: space-between;
           padding: 0 36px;
-          position: sticky;
-          top: 0;
-          z-index: 30;
+          background: #FFFFFF;
         }
 
-        .dash-search-box {
+        /* Search Box */
+        .menti-search-box {
           position: relative;
-          width: 100%;
-          max-width: 480px;
+          width: 380px;
+          max-width: 100%;
         }
 
-        .dash-search-icon {
+        .menti-search-icon {
           position: absolute;
           left: 14px;
           top: 50%;
           transform: translateY(-50%);
-          color: #94A3B8;
+          color: #9CA3AF;
+          pointer-events: none;
         }
 
-        .dash-search-input {
+        .menti-search-input {
           width: 100%;
-          height: 40px;
-          padding: 0 14px 0 40px;
-          border-radius: 9999px;
-          border: 1px solid #E2E8F0;
-          background: #F8FAFC;
-          font-family: var(--font-body, 'Inter', sans-serif);
+          height: 38px;
+          padding: 0 16px 0 38px;
+          border-radius: 8px;
+          border: none;
+          background: #F3F4F6;
+          color: #111827;
           font-size: 13.5px;
-          color: #0F172A;
+          font-family: inherit;
           outline: none;
-          transition: all 0.15s ease;
-          box-sizing: border-box;
+          transition: background 0.15s ease, box-shadow 0.15s ease;
         }
 
-        .dash-search-input:focus {
+        .menti-search-input::placeholder {
+          color: #9CA3AF;
+        }
+
+        .menti-search-input:focus {
           background: #FFFFFF;
-          border-color: #0F172A;
-          box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+          box-shadow: 0 0 0 2px #E5E7EB;
         }
 
-        .dash-topbar-right {
+        /* Header Actions */
+        .menti-header-actions {
           display: flex;
           align-items: center;
           gap: 12px;
         }
 
-        .dash-icon-btn {
-          width: 38px;
-          height: 38px;
+        .menti-icon-btn {
+          width: 36px;
+          height: 36px;
           border-radius: 50%;
-          border: 1px solid #E2E8F0;
-          background: #FFFFFF;
-          color: #475569;
+          border: none;
+          background: #F3F4F6;
+          color: #4B5563;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          transition: all 0.15s ease;
           position: relative;
+          transition: background 0.15s ease, color 0.15s ease;
         }
 
-        .dash-icon-btn:hover {
-          background: #F8FAFC;
-          color: #0F172A;
-          border-color: #CBD5E1;
+        .menti-icon-btn:hover {
+          background: #E5E7EB;
+          color: #111827;
         }
 
-        .dash-unread-dot {
+        .menti-bell-dot {
           position: absolute;
           top: 8px;
-          right: 8px;
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
+          right: 9px;
+          width: 6px;
+          height: 6px;
           background: #EF4444;
-          border: 1.5px solid #FFFFFF;
+          border-radius: 50%;
         }
 
-        .dash-user-avatar {
-          width: 38px;
-          height: 38px;
+        /* Avatar Circle (Pastel pink with dark AP) */
+        .menti-avatar-btn {
+          width: 36px;
+          height: 36px;
           border-radius: 50%;
-          background: #FED7AA;
-          color: #9A3412;
           border: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          background: #FCE7F3;
+          color: #BE185D;
           font-size: 13px;
           font-weight: 700;
           letter-spacing: 0.02em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           cursor: pointer;
-          transition: transform 0.15s ease;
+          transition: transform 0.1s ease, filter 0.15s ease;
         }
 
-        .dash-user-avatar:hover {
-          transform: scale(1.05);
+        .menti-avatar-btn:hover {
+          filter: brightness(0.96);
+          transform: scale(1.04);
         }
 
-        .dash-user-avatar.large {
-          width: 46px;
-          height: 46px;
-          font-size: 16px;
-        }
-
-        /* Dropdowns */
-        .dash-dropdown-anchor {
+        .menti-relative {
           position: relative;
         }
 
-        .dash-dropdown-panel {
+        /* Dropdowns */
+        .menti-dropdown {
           position: absolute;
-          right: 0;
           top: calc(100% + 8px);
+          right: 0;
           background: #FFFFFF;
-          border-radius: 14px;
-          border: 1px solid #E2E8F0;
-          box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+          border: 1px solid #E5E7EB;
+          border-radius: 12px;
+          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
           z-index: 100;
           overflow: hidden;
+          animation: dropFade 0.15s ease-out;
         }
 
-        .dash-dropdown-panel.profile {
-          width: 260px;
+        @keyframes dropFade {
+          from { opacity: 0; transform: translateY(-4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-dropdown {
+          width: 250px;
           padding: 8px;
         }
 
-        .dash-dropdown-panel.notifications {
-          width: 320px;
+        .profile-card {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 10px;
         }
 
-        .dash-dropdown-head {
+        .profile-avatar-large {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: #FCE7F3;
+          color: #BE185D;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 14px;
+        }
+
+        .profile-details {
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
+
+        .profile-name {
+          font-size: 13.5px;
+          font-weight: 600;
+          color: #111827;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        .profile-email {
+          font-size: 12px;
+          color: #6B7280;
+        }
+
+        .profile-org {
+          font-size: 11px;
+          color: #2563EB;
+          font-weight: 500;
+          margin-top: 2px;
+        }
+
+        .dropdown-divider {
+          height: 1px;
+          background: #F3F4F6;
+          margin: 6px 0;
+        }
+
+        .dropdown-section {
+          display: flex;
+          flex-direction: column;
+          gap: 1px;
+        }
+
+        .dropdown-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          width: 100%;
+          height: 36px;
+          padding: 0 10px;
+          border-radius: 6px;
+          border: none;
+          background: transparent;
+          color: #374151;
+          font-size: 13px;
+          font-weight: 500;
+          text-align: left;
+          cursor: pointer;
+          transition: background 0.12s ease;
+        }
+
+        .dropdown-item:hover {
+          background: #F4F4F5;
+          color: #111827;
+        }
+
+        .dropdown-item.logout {
+          color: #EF4444;
+        }
+
+        .dropdown-item.logout:hover {
+          background: #FEF2F2;
+          color: #DC2626;
+        }
+
+        /* Notifications Dropdown */
+        .notifs-dropdown {
+          width: 320px;
+          padding: 12px;
+        }
+
+        .notif-head {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 12px 16px;
-          border-bottom: 1px solid #F1F5F9;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #F3F4F6;
         }
 
-        .dash-dropdown-head h4 {
-          margin: 0;
+        .notif-title {
           font-size: 13.5px;
           font-weight: 600;
+          color: #111827;
         }
 
-        .dash-text-link {
+        .notif-clear {
           background: none;
           border: none;
+          font-size: 12px;
           color: #2563EB;
-          font-size: 11.5px;
-          font-weight: 500;
           cursor: pointer;
         }
 
-        .dash-notif-list {
-          max-height: 280px;
-          overflow-y: auto;
-        }
-
-        .dash-notif-item {
+        .notif-list {
           display: flex;
-          align-items: flex-start;
+          flex-direction: column;
           gap: 10px;
-          padding: 12px 16px;
-          border-bottom: 1px solid #F8FAFC;
+          margin-top: 10px;
+        }
+
+        .notif-item {
+          display: flex;
+          gap: 10px;
           font-size: 12.5px;
+          line-height: 1.4;
         }
 
-        .dash-notif-item.unread {
-          background: #F8FAFC;
-        }
-
-        .dash-notif-dot {
+        .notif-indicator {
           width: 6px;
           height: 6px;
           border-radius: 50%;
@@ -716,217 +889,313 @@ export function DashboardLayout({
           flex-shrink: 0;
         }
 
-        .dash-notif-title {
-          margin: 0 0 2px 0;
-          font-weight: 600;
-          color: #0F172A;
-        }
-
-        .dash-notif-time {
+        .notif-text {
+          color: #374151;
           margin: 0;
-          font-size: 11px;
-          color: #64748B;
         }
 
-        .dash-profile-head {
+        .notif-time {
+          font-size: 11px;
+          color: #9CA3AF;
+        }
+
+        /* Page Content */
+        .menti-content {
+          padding: 16px 36px 60px 36px;
+          max-width: 1280px;
+          width: 100%;
+        }
+
+        /* ── Floating Support Widget (Bottom Right) ── */
+        .menti-floating-widget {
+          position: fixed;
+          bottom: 24px;
+          right: 24px;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: #1B2234;
+          color: #FFFFFF;
+          border: none;
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
           display: flex;
           align-items: center;
-          gap: 12px;
-          padding: 10px 10px 12px 10px;
+          justify-content: center;
+          cursor: pointer;
+          z-index: 50;
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
 
-        .dash-user-name {
-          margin: 0 0 2px 0;
-          font-size: 13.5px;
+        .menti-floating-widget:hover {
+          transform: scale(1.08);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+        }
+
+        .floating-red-dot {
+          position: absolute;
+          top: 3px;
+          right: 3px;
+          width: 9px;
+          height: 9px;
+          background: #EF4444;
+          border: 2px solid #FFFFFF;
+          border-radius: 50%;
+        }
+
+        /* Help Modal */
+        .help-modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 200;
+          backdrop-filter: blur(2px);
+        }
+
+        .help-modal-card {
+          width: 460px;
+          max-width: 92vw;
+          background: #FFFFFF;
+          border-radius: 16px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+          overflow: hidden;
+          animation: popIn 0.2s ease-out;
+        }
+
+        @keyframes popIn {
+          from { opacity: 0; transform: scale(0.96); }
+          to { opacity: 1; transform: scale(1); }
+        }
+
+        .help-modal-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px 24px;
+          border-bottom: 1px solid #F3F4F6;
+        }
+
+        .help-modal-header h3 {
+          margin: 0;
+          font-size: 17px;
           font-weight: 600;
-          color: #0F172A;
+          color: #111827;
         }
 
-        .dash-user-email {
-          margin: 0 0 4px 0;
-          font-size: 11.5px;
-          color: #64748B;
+        .close-help-btn {
+          background: none;
+          border: none;
+          color: #9CA3AF;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
         }
 
-        .dash-pro-badge {
-          display: inline-block;
-          font-size: 10px;
-          font-weight: 600;
-          color: #166534;
-          background: #DCFCE7;
-          padding: 1px 6px;
-          border-radius: 4px;
+        .close-help-btn:hover {
+          color: #111827;
         }
 
-        .dash-dropdown-divider {
-          height: 1px;
-          background: #F1F5F9;
-          margin: 4px 0;
-        }
-
-        .dash-dropdown-menu {
+        .help-modal-body {
+          padding: 24px;
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          gap: 16px;
         }
 
-        .dash-dropdown-item {
+        .help-p {
+          font-size: 14px;
+          color: #4B5563;
+          margin: 0;
+        }
+
+        .help-item {
+          display: flex;
+          gap: 12px;
+          font-size: 13.5px;
+          color: #374151;
+          line-height: 1.45;
+        }
+
+        .help-num {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: #EFF6FF;
+          color: #2563EB;
+          font-weight: 700;
+          font-size: 12px;
           display: flex;
           align-items: center;
-          gap: 10px;
-          padding: 8px 12px;
-          border-radius: 8px;
-          text-decoration: none;
-          color: #334155;
-          font-size: 13px;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .help-modal-footer {
+          padding: 16px 24px;
+          border-top: 1px solid #F3F4F6;
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .help-primary-btn {
+          height: 38px;
+          padding: 0 20px;
+          background: #19191D;
+          color: #FFFFFF;
           border: none;
-          background: transparent;
-          width: 100%;
-          text-align: left;
+          border-radius: 8px;
+          font-size: 13.5px;
+          font-weight: 600;
           cursor: pointer;
-          box-sizing: border-box;
-          transition: background 0.12s ease;
         }
 
-        .dash-dropdown-item:hover {
-          background: #F1F5F9;
-          color: #0F172A;
-        }
-
-        .dash-dropdown-item.danger:hover {
-          background: #FEE2E2;
-          color: #DC2626;
-        }
-
-        /* ── Content Stage ── */
-        .dash-content-area {
-          flex: 1;
-          padding: 36px 44px 64px 44px;
-          max-width: 1440px;
-          box-sizing: border-box;
+        .help-primary-btn:hover {
+          background: #2D2D34;
         }
 
         /* ── Dark Mode Overrides ── */
-        [data-theme="dark"] .dash-container {
-          background-color: #0B0E14;
-          color: #F8FAFC;
+        [data-theme="dark"] .menti-shell,
+        [data-theme="dark"] .menti-main {
+          background: #0E1015;
+          color: #F3F4F6;
         }
 
-        [data-theme="dark"] .dash-sidebar {
-          background: #0F131A;
-          border-right-color: rgba(255, 255, 255, 0.07);
+        [data-theme="dark"] .menti-sidebar {
+          background: #0E1015;
+          border-right-color: #1F242E;
         }
 
-        [data-theme="dark"] .dash-brand-title {
-          color: #FFFFFF;
+        [data-theme="dark"] .menti-brand-name {
+          color: #F9FAFB;
         }
 
-        [data-theme="dark"] .dash-brand-icon {
+        [data-theme="dark"] .menti-new-btn {
+          background: #F3F4F6;
+          color: #111827;
+        }
+
+        [data-theme="dark"] .menti-new-btn:hover {
           background: #FFFFFF;
-          color: #090A0E;
         }
 
-        [data-theme="dark"] .dash-new-btn {
-          background: #FFFFFF;
-          color: #090A0E;
+        [data-theme="dark"] .menti-nav-link {
+          color: #9CA3AF;
         }
 
-        [data-theme="dark"] .dash-new-btn:hover {
-          background: #F1F5F9;
+        [data-theme="dark"] .menti-nav-link:hover {
+          background: #181C24;
+          color: #F9FAFB;
         }
 
-        [data-theme="dark"] .dash-nav-item {
-          color: #94A3B8;
+        [data-theme="dark"] .menti-nav-link.is-active {
+          background: #181C24;
+          color: #F9FAFB;
         }
 
-        [data-theme="dark"] .dash-nav-item:hover {
-          background: rgba(255, 255, 255, 0.06);
+        [data-theme="dark"] .menti-nav-link.is-active .menti-link-icon {
+          color: #F9FAFB;
+        }
+
+        [data-theme="dark"] .menti-sub-link:hover {
+          background: #181C24;
+          color: #F9FAFB;
+        }
+
+        [data-theme="dark"] .menti-header {
+          background: #0E1015;
+        }
+
+        [data-theme="dark"] .menti-search-input {
+          background: #181C24;
+          color: #F9FAFB;
+        }
+
+        [data-theme="dark"] .menti-search-input:focus {
+          background: #1C212B;
+          box-shadow: 0 0 0 2px #374151;
+        }
+
+        [data-theme="dark"] .menti-icon-btn {
+          background: #181C24;
+          color: #9CA3AF;
+        }
+
+        [data-theme="dark"] .menti-icon-btn:hover {
+          background: #232936;
+          color: #F9FAFB;
+        }
+
+        [data-theme="dark"] .menti-dropdown {
+          background: #151820;
+          border-color: #272E3B;
+        }
+
+        [data-theme="dark"] .profile-name {
+          color: #F9FAFB;
+        }
+
+        [data-theme="dark"] .dropdown-divider {
+          background: #1F242E;
+        }
+
+        [data-theme="dark"] .dropdown-item {
+          color: #D1D5DB;
+        }
+
+        [data-theme="dark"] .dropdown-item:hover {
+          background: #1F242E;
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .dash-nav-item.is-active {
-          background: rgba(255, 255, 255, 0.08);
-          color: #FFFFFF;
+        [data-theme="dark"] .help-modal-card {
+          background: #151820;
+          border: 1px solid #272E3B;
         }
 
-        [data-theme="dark"] .dash-team-section {
-          border-top-color: rgba(255, 255, 255, 0.06);
+        [data-theme="dark"] .help-modal-header {
+          border-bottom-color: #1F242E;
         }
 
-        [data-theme="dark"] .dash-topbar {
-          background: #0F131A;
-          border-bottom-color: rgba(255, 255, 255, 0.07);
+        [data-theme="dark"] .help-modal-header h3 {
+          color: #F9FAFB;
         }
 
-        [data-theme="dark"] .dash-search-input {
-          background: #161B24;
-          border-color: rgba(255, 255, 255, 0.1);
-          color: #FFFFFF;
+        [data-theme="dark"] .help-modal-footer {
+          border-top-color: #1F242E;
         }
 
-        [data-theme="dark"] .dash-search-input:focus {
-          border-color: #3B82F6;
-          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        [data-theme="dark"] .help-primary-btn {
+          background: #F3F4F6;
+          color: #111827;
         }
 
-        [data-theme="dark"] .dash-icon-btn {
-          background: #161B24;
-          border-color: rgba(255, 255, 255, 0.1);
-          color: #CBD5E1;
-        }
-
-        [data-theme="dark"] .dash-icon-btn:hover {
-          background: #1F2633;
-          color: #FFFFFF;
-        }
-
-        [data-theme="dark"] .dash-dropdown-panel {
-          background: #161B24;
-          border-color: rgba(255, 255, 255, 0.12);
-        }
-
-        [data-theme="dark"] .dash-dropdown-head {
-          border-bottom-color: rgba(255, 255, 255, 0.08);
-        }
-
-        [data-theme="dark"] .dash-user-name {
-          color: #FFFFFF;
-        }
-
-        [data-theme="dark"] .dash-dropdown-item {
-          color: #CBD5E1;
-        }
-
-        [data-theme="dark"] .dash-dropdown-item:hover {
-          background: rgba(255, 255, 255, 0.08);
-          color: #FFFFFF;
-        }
-
-        /* ── Responsive adjustments ── */
-        @media (max-width: 960px) {
-          .dash-sidebar {
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+          .menti-sidebar {
             width: 72px;
-            padding: 16px 8px;
+            min-width: 72px;
           }
-          .dash-brand-title,
-          .dash-new-btn span,
-          .dash-nav-item span,
-          .dash-section-header,
-          .dash-item-chip {
+          .menti-brand-name,
+          .menti-new-btn span:first-child,
+          .menti-nav-link span,
+          .menti-group-title,
+          .menti-bottom-nav {
             display: none;
           }
-          .dash-new-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            margin: 0 auto 20px auto;
+          .menti-new-btn {
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            margin: 0 auto 24px auto;
           }
-          .dash-nav-item {
+          .menti-nav-link {
             justify-content: center;
             padding: 0;
           }
-          .dash-content-area {
-            padding: 24px 20px 48px 20px;
+          .menti-nav-link.is-active::before {
+            left: 0;
           }
         }
       `}</style>
