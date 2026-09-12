@@ -195,6 +195,54 @@ export function LandingNav() {
             width: calc(100% - 32px);
           }
         }
+
+        /* ── Dark Mode Overrides ── */
+        :root[data-theme="dark"] .craft-header-pill,
+        [data-theme="dark"] .craft-header-pill {
+          background: linear-gradient(180deg, rgba(24, 26, 32, 0.75) 0%, rgba(14, 15, 19, 0.94) 100%);
+          border-color: rgba(255, 255, 255, 0.14);
+          box-shadow: 
+            0 16px 36px 2px rgba(0, 0, 0, 0.5),
+            0 2px 6px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        :root[data-theme="dark"] .pairly-logo-text,
+        [data-theme="dark"] .pairly-logo-text {
+          color: #FFFFFF;
+        }
+
+        :root[data-theme="dark"] .craft-nav-item,
+        [data-theme="dark"] .craft-nav-item {
+          color: rgba(255, 255, 255, 0.82);
+        }
+
+        :root[data-theme="dark"] .craft-nav-item:hover,
+        [data-theme="dark"] .craft-nav-item:hover {
+          color: #FFFFFF;
+        }
+
+        :root[data-theme="dark"] .craft-nav-login,
+        [data-theme="dark"] .craft-nav-login {
+          color: rgba(255, 255, 255, 0.88);
+        }
+
+        :root[data-theme="dark"] .craft-nav-login:hover,
+        [data-theme="dark"] .craft-nav-login:hover {
+          color: #FFFFFF;
+        }
+
+        :root[data-theme="dark"] .craft-nav-cta,
+        [data-theme="dark"] .craft-nav-cta {
+          background: #FFFFFF;
+          color: #090A0D;
+          box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+        }
+
+        :root[data-theme="dark"] .craft-nav-cta:hover,
+        [data-theme="dark"] .craft-nav-cta:hover {
+          background: #ECECF0;
+        }
       `}</style>
     </header>
   );

@@ -228,6 +228,58 @@ export function FinalCta() {
             min-width: unset;
           }
         }
+
+        /* ── Dark Mode Overrides ── */
+        :root[data-theme="dark"] .final-cta-panel,
+        [data-theme="dark"] .final-cta-panel {
+          background: linear-gradient(135deg, #092015 0%, #103322 50%, #16462F 100%);
+          border: 1px solid rgba(188, 230, 201, 0.25);
+          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 50px rgba(45, 212, 167, 0.1);
+        }
+
+        :root[data-theme="dark"] .final-cta-wave-img,
+        [data-theme="dark"] .final-cta-wave-img {
+          opacity: 0.18;
+          filter: brightness(0.6) hue-rotate(20deg);
+        }
+
+        :root[data-theme="dark"] .final-cta-heading,
+        [data-theme="dark"] .final-cta-heading {
+          color: #FFFFFF;
+          text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        :root[data-theme="dark"] .final-cta-subline,
+        [data-theme="dark"] .final-cta-subline {
+          color: #D2F2DF;
+          text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        :root[data-theme="dark"] .final-cta-web-btn,
+        [data-theme="dark"] .final-cta-web-btn {
+          background-color: rgba(255, 255, 255, 0.14);
+          color: #FFFFFF;
+          border-color: rgba(255, 255, 255, 0.25);
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        :root[data-theme="dark"] .final-cta-web-btn:hover,
+        [data-theme="dark"] .final-cta-web-btn:hover {
+          background-color: rgba(255, 255, 255, 0.24);
+          border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        :root[data-theme="dark"] .final-cta-appstore-btn,
+        [data-theme="dark"] .final-cta-appstore-btn {
+          background-color: #FFFFFF;
+          color: #090A0D;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        :root[data-theme="dark"] .final-cta-appstore-btn:hover,
+        [data-theme="dark"] .final-cta-appstore-btn:hover {
+          background-color: #E8E8EC;
+        }
       `}</style>
     </section>
   );

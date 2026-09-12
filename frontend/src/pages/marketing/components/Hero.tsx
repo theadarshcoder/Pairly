@@ -337,6 +337,64 @@ export function Hero() {
             display: none;
           }
         }
+
+        /* ── Dark Mode Overrides ── */
+        :root[data-theme="dark"] .craft-hero-banner-card,
+        [data-theme="dark"] .craft-hero-banner-card {
+          background: linear-gradient(180deg, #070B12 0%, #0B1320 28%, #101B2E 62%, #080D16 100%) !important;
+        }
+
+        :root[data-theme="dark"] .hero-sky-gradient,
+        [data-theme="dark"] .hero-sky-gradient {
+          background: linear-gradient(180deg, #070B12 0%, #0B1320 28%, #101B2E 62%, #080D16 100%) !important;
+        }
+
+        :root[data-theme="dark"] .hero-cloud-left,
+        :root[data-theme="dark"] .hero-cloud-right,
+        [data-theme="dark"] .hero-cloud-left,
+        [data-theme="dark"] .hero-cloud-right {
+          opacity: 0.16 !important;
+          filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8)) !important;
+          mix-blend-mode: screen !important;
+        }
+
+        :root[data-theme="dark"] .hero-notebook-paper,
+        [data-theme="dark"] .hero-notebook-paper {
+          filter: brightness(0.72) contrast(1.05) saturate(0.85) !important;
+          opacity: 0.9 !important;
+        }
+
+        :root[data-theme="dark"] .hero-torn-paper-peak,
+        [data-theme="dark"] .hero-torn-paper-peak {
+          background: #11141E !important;
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        :root[data-theme="dark"] .hero-mountain-lavender,
+        [data-theme="dark"] .hero-mountain-lavender {
+          background: linear-gradient(145deg, #2E214E 0%, #1A1230 100%) !important;
+        }
+
+        :root[data-theme="dark"] .craft-hero-h1,
+        [data-theme="dark"] .craft-hero-h1 {
+          color: #F4F4F5 !important;
+        }
+
+        :root[data-theme="dark"] .craft-hero-subhead,
+        [data-theme="dark"] .craft-hero-subhead {
+          color: rgba(244, 244, 245, 0.75) !important;
+        }
+
+        :root[data-theme="dark"] .craft-hero-floating-btn,
+        [data-theme="dark"] .craft-hero-floating-btn {
+          background: #FFFFFF !important;
+          color: #090A0D !important;
+        }
+
+        :root[data-theme="dark"] .craft-hero-floating-btn:hover,
+        [data-theme="dark"] .craft-hero-floating-btn:hover {
+          background: #EAEAEF !important;
+        }
       `}</style>
     </section>
   );

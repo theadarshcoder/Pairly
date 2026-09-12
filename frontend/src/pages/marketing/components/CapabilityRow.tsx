@@ -406,6 +406,89 @@ export function CapabilityRow() {
             border-radius: 16px;
           }
         }
+
+        /* ── Dark Mode Overrides ── */
+        :root[data-theme="dark"] .gamma-sky-section,
+        [data-theme="dark"] .gamma-sky-section {
+          background: linear-gradient(
+            180deg,
+            #070B12 0%,
+            #0A1220 14%,
+            #0D1930 30%,
+            #0F203F 50%,
+            #0D1930 70%,
+            #0A1220 88%,
+            #080A0F 100%
+          ) !important;
+        }
+
+        :root[data-theme="dark"] .sky-gradient-base,
+        [data-theme="dark"] .sky-gradient-base {
+          background: linear-gradient(
+            180deg,
+            #070B12 0%,
+            #0A1220 14%,
+            #0D1930 30%,
+            #0F203F 50%,
+            #0D1930 70%,
+            #0A1220 88%,
+            #080A0F 100%
+          ) !important;
+        }
+
+        :root[data-theme="dark"] .sky-center-radial,
+        [data-theme="dark"] .sky-center-radial {
+          background: radial-gradient(
+            ellipse 85% 45% at 50% 32%,
+            rgba(124, 92, 255, 0.2) 0%,
+            rgba(7, 11, 18, 0) 70%
+          ) !important;
+        }
+
+        :root[data-theme="dark"] .sky-social-heading,
+        [data-theme="dark"] .sky-social-heading {
+          color: #88A8CD !important;
+        }
+
+        :root[data-theme="dark"] .sky-headline-text,
+        [data-theme="dark"] .sky-headline-text {
+          color: #F0F6FE !important;
+          text-shadow: 0 2px 24px rgba(124, 92, 255, 0.25) !important;
+        }
+
+        :root[data-theme="dark"] .sunset-cloud-left,
+        :root[data-theme="dark"] .sunset-cloud-right,
+        [data-theme="dark"] .sunset-cloud-left,
+        [data-theme="dark"] .sunset-cloud-right {
+          opacity: 0.18 !important;
+          filter: brightness(0.5) hue-rotate(180deg) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8)) !important;
+        }
+
+        :root[data-theme="dark"] .sky-icon-tile,
+        [data-theme="dark"] .sky-icon-tile {
+          background: rgba(20, 26, 42, 0.82) !important;
+          border-color: rgba(255, 255, 255, 0.12) !important;
+          color: #A5CFFF !important;
+          box-shadow: 
+            0 12px 28px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+        }
+
+        :root[data-theme="dark"] .sky-capability-item:hover .sky-icon-tile,
+        [data-theme="dark"] .sky-capability-item:hover .sky-icon-tile {
+          background: rgba(30, 40, 66, 0.95) !important;
+          border-color: rgba(255, 255, 255, 0.28) !important;
+          color: #FFFFFF !important;
+          box-shadow: 
+            0 16px 36px rgba(0, 0, 0, 0.55),
+            0 0 20px rgba(124, 92, 255, 0.3),
+            inset 0 1px 0 #FFFFFF !important;
+        }
+
+        :root[data-theme="dark"] .sky-capability-label,
+        [data-theme="dark"] .sky-capability-label {
+          color: #D6E8FD !important;
+        }
       `}</style>
     </section>
   );
