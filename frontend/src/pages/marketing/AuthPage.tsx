@@ -13,11 +13,13 @@ export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(isInitialLogin);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [institution, setInstitution] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
-  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark' | 'system'>(() => getStoredTheme());
+  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark' | 'system'>(() => {
+    const stored = getStoredTheme();
+    return stored || 'light';
+  });
 
   // Prevent background scrolling while on AuthPage
   useEffect(() => {
@@ -57,11 +59,15 @@ export default function AuthPage() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setSuccessMsg(isLogin ? 'Welcome back! Redirecting to your dashboard...' : 'Account created successfully! Preparing your workspace...');
+      setSuccessMsg(
+        isLogin
+          ? 'Welcome back! Redirecting to your dashboard...'
+          : 'Account created successfully! Preparing your workspace...'
+      );
       setTimeout(() => {
         navigate('/dashboard');
-      }, 1200);
-    }, 750);
+      }, 1100);
+    }, 700);
   };
 
   const planTitles: Record<string, string> = {
@@ -72,793 +78,950 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="auth-fixed-viewport">
-      {/* Background Ambience */}
-      <div className="auth-bg-decor" aria-hidden="true">
-        <div className="auth-bg-radial" />
-        <img
-          src="/images/paper-texture.png"
-          alt=""
-          className="auth-paper-texture"
-        />
+    <div className="resend-auth-viewport">
+      {/* Background Ambience: Paper Texture & Organic Silk Wave */}
+      <div className="resend-bg-layer" aria-hidden="true">
+        {/* Organic silk ribbon wave in the background */}
+        <svg
+          className="resend-silk-wave"
+          viewBox="0 0 1440 900"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M-100,500 C300,750 600,200 1100,600 C1300,750 1500,400 1600,200 L1600,0 L-100,0 Z"
+            fill="url(#silk-gradient-1)"
+            opacity="0.35"
+          />
+          <path
+            d="M-50,650 C400,900 800,450 1200,850 C1400,1050 1550,750 1650,550 L1650,-50 L-50,-50 Z"
+            fill="url(#silk-gradient-2)"
+            opacity="0.25"
+          />
+          <defs>
+            <linearGradient id="silk-gradient-1" x1="0" y1="0" x2="1440" y2="900" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
+              <stop offset="45%" stopColor="#E9E5DD" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#D8D2C5" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="silk-gradient-2" x1="1440" y1="0" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#F5F0E6" stopOpacity="0.6" />
+              <stop offset="60%" stopColor="#DDD6C7" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#C9C2B0" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* Tactile Authentic Paper Texture Overlay */}
+        <div className="resend-paper-texture" />
       </div>
 
-      {/* Sleek Fixed Header Bar */}
-      <header className="auth-topbar">
-        <Link to="/" className="auth-brand-link" title="Return to Pairly Home">
-          <span className="auth-logo-symbol">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-          </span>
-          <span className="auth-brand-name">Pairly</span>
+      {/* Floating Top Navigation: < Home & Theme Switcher */}
+      <header className="resend-top-nav">
+        <Link to="/" className="resend-home-link" title="Return to Pairly Home">
+          <span className="resend-chevron">‹</span>
+          <span>Home</span>
         </Link>
 
-        <div className="auth-topbar-actions">
-          <button
-            type="button"
-            className="auth-theme-btn"
-            onClick={toggleTheme}
-            title={`Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} mode`}
-            aria-label="Toggle theme"
-          >
-            {currentTheme === 'dark' ? (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
-            ) : (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
-            )}
-          </button>
-
-          <Link to="/" className="auth-back-link">
-            <span>←</span>
-            <span>Back to site</span>
-          </Link>
-        </div>
+        <button
+          type="button"
+          className="resend-theme-toggle"
+          onClick={toggleTheme}
+          title={`Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} mode`}
+          aria-label="Toggle theme"
+        >
+          {currentTheme === 'dark' ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          )}
+        </button>
       </header>
 
-      {/* Main Centered Stage with Expanded Card */}
-      <main className="auth-stage">
-        <div className="auth-card-wrapper">
-          <div className="auth-stationery-card">
-            {/* Paper Texture Overlay */}
-            <div className="auth-card-texture" aria-hidden="true" />
+      {/* Main Stage: Resend Centered Floating Layout */}
+      <main className="resend-auth-stage">
+        <div className="resend-auth-container">
+          {/* Logo Badge (Pairly P Lettermark in Rounded Squircle) */}
+          <div className="resend-logo-wrapper">
+            <div className="resend-logo-badge" title="Pairly">
+              <span className="resend-logo-letter">P</span>
+            </div>
+          </div>
 
-            {/* Plan Badge if coming from /pricing */}
-            {planParam && planTitles[planParam] && (
-              <div className="auth-plan-pill">
-                <span className="plan-dot" />
-                <span>Selected Plan: <strong>{planTitles[planParam]}</strong></span>
-              </div>
-            )}
+          {/* Plan Pill if user came with selected tier */}
+          {planParam && planTitles[planParam] && (
+            <div className="resend-plan-indicator">
+              <span className="resend-plan-dot" />
+              <span>Selected: <strong>{planTitles[planParam]}</strong></span>
+            </div>
+          )}
 
-            {/* Header & Mode Switcher */}
-            <div className="auth-heading-area">
-              <h1 className="auth-title">
-                {isLogin ? 'Sign in to Pairly' : 'Create your account'}
-              </h1>
-              <p className="auth-tagline">
-                {isLogin
-                  ? 'Welcome back. Enter your credentials to continue.'
-                  : 'Get started with your classroom in seconds.'}
-              </p>
+          {/* Title */}
+          <h1 className="resend-auth-title">
+            {isLogin ? 'Log in to Pairly' : 'Create a Pairly account'}
+          </h1>
 
-              {/* Segmented Mode Switcher */}
-              <div className="auth-segmented-pill">
+          {/* Subtitle with Inline Switcher Link */}
+          <div className="resend-auth-subtitle">
+            {isLogin ? (
+              <span>
+                Don’t have an account?{' '}
                 <button
                   type="button"
-                  className={`auth-segment ${!isLogin ? 'is-active' : ''}`}
+                  className="resend-switch-btn"
                   onClick={() => switchMode(false)}
                 >
-                  Create Account
+                  Sign up.
                 </button>
+              </span>
+            ) : (
+              <span>
+                Already have an account?{' '}
                 <button
                   type="button"
-                  className={`auth-segment ${isLogin ? 'is-active' : ''}`}
+                  className="resend-switch-btn"
                   onClick={() => switchMode(true)}
                 >
-                  Log In
+                  Log in.
+                </button>
+              </span>
+            )}
+          </div>
+
+          {/* Success State */}
+          {successMsg ? (
+            <div className="resend-success-card">
+              <div className="resend-success-icon">✓</div>
+              <p className="resend-success-text">{successMsg}</p>
+            </div>
+          ) : (
+            <>
+              {/* Social Login Grid (Google & GitHub side by side) */}
+              <div className="resend-sso-grid">
+                <button
+                  type="button"
+                  className="resend-sso-button"
+                  onClick={() => {
+                    setIsLoading(true);
+                    setTimeout(() => navigate('/dashboard'), 850);
+                  }}
+                >
+                  <svg className="resend-sso-icon" width="16" height="16" viewBox="0 0 24 24">
+                    <path
+                      fill="#4285F4"
+                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                    />
+                    <path
+                      fill="#34A853"
+                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    />
+                    <path
+                      fill="#FBBC05"
+                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                    />
+                    <path
+                      fill="#EA4335"
+                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                    />
+                  </svg>
+                  <span>Log in with Google</span>
+                </button>
+
+                <button
+                  type="button"
+                  className="resend-sso-button"
+                  onClick={() => {
+                    setIsLoading(true);
+                    setTimeout(() => navigate('/dashboard'), 850);
+                  }}
+                >
+                  <svg className="resend-sso-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    />
+                  </svg>
+                  <span>Log in with GitHub</span>
                 </button>
               </div>
-            </div>
 
-            {/* Success State */}
-            {successMsg ? (
-              <div className="auth-success-alert">
-                <span className="auth-success-badge">✓</span>
-                <p>{successMsg}</p>
+              {/* Divider: ──── or ──── */}
+              <div className="resend-divider">
+                <span className="resend-divider-line" />
+                <span className="resend-divider-text">or</span>
+                <span className="resend-divider-line" />
               </div>
-            ) : (
-              <>
-                {/* Single-Click Social SSO Grid */}
-                <div className="auth-social-row">
-                  <button
-                    type="button"
-                    className="auth-sso-btn"
-                    onClick={() => {
-                      setIsLoading(true);
-                      setTimeout(() => navigate('/dashboard'), 900);
-                    }}
-                  >
-                    <svg className="sso-icon" viewBox="0 0 24 24">
-                      <path
-                        fill="#4285F4"
-                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                      />
-                      <path
-                        fill="#34A853"
-                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                      />
-                      <path
-                        fill="#FBBC05"
-                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                      />
-                      <path
-                        fill="#EA4335"
-                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                      />
-                    </svg>
-                    <span>Google</span>
-                  </button>
 
-                  <button
-                    type="button"
-                    className="auth-sso-btn"
-                    onClick={() => {
-                      setIsLoading(true);
-                      setTimeout(() => navigate('/dashboard'), 900);
-                    }}
-                  >
-                    <svg className="sso-icon" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.58.67-.99 1.74-.86 2.78.99.08 2.01-.53 2.57-1.28z" />
-                    </svg>
-                    <span>Apple</span>
-                  </button>
+              {/* Email & Password Form */}
+              <form onSubmit={handleSubmit} className="resend-form">
+                <div className="resend-field-group">
+                  <label className="resend-field-label" htmlFor="auth-email">
+                    Email
+                  </label>
+                  <input
+                    id="auth-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="alan.turing@example.com"
+                    className="resend-input"
+                    required
+                    autoComplete="email"
+                  />
                 </div>
 
-                {/* Divider */}
-                <div className="auth-separator">
-                  <span className="auth-sep-line" />
-                  <span className="auth-sep-label">OR WITH EMAIL</span>
-                  <span className="auth-sep-line" />
-                </div>
-
-                {/* Credentials Form */}
-                <form onSubmit={handleSubmit} className="auth-input-form">
-                  {!isLogin && (
-                    <div className="auth-grid-split">
-                      <div className="auth-field">
-                        <label className="auth-label" htmlFor="user-name">Full Name</label>
-                        <input
-                          id="user-name"
-                          type="text"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="Dr. Eleanor Vance"
-                          className="auth-textbox"
-                          required
-                        />
-                      </div>
-                      <div className="auth-field">
-                        <label className="auth-label" htmlFor="user-institution">Institution</label>
-                        <input
-                          id="user-institution"
-                          type="text"
-                          value={institution}
-                          onChange={(e) => setInstitution(e.target.value)}
-                          placeholder="Stanford University"
-                          className="auth-textbox"
-                          required
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="auth-field">
-                    <label className="auth-label" htmlFor="user-email">Academic Email</label>
-                    <input
-                      id="user-email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="vance@stanford.edu"
-                      className="auth-textbox"
-                      required
-                    />
+                <div className="resend-field-group">
+                  <div className="resend-label-row">
+                    <label className="resend-field-label" htmlFor="auth-password">
+                      Password
+                    </label>
+                    {isLogin && (
+                      <a
+                        href="#forgot"
+                        className="resend-forgot-link"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          alert('Password recovery link sent to your email.');
+                        }}
+                      >
+                        Forgot?
+                      </a>
+                    )}
                   </div>
 
-                  <div className="auth-field">
-                    <div className="auth-label-row">
-                      <label className="auth-label" htmlFor="user-password">Password</label>
-                      {isLogin && (
-                        <a
-                          href="#forgot"
-                          className="auth-forgot-link"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            alert('Password reset link sent to your academic email.');
-                          }}
-                        >
-                          Forgot password?
-                        </a>
-                      )}
-                    </div>
+                  <div className="resend-password-wrap">
                     <input
-                      id="user-password"
-                      type="password"
+                      id="auth-password"
+                      type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••••••"
-                      className="auth-textbox"
+                      className="resend-input resend-password-input"
                       required
                       minLength={8}
+                      autoComplete={isLogin ? 'current-password' : 'new-password'}
                     />
+                    <button
+                      type="button"
+                      className="resend-eye-btn"
+                      onClick={() => setShowPassword(!showPassword)}
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showPassword ? (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                          <line x1="1" y1="1" x2="23" y2="23" />
+                        </svg>
+                      ) : (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                          <circle cx="12" cy="12" r="3" />
+                        </svg>
+                      )}
+                    </button>
                   </div>
+                </div>
 
-                  <button
-                    type="submit"
-                    className="auth-action-btn"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? (
-                      <span className="btn-spinner">Connecting...</span>
-                    ) : (
-                      <span>{isLogin ? 'Sign in to Dashboard →' : 'Launch Free Workspace →'}</span>
-                    )}
-                  </button>
-                </form>
-              </>
-            )}
-          </div>
+                <button
+                  type="submit"
+                  className="resend-submit-btn"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <span className="resend-btn-loading">
+                      <span className="resend-spinner" />
+                      Connecting...
+                    </span>
+                  ) : (
+                    <span>{isLogin ? 'Log in' : 'Create account'}</span>
+                  )}
+                </button>
+              </form>
+
+              {/* Bottom Terms Disclaimer */}
+              <div className="resend-legal-caption">
+                {!isLogin ? (
+                  <p>
+                    By signing up, you agree to our{' '}
+                    <Link to="/terms">Terms</Link>,{' '}
+                    <Link to="/terms">Acceptable Use</Link>, and{' '}
+                    <Link to="/privacy">Privacy Policy</Link>.
+                  </p>
+                ) : (
+                  <p>
+                    Protected by Pairly Enterprise Guard ·{' '}
+                    <Link to="/privacy">Privacy Policy</Link>
+                  </p>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </main>
 
-      {/* Styling */}
+      {/* Modern Resend-Grade Styling with Pairly Texture and Typography */}
       <style>{`
-        /* ── Fixed Non-Scrollable Viewport Container ── */
-        .auth-fixed-viewport {
+        /* ── Fixed Viewport ── */
+        .resend-auth-viewport {
           position: fixed;
           inset: 0;
           width: 100vw;
           height: 100vh;
           height: 100dvh;
-          overflow: hidden;
+          overflow-y: auto;
+          overflow-x: hidden;
+          background-color: var(--paper, #FAF8F5);
+          font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+          color: var(--ink, #1B1712);
+          z-index: 999;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          background-color: var(--paper, #FAF7F2);
-          z-index: 999;
+          scrollbar-width: none;
         }
 
-        /* ── Background Ambience ── */
-        .auth-bg-decor {
-          position: absolute;
+        .resend-auth-viewport::-webkit-scrollbar {
+          display: none;
+        }
+
+        /* ── Background Atmosphere: Silk Wave & Paper Texture ── */
+        .resend-bg-layer {
+          position: fixed;
           inset: 0;
           pointer-events: none;
+          z-index: 0;
           overflow: hidden;
-          z-index: 1;
         }
 
-        .auth-bg-radial {
+        .resend-silk-wave {
           position: absolute;
-          top: 18%;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 1000px;
-          height: 600px;
-          background: radial-gradient(50% 50% at 50% 50%, rgba(158, 212, 239, 0.25) 0%, rgba(250, 247, 242, 0) 100%);
+          inset: -20px -20px -20px -20px;
+          width: calc(100% + 40px);
+          height: calc(100% + 40px);
+          pointer-events: none;
         }
 
-        .auth-paper-texture {
+        .resend-paper-texture {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
-          object-fit: cover;
-          opacity: 0.14;
+          background-image: url('/images/paper-texture.png');
+          background-size: cover;
+          background-position: center;
           mix-blend-mode: multiply;
+          opacity: 0.16;
+          pointer-events: none;
         }
 
-        /* ── Top Bar ── */
-        .auth-topbar {
+        /* ── Floating Minimalist Top Navigation ── */
+        .resend-top-nav {
           position: relative;
-          z-index: 10;
-          height: 56px;
+          z-index: 20;
+          height: 64px;
+          padding: 0 36px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0 36px;
           flex-shrink: 0;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         }
 
-        .auth-brand-link {
-          display: flex;
+        .resend-home-link {
+          display: inline-flex;
           align-items: center;
-          gap: 10px;
+          gap: 6px;
+          color: rgba(27, 23, 18, 0.7);
           text-decoration: none;
-          color: #0F172A;
+          font-size: 14px;
+          font-weight: 500;
+          transition: all 0.15s ease;
+          padding: 6px 10px;
+          border-radius: 8px;
         }
 
-        .auth-logo-symbol {
-          width: 32px;
-          height: 32px;
-          border-radius: 9px;
-          background: #0F172A;
-          color: #FFFFFF;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+        .resend-chevron {
+          font-size: 18px;
+          line-height: 1;
+          transform: translateY(-1px);
+          transition: transform 0.15s ease;
         }
 
-        .auth-brand-name {
-          font-family: var(--font-display, 'UntitledSerif', Georgia, serif);
-          font-weight: 700;
-          font-size: 21px;
-          letter-spacing: -0.02em;
-          color: #0F172A;
+        .resend-home-link:hover {
+          color: #111827;
+          background: rgba(0, 0, 0, 0.04);
         }
 
-        .auth-topbar-actions {
-          display: flex;
-          align-items: center;
-          gap: 14px;
+        .resend-home-link:hover .resend-chevron {
+          transform: translateX(-2px) translateY(-1px);
         }
 
-        .auth-theme-btn {
-          width: 34px;
-          height: 34px;
+        .resend-theme-toggle {
+          width: 36px;
+          height: 36px;
           border-radius: 50%;
           border: 1px solid rgba(0, 0, 0, 0.08);
-          background: rgba(255, 255, 255, 0.8);
-          color: #475569;
+          background: rgba(255, 255, 255, 0.7);
+          color: #4B5563;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           transition: all 0.15s ease;
+          backdrop-filter: blur(8px);
         }
 
-        .auth-theme-btn:hover {
+        .resend-theme-toggle:hover {
           background: #FFFFFF;
-          color: #0F172A;
-          border-color: rgba(0, 0, 0, 0.15);
+          color: #111827;
+          border-color: rgba(0, 0, 0, 0.18);
+          transform: scale(1.04);
         }
 
-        .auth-back-link {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13px;
-          font-weight: 500;
-          color: #475569;
-          text-decoration: none;
-          padding: 6px 12px;
-          border-radius: 8px;
-          transition: all 0.15s ease;
-        }
-
-        .auth-back-link:hover {
-          color: #0F172A;
-          background: rgba(0, 0, 0, 0.04);
-        }
-
-        /* ── Centered Stage with Expanded Card ── */
-        .auth-stage {
+        /* ── Main Resend Stage ── */
+        .resend-auth-stage {
           position: relative;
-          z-index: 5;
+          z-index: 10;
           flex: 1;
           display: flex;
           align-items: center;
           justify-content: center;
-          min-height: 0;
-          padding: 16px 32px;
-          overflow-y: auto;
-          scrollbar-width: none;
+          padding: 16px 24px 48px 24px;
         }
 
-        .auth-stage::-webkit-scrollbar {
-          display: none;
-        }
-
-        /* Expanded card wrapper — generous full-width presence */
-        .auth-card-wrapper {
+        .resend-auth-container {
           width: 100%;
-          max-width: 860px;
-          margin: auto;
+          max-width: 410px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
         }
 
-        .auth-stationery-card {
-          position: relative;
-          background: #FFFFFF;
-          border-radius: 24px;
-          border: 1.5px solid rgba(0, 0, 0, 0.08);
-          box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
-          padding: 36px 44px;
-          overflow: hidden;
+        /* ── Logo Badge ── */
+        .resend-logo-wrapper {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 24px;
         }
 
-        .auth-card-texture {
-          position: absolute;
-          inset: 0;
-          background-image: url('/images/paper-texture.png');
-          background-size: cover;
-          opacity: 0.02;
-          mix-blend-mode: overlay;
-          pointer-events: none;
+        .resend-logo-badge {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: #000000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+          transition: transform 0.2s ease;
         }
 
-        .auth-plan-pill {
+        .resend-logo-badge:hover {
+          transform: scale(1.05);
+        }
+
+        .resend-logo-letter {
+          font-family: var(--font-display, 'UntitledSerif', 'Instrument Serif', Georgia, serif);
+          font-size: 26px;
+          font-weight: 700;
+          color: #FFFFFF;
+          line-height: 1;
+          transform: translateY(-1px);
+        }
+
+        /* Plan pill */
+        .resend-plan-indicator {
+          align-self: center;
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          background: #EFF6FF;
-          border: 1px solid #BFDBFE;
+          background: rgba(37, 99, 235, 0.08);
+          border: 1px solid rgba(37, 99, 235, 0.2);
           color: #1D4ED8;
-          font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 12px;
-          padding: 4px 12px;
+          padding: 3px 10px;
           border-radius: 9999px;
-          margin-bottom: 14px;
+          margin-bottom: 16px;
         }
 
-        .plan-dot {
-          width: 5px;
-          height: 5px;
+        .resend-plan-dot {
+          width: 6px;
+          height: 6px;
           border-radius: 50%;
           background: #2563EB;
         }
 
-        /* ── Header Area ── */
-        .auth-heading-area {
+        /* ── Title & Subtitle ── */
+        .resend-auth-title {
+          font-family: var(--font-display, 'UntitledSerif', 'Instrument Serif', Georgia, serif);
+          font-size: 29px;
+          font-weight: 600;
+          letter-spacing: -0.025em;
           text-align: center;
+          margin: 0 0 8px 0;
+          color: var(--ink, #111827);
+          line-height: 1.25;
+        }
+
+        .resend-auth-subtitle {
+          font-size: 14px;
+          color: #6B7280;
+          text-align: center;
+          margin-bottom: 26px;
+          line-height: 1.4;
+        }
+
+        .resend-switch-btn {
+          background: none;
+          border: none;
+          padding: 0;
+          margin: 0;
+          font-family: inherit;
+          font-size: inherit;
+          font-weight: 600;
+          color: #111827;
+          cursor: pointer;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          transition: color 0.15s ease;
+        }
+
+        .resend-switch-btn:hover {
+          color: #000000;
+        }
+
+        /* ── Social SSO Buttons ── */
+        .resend-sso-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
           margin-bottom: 22px;
         }
 
-        .auth-title {
-          font-family: 'UntitledSerif', Georgia, serif;
-          font-style: italic;
-          font-weight: 400;
-          font-size: 32px;
-          color: #0F172A;
-          margin: 0 0 6px 0;
-          line-height: 1.15;
-          letter-spacing: -0.02em;
-        }
-
-        .auth-tagline {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 14px;
-          color: #64748B;
-          line-height: 1.45;
-          margin: 0 0 18px 0;
-        }
-
-        .auth-segmented-pill {
-          display: inline-flex;
-          background: rgba(15, 23, 42, 0.05);
-          padding: 4px;
-          border-radius: 9999px;
-          border: 1px solid rgba(15, 23, 42, 0.06);
-          width: 100%;
-        }
-
-        .auth-segment {
-          flex: 1;
-          background: transparent;
-          border: none;
-          padding: 8px 16px;
-          border-radius: 9999px;
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13.5px;
-          font-weight: 600;
-          color: #64748B;
-          cursor: pointer;
-          transition: all 0.15s ease;
-        }
-
-        .auth-segment.is-active {
-          background: #FFFFFF;
-          color: #0F172A;
-          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-        }
-
-        /* ── Social SSO ── */
-        .auth-social-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 14px;
-          margin-bottom: 18px;
-        }
-
-        .auth-sso-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
+        .resend-sso-button {
           height: 44px;
+          border-radius: 10px;
+          border: 1px solid rgba(0, 0, 0, 0.12);
           background: #FFFFFF;
-          border: 1px solid #E2E8F0;
-          border-radius: 12px;
+          color: #1F2937;
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 13.5px;
           font-weight: 500;
-          color: #1E293B;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
           cursor: pointer;
           transition: all 0.15s ease;
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+          padding: 0 10px;
         }
 
-        .auth-sso-btn:hover {
-          background: #F8FAFC;
-          border-color: #CBD5E1;
+        .resend-sso-button:hover {
+          background: #FAFAFA;
+          border-color: rgba(0, 0, 0, 0.22);
+          transform: translateY(-1px);
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
         }
 
-        .sso-icon {
-          width: 18px;
-          height: 18px;
+        .resend-sso-icon {
+          flex-shrink: 0;
         }
 
-        /* ── Separator ── */
-        .auth-separator {
+        /* ── Divider ── */
+        .resend-divider {
           display: flex;
           align-items: center;
-          gap: 14px;
-          margin-bottom: 18px;
+          gap: 12px;
+          margin-bottom: 22px;
         }
 
-        .auth-sep-line {
+        .resend-divider-line {
           flex: 1;
           height: 1px;
-          background: #E2E8F0;
+          background: rgba(0, 0, 0, 0.08);
         }
 
-        .auth-sep-label {
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 10px;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          color: #94A3B8;
-        }
-
-        /* ── Form Inputs ── */
-        .auth-input-form {
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-        }
-
-        .auth-grid-split {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 14px;
-        }
-
-        .auth-field {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-        }
-
-        .auth-label-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .auth-label {
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 13px;
-          font-weight: 600;
-          color: #334155;
-        }
-
-        .auth-forgot-link {
-          font-family: var(--font-body, 'Inter', sans-serif);
+        .resend-divider-text {
           font-size: 12px;
-          color: #2563EB;
-          text-decoration: none;
+          color: #9CA3AF;
+          font-weight: 400;
+          text-transform: lowercase;
         }
 
-        .auth-forgot-link:hover {
+        /* ── Form Fields ── */
+        .resend-form {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .resend-field-group {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .resend-field-label {
+          font-size: 13px;
+          font-weight: 500;
+          color: #374151;
+        }
+
+        .resend-label-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .resend-forgot-link {
+          font-size: 12.5px;
+          color: #6B7280;
+          text-decoration: none;
+          transition: color 0.15s ease;
+        }
+
+        .resend-forgot-link:hover {
+          color: #111827;
           text-decoration: underline;
         }
 
-        .auth-textbox {
-          height: 42px;
-          padding: 0 14px;
+        .resend-input {
+          height: 44px;
+          width: 100%;
           border-radius: 10px;
-          border: 1px solid #CBD5E1;
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 14px;
-          color: #0F172A;
+          border: 1px solid rgba(0, 0, 0, 0.14);
           background: #FFFFFF;
-          outline: none;
-          transition: border-color 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .auth-textbox:focus {
-          border-color: #0F172A;
-          box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
-        }
-
-        .auth-action-btn {
-          margin-top: 6px;
-          height: 46px;
-          border-radius: 12px;
-          background: #0F172A;
-          border: none;
-          color: #FFFFFF;
+          color: #111827;
           font-family: var(--font-body, 'Inter', sans-serif);
           font-size: 14px;
-          font-weight: 600;
+          padding: 0 14px;
+          transition: all 0.15s ease;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+          box-sizing: border-box;
+        }
+
+        .resend-input::placeholder {
+          color: #9CA3AF;
+          font-size: 14px;
+        }
+
+        .resend-input:focus {
+          outline: none;
+          border-color: #0F172A;
+          box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.09);
+        }
+
+        /* Password container with embedded eye */
+        .resend-password-wrap {
+          position: relative;
+          width: 100%;
+        }
+
+        .resend-password-input {
+          padding-right: 42px;
+        }
+
+        .resend-eye-btn {
+          position: absolute;
+          right: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          border: none;
+          background: transparent;
+          color: #9CA3AF;
+          cursor: pointer;
+          padding: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: color 0.15s ease;
+        }
+
+        .resend-eye-btn:hover {
+          color: #111827;
+        }
+
+        /* ── Submit Action Button ── */
+        .resend-submit-btn {
+          margin-top: 6px;
+          height: 44px;
+          width: 100%;
+          border-radius: 10px;
+          background: #000000;
+          color: #FFFFFF;
+          border: none;
+          font-family: var(--font-body, 'Inter', sans-serif);
+          font-size: 14px;
+          font-weight: 500;
           cursor: pointer;
           transition: all 0.15s ease;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 3px 10px rgba(15, 23, 42, 0.12);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
-        .auth-action-btn:hover {
-          background: #1E293B;
+        .resend-submit-btn:hover:not(:disabled) {
+          background: #1F2937;
           transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        .btn-spinner {
-          opacity: 0.8;
+        .resend-submit-btn:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
         }
 
-        .auth-success-alert {
-          background: #F0FDF4;
-          border: 1px solid #BBF7D0;
-          padding: 24px;
-          border-radius: 14px;
-          text-align: center;
-          color: #166534;
-        }
-
-        .auth-success-badge {
-          display: inline-flex;
+        .resend-btn-loading {
+          display: flex;
           align-items: center;
-          justify-content: center;
+          gap: 8px;
+        }
+
+        .resend-spinner {
+          width: 14px;
+          height: 14px;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          border-top-color: #FFFFFF;
+          border-radius: 50%;
+          animation: resend-spin 0.6s linear infinite;
+        }
+
+        @keyframes resend-spin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        /* ── Bottom Legal Caption ── */
+        .resend-legal-caption {
+          margin-top: 24px;
+          text-align: center;
+        }
+
+        .resend-legal-caption p {
+          margin: 0;
+          font-size: 12px;
+          line-height: 1.5;
+          color: #6B7280;
+        }
+
+        .resend-legal-caption a {
+          color: #4B5563;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+          transition: color 0.15s ease;
+        }
+
+        .resend-legal-caption a:hover {
+          color: #111827;
+        }
+
+        /* ── Success Alert ── */
+        .resend-success-card {
+          background: #FFFFFF;
+          border: 1px solid #E5E7EB;
+          border-radius: 12px;
+          padding: 24px;
+          text-align: center;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .resend-success-icon {
           width: 38px;
           height: 38px;
           border-radius: 50%;
-          background: #22C55E;
+          background: #10B981;
           color: #FFFFFF;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
           font-size: 18px;
-          margin-bottom: 8px;
+          margin-bottom: 10px;
         }
 
-
-        /* ── Dark Mode Overrides ── */
-        [data-theme="dark"] .auth-fixed-viewport {
-          background-color: #07080B;
+        .resend-success-text {
+          margin: 0;
+          font-size: 14px;
+          color: #065F46;
+          font-weight: 500;
         }
 
-        [data-theme="dark"] .auth-topbar {
-          border-bottom-color: rgba(255, 255, 255, 0.06);
-        }
-
-        [data-theme="dark"] .auth-brand-name {
+        /* ── Dark Mode (Matching Resend Dark Theme) ── */
+        [data-theme="dark"] .resend-auth-viewport {
+          background-color: #0A0A0C;
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .auth-theme-btn {
+        [data-theme="dark"] .resend-paper-texture {
+          mix-blend-mode: overlay;
+          opacity: 0.1;
+        }
+
+        [data-theme="dark"] .resend-silk-wave stop[offset="0%"] {
+          stop-color: #1C1F28;
+        }
+
+        [data-theme="dark"] .resend-silk-wave stop[offset="45%"] {
+          stop-color: #12141A;
+        }
+
+        [data-theme="dark"] .resend-silk-wave stop[offset="100%"] {
+          stop-color: #0A0A0C;
+        }
+
+        [data-theme="dark"] .resend-home-link {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        [data-theme="dark"] .resend-home-link:hover {
+          color: #FFFFFF;
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        [data-theme="dark"] .resend-theme-toggle {
+          background: rgba(255, 255, 255, 0.08);
           border-color: rgba(255, 255, 255, 0.12);
-          background: rgba(30, 41, 59, 0.6);
           color: #CBD5E1;
         }
 
-        [data-theme="dark"] .auth-theme-btn:hover {
-          background: #1E293B;
+        [data-theme="dark"] .resend-theme-toggle:hover {
+          background: rgba(255, 255, 255, 0.16);
+          color: #FFFFFF;
+          border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        [data-theme="dark"] .resend-logo-badge {
+          background: #FFFFFF;
+          box-shadow: 0 4px 20px rgba(255, 255, 255, 0.12);
+        }
+
+        [data-theme="dark"] .resend-logo-letter {
+          color: #0A0A0C;
+        }
+
+        [data-theme="dark"] .resend-auth-title {
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .auth-back-link {
-          color: #94A3B8;
+        [data-theme="dark"] .resend-auth-subtitle {
+          color: #9CA3AF;
         }
 
-        [data-theme="dark"] .auth-back-link:hover {
-          color: #FFFFFF;
-          background: rgba(255, 255, 255, 0.06);
-        }
-
-        [data-theme="dark"] .auth-stationery-card {
-          background: #11141C;
-          border-color: rgba(255, 255, 255, 0.1);
-          box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.7);
-        }
-
-        [data-theme="dark"] .auth-title {
+        [data-theme="dark"] .resend-switch-btn {
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .auth-tagline {
-          color: #94A3B8;
+        [data-theme="dark"] .resend-sso-button {
+          background: #14161C;
+          border-color: rgba(255, 255, 255, 0.12);
+          color: #F3F4F6;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         }
 
-        [data-theme="dark"] .auth-segmented-pill {
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(255, 255, 255, 0.08);
+        [data-theme="dark"] .resend-sso-button:hover {
+          background: #1C1F28;
+          border-color: rgba(255, 255, 255, 0.22);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
         }
 
-        [data-theme="dark"] .auth-segment.is-active {
-          background: #1E293B;
-          color: #FFFFFF;
-        }
-
-        [data-theme="dark"] .auth-sso-btn {
-          background: #1E293B;
-          border-color: rgba(255, 255, 255, 0.1);
-          color: #F1F5F9;
-        }
-
-        [data-theme="dark"] .auth-sso-btn:hover {
-          background: #283548;
-        }
-
-        [data-theme="dark"] .auth-sep-line {
+        [data-theme="dark"] .resend-divider-line {
           background: rgba(255, 255, 255, 0.1);
         }
 
-        [data-theme="dark"] .auth-label {
-          color: #E2E8F0;
+        [data-theme="dark"] .resend-divider-text {
+          color: #6B7280;
         }
 
-        [data-theme="dark"] .auth-textbox {
-          background: #1E293B;
-          border-color: rgba(255, 255, 255, 0.15);
+        [data-theme="dark"] .resend-field-label {
+          color: #E5E7EB;
+        }
+
+        [data-theme="dark"] .resend-forgot-link {
+          color: #9CA3AF;
+        }
+
+        [data-theme="dark"] .resend-forgot-link:hover {
           color: #FFFFFF;
         }
 
-        [data-theme="dark"] .auth-textbox:focus {
-          border-color: #60A5FA;
-          box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+        [data-theme="dark"] .resend-input {
+          background: #14161C;
+          border-color: rgba(255, 255, 255, 0.12);
+          color: #FFFFFF;
         }
 
-        [data-theme="dark"] .auth-action-btn {
+        [data-theme="dark"] .resend-input::placeholder {
+          color: #4B5563;
+        }
+
+        [data-theme="dark"] .resend-input:focus {
+          border-color: #FFFFFF;
+          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+        }
+
+        [data-theme="dark"] .resend-eye-btn {
+          color: #6B7280;
+        }
+
+        [data-theme="dark"] .resend-eye-btn:hover {
+          color: #FFFFFF;
+        }
+
+        [data-theme="dark"] .resend-submit-btn {
           background: #FFFFFF;
-          color: #090A0D;
+          color: #0A0A0C;
+          box-shadow: 0 2px 12px rgba(255, 255, 255, 0.15);
         }
 
-        [data-theme="dark"] .auth-action-btn:hover {
-          background: #E2E8F0;
+        [data-theme="dark"] .resend-submit-btn:hover:not(:disabled) {
+          background: #F3F4F6;
+          box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
         }
 
-
-        @media (max-width: 900px) {
-          .auth-stage {
-            padding: 16px 20px;
-          }
-
-          .auth-stationery-card {
-            padding: 28px 24px;
-          }
+        [data-theme="dark"] .resend-legal-caption p {
+          color: #6B7280;
         }
 
-        @media (max-width: 640px) {
-          .auth-topbar {
-            padding: 0 16px;
+        [data-theme="dark"] .resend-legal-caption a {
+          color: #9CA3AF;
+        }
+
+        [data-theme="dark"] .resend-legal-caption a:hover {
+          color: #FFFFFF;
+        }
+
+        /* ── Responsive adjustments ── */
+        @media (max-width: 480px) {
+          .resend-top-nav {
+            padding: 0 20px;
           }
-          .auth-grid-split {
+
+          .resend-auth-stage {
+            padding: 12px 16px 36px 16px;
+          }
+
+          .resend-sso-grid {
             grid-template-columns: 1fr;
+            gap: 10px;
+          }
+
+          .resend-auth-title {
+            font-size: 26px;
           }
         }
       `}</style>
