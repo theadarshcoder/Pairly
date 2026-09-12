@@ -326,28 +326,6 @@ export default function AuthPage() {
         </div>
       </main>
 
-      {/* Fixed Non-Scrollable Bottom Bar */}
-      <footer className="auth-bottombar">
-        <div className="auth-bottom-left">
-          <span>© 2026 Pairly Inc. All rights reserved.</span>
-        </div>
-
-        <div className="auth-bottom-center">
-          <Link to="/privacy">Privacy</Link>
-          <span className="auth-dot-sep">·</span>
-          <Link to="/terms">Terms</Link>
-          <span className="auth-dot-sep">·</span>
-          <Link to="/security">Security</Link>
-          <span className="auth-dot-sep">·</span>
-          <Link to="/community">Community</Link>
-        </div>
-
-        <div className="auth-bottom-right">
-          <span className="auth-system-dot" />
-          <span>All systems operational</span>
-        </div>
-      </footer>
-
       {/* Styling */}
       <style>{`
         /* ── Fixed Non-Scrollable Viewport Container ── */
@@ -768,56 +746,6 @@ export default function AuthPage() {
           margin-bottom: 8px;
         }
 
-        /* ── Fixed Non-Scrollable Bottom Bar ── */
-        .auth-bottombar {
-          position: relative;
-          z-index: 10;
-          height: 42px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 36px;
-          flex-shrink: 0;
-          font-family: var(--font-body, 'Inter', sans-serif);
-          font-size: 11.5px;
-          color: #64748B;
-          border-top: 1px solid rgba(0, 0, 0, 0.04);
-        }
-
-        .auth-bottom-center {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .auth-bottom-center a {
-          color: #64748B;
-          text-decoration: none;
-          transition: color 0.15s ease;
-        }
-
-        .auth-bottom-center a:hover {
-          color: #0F172A;
-          text-decoration: underline;
-        }
-
-        .auth-dot-sep {
-          color: #CBD5E1;
-        }
-
-        .auth-bottom-right {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-
-        .auth-system-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #22C55E;
-          box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
-        }
 
         /* ── Dark Mode Overrides ── */
         [data-theme="dark"] .auth-fixed-viewport {
@@ -914,14 +842,6 @@ export default function AuthPage() {
           background: #E2E8F0;
         }
 
-        [data-theme="dark"] .auth-bottombar {
-          border-top-color: rgba(255, 255, 255, 0.06);
-          color: #64748B;
-        }
-
-        [data-theme="dark"] .auth-bottom-center a:hover {
-          color: #E2E8F0;
-        }
 
         @media (max-width: 900px) {
           .auth-stage {
@@ -934,11 +854,8 @@ export default function AuthPage() {
         }
 
         @media (max-width: 640px) {
-          .auth-topbar, .auth-bottombar {
+          .auth-topbar {
             padding: 0 16px;
-          }
-          .auth-bottom-center {
-            display: none;
           }
           .auth-grid-split {
             grid-template-columns: 1fr;
